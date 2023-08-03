@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../assets/images/breezy-favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/garbi_favicon.png" type="image/x-icon">
+    <link href="./assets/css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <title>Garbi Protocol</title>
+
+    <title>Add Liquidity</title>
     <style id="svelte-166mr51-style">
         ul.svelte-166mr51 {
             display: flex;
@@ -102,7 +103,7 @@
             font-size: inherit;
             font-family: inherit;
             margin-left: 0.75em;
-            width: 90%
+            width: 90%;
         }
         
         p.svelte-5f7pqk {
@@ -133,12 +134,13 @@
             margin: 0 0.25em 0 0.5em
         }
     </style>
+
 </head>
 
 <body>
     <div class="wrapper">
         <header class="header" id="header">
-            <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
+            <div class="alert-banner" style="background: #000">
                 <div class="message">Please note that Garbi Protocol is currently only supported on the Arbitrum One network. To use Garbi Protocol, <button class="switch-network-btn">switch to a network</button> that supports it.</div>
             </div>
             <nav class="navbar navbar-expand-lg">
@@ -149,26 +151,33 @@
                                 <button class="navbar-toggler mr-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-header">
                                         <i class="fas fa-bars"></i>
                                     </button>
-                                <div class="logo" onclick="window.location = 'index.html'">
-                                    <img src="../assets/images/breezy-logo.svg" />
+                                <div class="logo" onclick="window.location='index.html'">
+                                    <img src="./assets/images/breezy-logo.svg" />
                                 </div>
                             </div>
                         </div>
                         <div class="col-6 col-lg-2 order-lg-3">
                             <div class="d-flex align-items-center justify-content-end">
-                                <a href="/swap.html" class="header__btn-connect">Launch App</a>
+                                <!-- <span class="wrap-user-acct">0x000</span> -->
+                                <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect wallet</a>
+                                <!-- <span class="dropMenu">
+                                        <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
+                                        <div class="ctmenu-sub  swap-box">
+                                            <a class="f-roboto f-400" href="dashboard.html">Dashboard</a>
+                                        </div>
+                                    </span> -->
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <div class="collapse navbar-collapse" id="navbar-header">
-                                <ul class="navbar-nav menu-header ms-auto mx-auto mb-2 mb-lg-0 align-items-lg-center">
-                                    <li>
+                                <ul class="navbar-nav menu-header-swap mx-auto mb-2 mb-lg-0 align-items-lg-center">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="swap.html">Swap</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="earnDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Earn 
-                                            </a>
+                                                    Earn 
+                                                </a>
                                         <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
                                             <li>
                                                 <a class="dropdown-item" href="nft-lp-earn.html">NFT-LP Earn</a>
@@ -186,8 +195,8 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            GRB-WETH Liquidity
-                                          </a>
+                                                GRB-WETH Liquidity
+                                              </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
                                             <li>
                                                 <a class="dropdown-item" href="https://app.uniswap.org/#/add/0x5Fd71280b6385157b291b9962f22153FC9E79000/ETH/3000?minPrice=0.0001&maxPrice=0.001" target="_blank">Uniswap V3</a>
@@ -197,6 +206,7 @@
                                             </li>
                                         </ul>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -204,140 +214,97 @@
                 </div>
             </nav>
         </header>
-        <main class="page__home" style="min-height: calc(100vh - 73px);">
-            
-                <div class="row">
-                    <div class="col-lg-10" style="background-color: #0C3FFF;">
-                        <div class="container container-2"> 
-                            <article class="home__banner d-flex align-items-center">                                               
-                                <div class="" >
-                                    <h1 class="home__banner-title">Garbi <br> <span>The truly DeFi protocol</span></h1>
-                                    <div class="home__title-medium">Experience the seamless integration of trading, reward harvesting, and asset cultivation all within a single decentralized platform</div>
-                                </div>                            
-                                <div class="img">
-                                    <img src="../assets/images/home-item-1.png" alt="">
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                    <div class="col-lg-2"></div>
-                </div>
-            <article class="home-analytics section" id="home-analytics">
-                <div class="container container-1">
-                    <div class="row">
-                        <header class="home__title-normal mb-5 d-flex align-items-center">
-                            Protocol Information
-                        </header>
-                        <div class="col-lg-5">
-                            <div class="analytics-info">
-                                <div class="title">
-                                    $<span id="total-trade-vol">Loading</span>
-                                </div>
-                                <div class="description">Transactions Volumes</div>
-                            </div>            
-                        </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-5">
-                            <div class="analytics-info">
-                                <div class="title">
-                                    $<span id="total-trade-vol">Loading</span>
-                                </div>
-                                <div class="description">Transactions Volumes</div>
-                            </div>     
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="analytics-info">
-                                <div class="title">
-                                    $<span id="total-trade-vol">Loading</span>
-                                </div>
-                                <div class="description">Transactions Volumes</div>
-                            </div>     
-                        </div>
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-5">
-                            <div class="analytics-info">
-                                <div class="title">
-                                    $<span id="total-trade-vol">Loading</span>
-                                </div>
-                                <div class="description">Transactions Volumes</div>
-                            </div>     
+        <main class="page__swap">
+            <section class="blog__container">
+                <div class="masthead">
+                    <div class="masthead__action-buttons">
+                        <div class="masthead__action-buttons">
+                            <a href="deposit.html" class="button button--large button--buy button-stable-swap-form">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <label class="label">Deposit</label>
+                            </a>
+                            <a href="withdraw.html" class="button button--large button--sell button-token-swap-form button-disabled">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <label class="label">Withdraw</label>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </article>
-            <article class="home__governance section" id="home__governance">
-                <div class="container container-1">
-                    <header class="home__title-normal d-flex align-items-center">
-                        Embodying the community's vision.
-                    </header>
-                    <p>The Garbi Protocol is governed by a decentralized assembly of GRB token holders who propose and cast votes on modifications to the protocol through a democratic process.</p>
-                    <a href="" class="header__btn-connect">Read More</a>
-                    <div class=" garbi__row-1 align-items-stretch">
-                        <div class="">
-                            <div class="height-100 mt-5">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <a href="#" target="_blank">
-                                            <div class="garbi__box-governance mb-4">
-                                                <div class="icon-social">
-                                                    <img src="../assets/images/telegram.svg" alt="">
-                                                </div>
-                                                <div class="home__title-normal">Telegram Community ↗</div>
-                                                <div>Participate by proposing improvements and discussing the future of the Garbi protocol with the Garbi collective.</div>
-                                            </div>
-                                        </a>
+                <article class="swap__main garbi__box-1 p-3 mb-3">
+                    <div class="d-flex align-items-center justify-content-between mb-14">
+                        <div class="f-700">
+                            <span style="margin-left: 4px;">Deposit Liquidity</span>
+                            <span class="addlp__form-item">
+                                    <div class='swap__form-item-select' style="display: inline-block;">
+                                        GRB-WETH
                                     </div>
-                                    <div class="col-lg-4">
-                                        <a href="#" target="_blank">
-                                            <div class="garbi__box-governance mb-4">
-                                                <div class="icon-social">
-                                                    <img src="../assets/images/twitter.svg" alt="">
-                                                </div>
-                                                <div class="home__title-normal">Twitter ↗</div>
-                                                <div>Stay informed with the most recent news from our Twitter.</div>
+                                    <select name="lp_token" style="display:none">
+                                        <option 
+                                            data-contet="<div> class = 'addLp__form-item-select'</div>" 
+                                            value="grbweth">
+                                            GRB-WETH
+                                        </option>
+                                    </select>
+                                </span>
+                        </div>
+                        <div class="transaction__setting">
+                            <img src="./assets/images/setting.svg" class="cursor-pointer" id="transaction__setting-icon" />
+
+                            <div class="transaction__setting-description swap-box" id="transaction__setting-description">
+                                <header class="f-14 f-700 title">Transaction Settings</header>
+                                <section class="f-12">
+                                    <div class="mb-2">
+                                        <div class="f-roboto f-700 mb-1">Slippage tolerance?</div>
+                                        <div class="d-flex align-items-center transaction__setting-slippage">
+                                            <button type="button" class="btn-auto f-12 text-white f-roboto f-400 btn-auto-slippage">Auto</button>
+                                            <div class="slippage-input ml-2 flex-grow-1">
+                                                <input type="text" class="input-transaction-deadline  input-transaction-slippage f-12 f-roboto color-2 text-end" name="slippage" value="0.5" />
+                                                <span class="percent f-12">%</span>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <a href="#" target="_blank">                                  
-                                            <div class="garbi__box-governance">
-                                                <div class="icon-social">
-                                                    <img src="../assets/images/github.svg" alt="">
-                                                </div>
-                                                <div class="home__title-normal">Github ↗</div>
-                                                <div>For inquiries, suggestions, or problems, join our community at our Github repository.</div>
-                                            </div>
-                                        </a>
+
+                                    <div>
                                     </div>
-                                </div>
+                                </section>
                             </div>
                         </div>
+
                     </div>
-                </div>
-            </article>
-            <article class="home__banner partner-section section d-flex align-items-end">
-                <div class="container container-2 partner">
-                    <div class="text-center subtitle mb-5">
-                        <h4 class="title">Our Media Partners</h4>
-                    </div>
-                    <div class="text-center img-logo">
-                        <div class="row">
-                            <div class="partner-list">
-                                <div class="col-lg-4">
-                                    <a href="https://trendingcryptonews.info" target="_blank"><img src="../assets/images/partner-1.png" class="img-responsive"></a>
-                                </div>
-                                <div class="col-lg-4">
-                                    <a href="http://dailynewslayer2.com" target="_blank"><img src="../assets/images/partner-2.png" class="img-responsive"></a>
-                                </div>
-                                <div class="col-lg-4">
-                                    <a href="https://arbitrumalertwire.com/" target="_blank"><img src="../assets/images/partner-3.png" class="img-responsive"></a>
-                                </div>
-                            </div>            
-                        </div>
-                    </div>
-                        
-                </div>
-            </article>
+
+                    <ul>
+                        <li style="list-style-type: none; margin-left: -30px;">
+                            <label for="currency_0">
+                                    <span class="currency-laybal" style="margin-left: -10px;"> 
+                                        <img src="./assets/images/grb_token.png" class="token-icon img-token"> <span class="token-name token">GRB</span>
+                                        <button class="maxBalanceCoin max-token-input">Max: </button>
+                                        <span class="token-bal">Loading</span>
+                                    </span>
+                                </label>
+                            <div class="addLp__form_input mb-2">
+                                <input class="swap__form-input" name="token_input" autofocus value="" placeholder="0.0">
+                            </div>
+                        </li>
+                        <li style="list-style-type: none; margin-left: -30px;">
+                            <label for="currency_0">
+                                    <span class="currency-laybal"  style="margin-left: -10px;"> 
+                                        <img src="./assets/images/eth_logo.png" class="token-icon img-base"> <span class="token-name base">WETH</span>
+                                        <button class="maxBalanceCoin max-base-input">Max: </button>
+                                        <span class="base-bal">Loading</span>
+                                    </span>
+                                </label>
+                            <div class="addLp__form_input mb-2">
+                                <input class="swap__form-input" name="base_input" value="" placeholder="0.0">
+                            </div>
+                        </li>
+                        <li style="list-style-type: none; margin-left: -30px;">
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-token" style="display: none">Approve <span class="token">GRB</span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: none">Approve <span class="base">WETH</span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-deposit">Deposit</button>
+                    </ul>
+                </article>
+
+            </section>
         </main>
 
         <footer class="footer">
@@ -390,7 +357,7 @@
     <ul id="confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none;top: 0; justify-content: unset;">
         <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
             <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
-                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is sent to the Blockchain.</p>
+                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is sent to the blockchain.</p>
             </div>
             <div class="bn-notify-custom bn-notify-notification-close svelte-166mr51" onclick="$('#confirm-popup').hide()">
                 <div class="bn-notify-custom bn-notify-notification-close-icon svelte-r8gx3p">
@@ -421,11 +388,9 @@
             </div>
         </li>
     </ul>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/custom.js"></script>
-    <script src="../assets/js/custom.menu.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="./assets/js/custom.js"></script>
+    <script src="./assets/js/custom.menu.js"></script>
 </body>
 <script src="./js/utils/ui-helper.js"></script>
-</html>
