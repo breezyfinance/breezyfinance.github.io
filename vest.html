@@ -10,7 +10,7 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../assets/images/garbi_favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/breezy-favicon.svg" type="image/x-icon">
     <link href="../assets/css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
@@ -139,8 +139,8 @@
 <body>
     <div class="wrapper">
         <header class="header" id="header">
-            <div class="alert-banner" style="background: #000">
-                <div class="message">Please note that Garbi Protocol is currently only supported on the Arbitrum One network. To use Garbi Protocol, <button class="switch-network-btn">switch to a network</button> that supports it.</div>
+            <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
+                <div class="message">This is the demo page. Please follow our <a style="text-decoration: underline" href="#" target="_blank">Twitter</a> to get information about the launch date.</div>
             </div>
             <nav class="navbar navbar-expand-lg">
                 <div class="container container-1">
@@ -179,10 +179,7 @@
                                             </a>
                                         <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
                                             <li>
-                                                <a class="dropdown-item" href="nft-lp-earn.html">NFT-LP Earn</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="earn.html">Classic Earn</a>
+                                                <a class="dropdown-item" href="earn.html">Earn Basics</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -214,7 +211,7 @@
         </header>
         <main class="page__swap">
             <section class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-lg-6 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-3">
                             <div class="align-items-center justify-content-between">
@@ -222,27 +219,27 @@
                                     <fieldset>
                                         <div class="">
                                             <div class="garbi__box__farms">
-                                                <p>GRB Transform Repository</p>
-                                                <table class="pool__list">
+                                                <p>BCI Transform Repository</p>
+                                                <table class="pool__list" style="width: 100%;">
                                                     <tbody class="tbody">
                                                         <tr>
                                                             <td>
                                                                 Vesting Treasury
                                                             </td>
-                                                            <td><span class="contract-grb-balance">0</span> GRB</td>
+                                                            <td><span class="contract-grb-balance">0</span> BCI</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 Staked
                                                             </td>
-                                                            <td><span class="user-deposited-vegrb">0</span> veGRB</td>
+                                                            <td><span class="user-deposited-vegrb">0</span> veBCI</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 Vesting process
                                                             </td>
                                                             <td>
-                                                                <span class="user-vegrb-balance">0</span> veGRB / <span class="user-grb-claimable">0</span> GRB
+                                                                <span class="user-vegrb-balance">0</span> veBCI / <span class="user-grb-claimable">0</span> GRB
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -250,27 +247,27 @@
                                                                 Claimable
                                                             </td>
                                                             <td>
-                                                                <span class="user-grb-claimable">0</span> GRB
+                                                                <span class="user-grb-claimable">0</span> BCI
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 Your wallet
                                                             </td>
-                                                            <td><span class="user-wallet-vegrb-balance">0</span> veGRB</td>
+                                                            <td><span class="user-wallet-vegrb-balance">0</span> veBCI</td>
                                                         </tr>
                                                     </tbody>
 
                                                 </table>
                                                 <div class="input-area">
                                                     <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_vegrb_amount" value="" placeholder="veGRB">
+                                                        <input type="" class="swap__form-input" name="input_vegrb_amount" value="" placeholder="veBCI">
                                                     </div>
-                                                    <span class="approve_vegrb_message" style="font-style: italic; display: none">Please approve the spending of your veGRB</span>
+                                                    <span class="approve_vegrb_message" style="font-style: italic; display: none">Please approve the spending of your veBCI</span>
                                                     <span class="error_lock_vegrb_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve veGRB</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px" id="lock_vegrb_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Lock veGRB</button>
-                                                    <button style="border-radius: 6px;" id="claim_grb_button" type="button" class="header__btn-connect btn-claim text-center mb-4 mb-md-0">Claim GRB</button>
+                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve veBCI</button>
+                                                    <button style="border-radius: 6px; margin-right: 10px" id="lock_vegrb_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Lock veBCI</button>
+                                                    <button style="border-radius: 6px;" id="claim_grb_button" type="button" class="header__btn-connect btn-claim text-center mb-4 mb-md-0">Claim BCI</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,503 +276,23 @@
                             </div>
                         </article>
                     </div>
+                </div>
+                <div class="row justify-content-center">
                     <div class="col-lg-6 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-3" style="height: 450px;">
                             <div class="d-flex align-items-center justify-content-between mb-11">
                                 <div class="f-700 mt-3">
                                     <fieldset>
-                                        <p>Transform veGRB tokens to GRB tokens.</p>
+                                        <p>Transform veBCI tokens to BCI tokens.</p>
                                         <p>
-                                            Once you lock your veGRB to the GRB Transform Repository, you will receive 40% in GRB immediately, while the remaining 60% will be gradually converted to GRB over the course of one month, block by block. This provides stability and incentivizes long-term
-                                            holding. It is worth noting that there may be instances where the Treasury of the Garbi Protocol appears empty due to the timelock function in the GRB token contract. During such periods, users may experience
+                                            Once you lock your veGRB to the BCI Transform Repository, you will receive 40% in GRB immediately, while the remaining 60% will be gradually converted to GRB over the course of one month, block by block. This provides stability and incentivizes long-term
+                                            holding. It is worth noting that there may be instances where the Treasury of the Breezy Finance appears empty due to the timelock function in the GRB token contract. During such periods, users may experience
                                             delays in receiving rewards or may not receive rewards at all until the timelock expires.
                                         </p>
                                         <p>
-                                            Additionally, veGRB and GRB can be locked into pools with time durations ranging from one week to one year. This feature allows for flexible options to earn rewards and maximize profits while supporting the Garbi Protocol ecosystem.
+                                            Additionally, veBCI and BCI can be locked into pools with time durations ranging from one week to one year. This feature allows for flexible options to earn rewards and maximize profits while supporting the Garbi Protocol ecosystem.
                                         </p>
-                                        <p>Please read the vesting <a style="text-decoration: underline" href="https://garbi-protocol.gitbook.io/docs/tokenomic/tokenomic/utility" target="_blank">documents</a> for more information.</p>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class="align-items-center justify-content-between ">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class=" ">
-                                            <div class="garbi__box__farms">
-                                                <p>GRB 1-Week Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-grb-balance">Loading</span> GRB <br> $
-                                                                <span class="user-grb-balance-usd">0.0</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-grb-1week">Loading</span> GRB <br>$<span class="user-staked-grb-1week-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-grb-1week-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-grb-1week-earned">Loading</span>veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-grb-1week-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="grb-1week-total-staked">Loading</span> GRB <br> $<span class="grb-1week-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_grb_1week_amount" value="" placeholder="GRB">
-                                                    </div>
-                                                    <span class="approve_grb_1week_message" style="font-style: italic; display: none">Please approve the spending of your GRB</span>
-
-                                                    <span class="error_grb_1week_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_grb_1week" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_grb_1week_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_grb_1week" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_1week_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class="align-items-center justify-content-between">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class="">
-                                            <div class="garbi__box__farms">
-                                                <p>GRB 1-Month Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-grb-balance">Loading</span> GRB <br>$<span class="user-grb-balance-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-grb-1month">Loading</span> GRB <br>$<span class="user-staked-grb-1month-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-grb-1month-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-grb-1month-earned">Loading</span> veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-grb-1month-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="grb-1month-total-staked">Loading</span> GRB <br>$<span class="grb-1month-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_grb_1month_amount" value="" placeholder="GRB">
-                                                    </div>
-                                                    <span class="approve_grb_1month_message" style="font-style: italic; display: none">Please approve the spending of your GRB</span>
-
-                                                    <span class="error_grb_1month_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_grb_1month" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_grb_1month_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_grb_1month" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_1month_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class=" align-items-center justify-content-between">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class="">
-                                            <div class="garbi__box__farms">
-                                                <p>GRB 1-Year Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-grb-balance">Loading</span> GRB <br>$<span class="user-grb-balance-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-grb-1year">Loading</span> GRB <br>$<span class="user-staked-grb-1year-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-grb-1year-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-grb-1year-earned">Loading</span> veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-grb-1year-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="grb-1year-total-staked">Loading</span> GRB <br>$<span class="grb-1year-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_grb_1year_amount" value="" placeholder="GRB">
-                                                    </div>
-                                                    <span class="approve_grb_1year_message" style="font-style: italic; display: none">Please approve the spending of your GRB</span>
-
-                                                    <span class="error_grb_1year_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_grb_1year" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_grb_1year_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_grb_1year" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_1year_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class="align-items-center justify-content-between">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class="">
-                                            <div class="garbi__box__farms">
-                                                <p>veGRB 1-Week Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-vegrb-balance">Loading</span> veGRB <br>$<span class="user-vegrb-balance-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-vegrb-1week">Loading</span> veGRB <br>$<span class="user-staked-vegrb-1week-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-vegrb-1week-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-vegrb-1week-earned">Loading</span> veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-vegrb-1week-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="vegrb-1week-total-staked">Loading</span> veGRB <br>$<span class="vegrb-1week-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_vegrb_1week_amount" value="" placeholder="veGRB">
-                                                    </div>
-                                                    <span class="approve_vegrb_1week_message" style="font-style: italic; display: none">Please approve the spending of your veGRB</span>
-
-                                                    <span class="error_vegrb_1week_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb_1week" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_vegrb_1week_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_vegrb_1week" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_vegrbvault_1week_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class="align-items-center justify-content-between">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class="">
-                                            <div class="garbi__box__farms">
-                                                <p>veGRB 1-Month Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-vegrb-balance">Loading</span> veGRB <br>$<span class="user-vegrb-balance-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-vegrb-1month">Loading</span> veGRB <br>$<span class="user-staked-vegrb-1month-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-vegrb-1month-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-vegrb-1month-earned">Loading</span> veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-vegrb-1month-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="vegrb-1month-total-staked">Loading</span> veGRB <br>$<span class="vegrb-1month-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_vegrb_1month_amount" value="" placeholder="veGRB">
-                                                    </div>
-                                                    <span class="approve_vegrb_1month_message" style="font-style: italic; display: none">Please approve the spending of your veGRB</span>
-
-                                                    <span class="error_vegrb_1month_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb_1month" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_vegrb_1month_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_vegrb_1month" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_vegrbvault_1month_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3">
-                            <div class="align-items-center justify-content-between">
-                                <div class="f-700">
-                                    <fieldset>
-                                        <div class="">
-                                            <div class="garbi__box__farms">
-                                                <p>veGRB 1-Year Repository</p>
-                                                <table class="pool__list">
-                                                    <tbody class="tbody">
-                                                        <tr>
-                                                            <td>
-                                                                Price
-                                                            </td>
-                                                            <td>$<span class="grb-price">Loading</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Your wallet
-                                                            </td>
-                                                            <td><span class="user-wallet-vegrb-balance">Loading</span> veGRB <br>$<span class="user-vegrb-balance-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Staked
-                                                            </td>
-                                                            <td><span class="user-staked-vegrb-1year">Loading</span> veGRB <br>$<span class="user-staked-vegrb-1year-usd">0.0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Withdrawal Block #
-                                                            </td>
-                                                            <td><span class="user-vegrb-1year-withdrawal-block-number">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Current Block #
-                                                            </td>
-                                                            <td><span class="block-now">0</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Earned
-                                                            </td>
-                                                            <td><span class="user-vegrb-1year-earned">Loading</span> veGRB <br>$0.0</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                APR
-                                                            </td>
-                                                            <td><span class="user-vegrb-1year-apr">Loading</span> %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Total Staked
-                                                            </td>
-                                                            <td><span class="vegrb-1year-total-staked">Loading</span> veGRB <br>$<span class="vegrb-1year-total-staked-usd">Loading</span></td>
-                                                        </tr>
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="input-area">
-                                                    <div class="addLp__form_input mb-3">
-                                                        <input type="" class="swap__form-input" name="input_vegrb_1year_amount" value="" placeholder="veGRB">
-                                                    </div>
-                                                    <span class="approve_vegrb_1year_message" style="font-style: italic; display: none">Please approve the spending of your veGRB</span>
-
-                                                    <span class="error_vegrb_1year_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb_1year" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="lock_vegrb_1year_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Stake</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px;" id="unstake_vegrb_1year" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Unstake</button>
-                                                    <button style="border-radius: 6px;" id="claim_vegrb_vegrbvault_1year_button" type="button" class="header__btn-connect btn-claim text-center mt-3 mb-4 mb-md-0">Retrieve veGRB Earnings</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p>Please read the vesting <a style="text-decoration: underline" href="https://basecryptodigest.click/category/breezy/" target="_blank">documents</a> for more information.</p>
                                     </fieldset>
                                 </div>
                             </div>
@@ -791,7 +308,7 @@
                     <div class="row flex-grow-1 align-items-center">
                         <div class="col-lg-4">
                             <div class="d-flex align-items-center justify-content-between">
-                                <div>© 2023 Garbi Protocol</div>
+                                <div>© 2023 Breezy Finance</div>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
                                         <i class="fas fa-bars"></i>
                                     </button>
@@ -804,25 +321,22 @@
                                         <a class="nav-link" href="risks.html" class="">Risks</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://garbi-protocol.gitbook.io/docs/">Docs</a>
+                                        <a class="nav-link" target="_blank" href="https://basecryptodigest.click/category/breezy/">Docs</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://twitter.com/garbi_protocol/" rel="noopener noreferrer">#Twitter</a>
+                                        <a class="nav-link" target="_blank" href="#" rel="noopener noreferrer">#Twitter</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://t.me/garbiprotocol" rel="noopener noreferrer">@Telegram</a>
+                                        <a class="nav-link" target="_blank" href="#" rel="noopener noreferrer">@Telegram</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://github.com/garbiprotocol">git@</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="v1/index.html">V1</a>
+                                        <a class="nav-link" target="_blank" href="https://github.com/breezyfinance">git@</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="no-loss-lottery.html">Lottery</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Version 2.0.5</a>
+                                        <a class="nav-link" href="#">Version 0.0.1</a>
                                     </li>
                                 </ul>
                             </div>

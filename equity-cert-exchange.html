@@ -10,7 +10,7 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="../assets/images/garbi_favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/breezy-favicon.svg" type="image/x-icon">
     <link href="../assets/css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
@@ -139,8 +139,8 @@
 <body>
     <div class="wrapper">
         <header class="header" id="header">
-            <div class="alert-banner" style="background: #000">
-                <div class="message">Please note that Garbi Protocol is currently only supported on the Arbitrum One network. To use Garbi Protocol, <button class="switch-network-btn">switch to a network</button> that supports it.</div>
+            <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
+                <div class="message">This is the demo page. Please follow our <a style="text-decoration: underline" href="#" target="_blank">Twitter</a> to get information about the launch date.</div>
             </div>
             <nav class="navbar navbar-expand-lg">
                 <div class="container container-1">
@@ -179,10 +179,7 @@
                                             </a>
                                         <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
                                             <li>
-                                                <a class="dropdown-item" href="nft-lp-earn.html">NFT-LP Earn</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="earn.html">Classic Earn</a>
+                                                <a class="dropdown-item" href="earn.html">Earn Basics</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -246,6 +243,244 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <article class="buy-sell__main garbi__box-1 p-3" id="buy-gec-form">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="panel__header-row">
+                                    <label class="label text-color-2">Trade BCI</label>
+                                </div>
+                            </div>
+
+                            <div class="swap__form">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+
+                                        <div class="col-6">
+                                            <div class="text-end">
+                                                <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                <span class="text-white f-700 f-roboto f-14 from-volume">0.0</span>
+                                            </div>
+                                            <input class="swap__form-input" name="amountPay" placeholder="0.0" autofocus value="" />
+                                        </div>
+                                        <div class="col-6" style=" text-align: right;">
+                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                            <select class="selectpicker swap__form-select mt-1" name="from">
+                                                    <option
+                                                        value="usdt"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
+                                                        >USDT
+                                                    </option>
+                                                    <option
+                                                        value="usdc"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
+                                                        >USDC
+                                                    </option>
+                                                    <option
+                                                        value="dai"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
+                                                        >DAI
+                                                    </option>
+                                                </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="text-end">
+                                                <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                <span class="text-white f-700 f-roboto f-14 to-volume">0.0</span>
+                                            </div>
+                                            <input class="swap__form-input" style="pointer-events: none;" name="amountGECOut" placeholder="0.0" autofocus value="" />
+                                        </div>
+                                        <div class="col-6" style=" text-align: right;position: relative;">
+                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                            <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
+                                                <span>
+                                                        <img src='./assets/images/gec-logo.png' />
+                                                    </span> BCI
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Fees</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">0%</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="button-approve approve-usdt header__btn-connect w-100 text-center btn-swap" style="display: none">Approve USDT</button>
+                            <button type="button" class="button-approve approve-usdc header__btn-connect w-100 text-center btn-swap" style="display: none">Approve USDC</button>
+                            <button type="button" class="button-approve approve-dai header__btn-connect w-100 text-center btn-swap" style="display: none">Approve DAI</button>
+                            <button type="button" class="button-buy-gec header__btn-connect w-100 text-center btn-swap" style="">Buy BCI</button>
+
+                        </article>
+                        <article class="buy-sell__main garbi__box-1 p-3" id="sell-gec-form" style="display: none">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="panel__header-row">
+                                    <label class="label text-color-2">Exchange BCI</label>
+                                </div>
+                            </div>
+
+                            <div class="swap__form">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+
+                                        <div class="col-6">
+                                            <div class="text-end">
+                                                <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                <span class="text-white f-700 f-roboto f-14 from-volume">0.0</span>
+                                            </div>
+                                            <input class="swap__form-input" name="amountGEC" placeholder="0.0" autofocus value="" />
+                                        </div>
+                                        <div class="col-6" style=" text-align: right;position: relative;">
+                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                            <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
+                                                <span>
+                                                        <img src='./assets/images/gec-logo.png' />
+                                                    </span> BCI
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item">
+                                    <div class="row">
+
+                                        <div class="col-6">
+                                            <div class="text-end">
+                                                <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                <span class="text-white f-700 f-roboto f-14 to-volume">0.0</span>
+                                            </div>
+                                            <input class="swap__form-input" style="pointer-events: none;" name="amountAssetOut" placeholder="0.0" autofocus value="" />
+                                        </div>
+                                        <div class="col-6" style=" text-align: right;">
+                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                            <select class="selectpicker swap__form-select mt-1" name="to">
+                                                    <option
+                                                        value="usdt"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
+                                                        >USDT
+                                                    </option>
+                                                    <option
+                                                        value="usdc"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
+                                                        >USDC
+                                                    </option>
+                                                    <option
+                                                        value="dai"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
+                                                        >DAI
+                                                    </option>
+                                                </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Fees</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style=""><span class="sell-gec-fee">0</span>%</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="button-approve approve-gec header__btn-connect w-100 text-center btn-swap" style="display: none">Approve GEC</button>
+                            <button type="button" class="button-sell-gec header__btn-connect w-100 text-center btn-swap" style="">Sell BCI</button>
+                        </article>
+                        <div class="position-card__summary garbi__box-1 p-3">
+                            <div class="panel position-card">
+                                <div class="panel__header-row">
+                                    <div class="asset-row__detail-content">
+                                        <span class="asset asset--LINK">
+                                                <img class="coin" src="../assets/images/gec-logo.png">
+                                            </span>
+                                        <div class="asset-row__info">
+                                            <p class="body">BCI TradeHub</p>
+                                            <div class="asset-row__info__details meta L2">BCI</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="divider"></div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Price</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            $<span class=" gec-price" style="">Loading</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Wallet</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="user-wallet-gec" style="">Loading</span> GEC ($0.00)
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Staked</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">0.0000 GEC ($0.00)</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="divider"></div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="position-card__row__info">
+                                        <p class="body">APR</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">20.5</span>%
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="position-card__row">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Total Supply</p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="gec-total-supply-token" style="">Loading</span> GEC
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-8 col-sm-12">
                         <div class="home__assets-table garbi__box-1 p-3">
                             <table class="token-table">
@@ -347,7 +582,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <span class="p-3" style="font-style: italic;font-size:12px">Purchase BCI with no transaction fees; however, the fees associated with selling GEC may vary depending on the asset you select.</span>
+                        <span class="p-3" style="font-style: italic;font-size:12px">Acquire BCI without incurring transaction charges; nonetheless, the fees related to liquidating BCI might differ based on the chosen asset.</span>
                         <article class="garbi__box-1 p-3 mb-3" style="margin-top: 10px;">
                             <p class="f-700">What is Breezy Capital Index (BCI)?</p>
 
@@ -371,245 +606,7 @@
 
                             <div>Explore the potential of the BCI token in enhancing your crypto holdings. Visit our detailed guide on Gitbook.</div>
                         </article>
-                    </div>
-                    <div class="col-lg-4 col-sm-12">
-                        <article class="buy-sell__main garbi__box-1 p-3" id="buy-gec-form">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="panel__header-row">
-                                    <label class="label text-color-2">Exchange BCI</label>
-                                </div>
-                            </div>
-
-                            <div class="swap__form">
-                                <div class="swap__form-item mb-1">
-                                    <div class="row">
-
-                                        <div class="col-6">
-                                            <div class="text-end">
-                                                <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
-                                                <span class="text-white f-700 f-roboto f-14 from-volume">0.0</span>
-                                            </div>
-                                            <input class="swap__form-input" name="amountPay" placeholder="0.0" autofocus value="" />
-                                        </div>
-                                        <div class="col-6" style=" text-align: right;">
-                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
-                                            <select class="selectpicker swap__form-select mt-1" name="from">
-                                                    <option
-                                                        value="usdt"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
-                                                        >USDT
-                                                    </option>
-                                                    <option
-                                                        value="usdc"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
-                                                        >USDC
-                                                    </option>
-                                                    <option
-                                                        value="dai"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
-                                                        >DAI
-                                                    </option>
-                                                </select>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
-
-                                <div class="swap__form-item">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="text-end">
-                                                <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
-                                                <span class="text-white f-700 f-roboto f-14 to-volume">0.0</span>
-                                            </div>
-                                            <input class="swap__form-input" style="pointer-events: none;" name="amountGECOut" placeholder="0.0" autofocus value="" />
-                                        </div>
-                                        <div class="col-6" style=" text-align: right;position: relative;">
-                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
-                                            <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
-                                                <span>
-                                                        <img src='./assets/images/gec-logo.png' />
-                                                    </span> GEC
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between ">
-                                <div class="fees-area">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Fees</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="" style="">0%</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="button-approve approve-usdt header__btn-connect w-100 text-center btn-swap" style="display: none">Approve USDT</button>
-                            <button type="button" class="button-approve approve-usdc header__btn-connect w-100 text-center btn-swap" style="display: none">Approve USDC</button>
-                            <button type="button" class="button-approve approve-dai header__btn-connect w-100 text-center btn-swap" style="display: none">Approve DAI</button>
-                            <button type="button" class="button-buy-gec header__btn-connect w-100 text-center btn-swap" style="">Buy BCI</button>
-
-                        </article>
-                        <article class="buy-sell__main garbi__box-1 p-3" id="sell-gec-form" style="display: none">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="panel__header-row">
-                                    <label class="label text-color-2">Exchange BCI</label>
-                                </div>
-                            </div>
-
-                            <div class="swap__form">
-                                <div class="swap__form-item mb-1">
-                                    <div class="row">
-
-                                        <div class="col-6">
-                                            <div class="text-end">
-                                                <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
-                                                <span class="text-white f-700 f-roboto f-14 from-volume">0.0</span>
-                                            </div>
-                                            <input class="swap__form-input" name="amountGEC" placeholder="0.0" autofocus value="" />
-                                        </div>
-                                        <div class="col-6" style=" text-align: right;position: relative;">
-                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
-                                            <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
-                                                <span>
-                                                        <img src='./assets/images/gec-logo.png' />
-                                                    </span> GEC
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
-
-                                <div class="swap__form-item">
-                                    <div class="row">
-
-                                        <div class="col-6">
-                                            <div class="text-end">
-                                                <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
-                                                <span class="text-white f-700 f-roboto f-14 to-volume">0.0</span>
-                                            </div>
-                                            <input class="swap__form-input" style="pointer-events: none;" name="amountAssetOut" placeholder="0.0" autofocus value="" />
-                                        </div>
-                                        <div class="col-6" style=" text-align: right;">
-                                            <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
-                                            <select class="selectpicker swap__form-select mt-1" name="to">
-                                                    <option
-                                                        value="usdt"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
-                                                        >USDT
-                                                    </option>
-                                                    <option
-                                                        value="usdc"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
-                                                        >USDC
-                                                    </option>
-                                                    <option
-                                                        value="dai"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
-                                                        >DAI
-                                                    </option>
-                                                </select>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-between ">
-                                <div class="fees-area">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Fees</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="" style=""><span class="sell-gec-fee">0</span>%</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="button-approve approve-gec header__btn-connect w-100 text-center btn-swap" style="display: none">Approve GEC</button>
-                            <button type="button" class="button-sell-gec header__btn-connect w-100 text-center btn-swap" style="">Sell GEC</button>
-                        </article>
-                        <div class="position-card__summary garbi__box-1 p-3">
-                            <div class="panel position-card">
-                                <div class="panel__header-row">
-                                    <div class="asset-row__detail-content">
-                                        <span class="asset asset--LINK">
-                                                <img class="coin" src="../assets/images/gec-logo.png">
-                                            </span>
-                                        <div class="asset-row__info">
-                                            <p class="body">BCI TradeHub</p>
-                                            <div class="asset-row__info__details meta L2">BCI</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Price</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            $<span class=" gec-price" style="">Loading</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Wallet</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="user-wallet-gec" style="">Loading</span> GEC ($0.00)
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Staked</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="" style="">0.0000 GEC ($0.00)</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="position-card__row__info">
-                                        <p class="body">APR</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="" style="">20.5</span>%
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="position-card__row">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Total Supply</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="gec-total-supply-token" style="">Loading</span> GEC
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                  
             </section>
         </main>
 
@@ -619,7 +616,7 @@
                     <div class="row flex-grow-1 align-items-center">
                         <div class="col-lg-4">
                             <div class="d-flex align-items-center justify-content-between">
-                                <div>© 2023 Garbi Protocol</div>
+                                <div>© 2023 Breezy Finance</div>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
                                         <i class="fas fa-bars"></i>
                                     </button>
@@ -632,25 +629,22 @@
                                         <a class="nav-link" href="risks.html" class="">Risks</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://garbi-protocol.gitbook.io/docs/">Docs</a>
+                                        <a class="nav-link" target="_blank" href="https://basecryptodigest.click/category/breezy/">Docs</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://twitter.com/garbi_protocol/" rel="noopener noreferrer">#Twitter</a>
+                                        <a class="nav-link" target="_blank" href="#" rel="noopener noreferrer">#Twitter</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://t.me/garbiprotocol" rel="noopener noreferrer">@Telegram</a>
+                                        <a class="nav-link" target="_blank" href="#" rel="noopener noreferrer">@Telegram</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://github.com/garbiprotocol">git@</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="v1/index.html">V1</a>
+                                        <a class="nav-link" target="_blank" href="https://github.com/breezyfinance">git@</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="no-loss-lottery.html">Lottery</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Version 2.0.5</a>
+                                        <a class="nav-link" href="#">Version 0.0.1</a>
                                     </li>
                                 </ul>
                             </div>

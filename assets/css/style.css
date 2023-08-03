@@ -983,7 +983,9 @@ h6 {
 .pool__list-reponsive {
     overflow-x: auto;
 }
-.pool__list-reponsive .token-section
+.pool__list-reponsive .token-section {
+    
+}
 .pool__list {
     width: 100%;
 }
