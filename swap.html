@@ -170,14 +170,14 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="collapse navbar-collapse" id="navbar-header">
-                                <ul class="navbar-nav menu-header-swap mx-auto mb-2 mb-lg-0 align-items-lg-center">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="swap.html">Swap</a>
+                                <ul class="navbar-nav menu-header ms-auto mx-auto mb-2 mb-lg-0 align-items-lg-center">
+                                    <li>
+                                        <a class="nav-link" href="swap.html">Breezy Swap</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="earnDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Earn 
-                                                </a>
+                                            Breezy Profits 
+                                            </a>
                                         <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
                                             <li>
                                                 <a class="dropdown-item" href="nft-lp-earn.html">NFT-LP Earn</a>
@@ -188,15 +188,15 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="equity-cert-exchange.html">GEC Exchange</a>
+                                        <a class="nav-link" href="equity-cert-exchange.html">BCI TradeHub</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="vest.html">Vest veGRB to GRB</a>
+                                        <a class="nav-link" href="vest.html">Vest veBRE to BRE</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                GRB-WETH Liquidity
-                                              </a>
+                                            BRE-WETH Liquidity
+                                          </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
                                             <li>
                                                 <a class="dropdown-item" href="https://app.uniswap.org/#/add/0x5Fd71280b6385157b291b9962f22153FC9E79000/ETH/3000?minPrice=0.0001&maxPrice=0.001" target="_blank">Uniswap V3</a>
@@ -206,7 +206,6 @@
                                             </li>
                                         </ul>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -219,11 +218,7 @@
                 <div class="masthead">
                     <div class="masthead__action-buttons">
                         <div class="masthead__action-buttons">
-                            <button class="button button--large button--buy button-stable-swap-form">
-                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    <label class="label">Stable Swap</label>
-                                </button>
-                            <button class="button button--large button--sell button-token-swap-form button-disabled">
+                            <button class="button button--large button--sell button-token-swap-form">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                     <label class="label">Token Swap</label>
                                 </button>
@@ -232,89 +227,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-3 stable-swap" id="stable-swap-form">
-                            <div class="d-flex align-items-center justify-content-between mb-14">
-                                <div class="f-700">Stable Swap</div>
-                            </div>
-
-                            <div class="swap__form pb-1 stable-swap-pay">
-                                <div class="swap__form-item mb-1">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <select class="selectpicker swap__form-select mb-1" name="from">
-                                                    <option
-                                                        value="usdt"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
-                                                        >USDT</option>
-                                                    <option
-                                                        value="usdc"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
-                                                        >USDC</option>
-                                                    <option
-                                                        value="dai"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
-                                                        >DAI</option>
-                                                </select>
-                                            <div class="f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
-                                        </div>
-                                        <div class="col-7">
-                                            <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
-                                            <div class="text-end">
-                                                <span class="f-roboto f-14 f-400">$</span>
-                                                <span class="f-700 f-roboto f-14 from-volume">0.0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
-
-                                <div class="swap__form-item stable-swap-out">
-                                    <div class="row">
-                                        <div class="col-5">
-                                            <select class="selectpicker swap__form-select mb-1" name="to">
-                                                    <option
-                                                        value="usdc"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdc_logo.png' /></span>USDC</div>"
-                                                        >USDC</option>
-                                                    <option
-                                                        value="usdt"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/usdt_logo.png' /></span>USDT</div>"
-                                                        >USDT</option>
-                                                    <option
-                                                        value="dai"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/dai_logo.png' /></span>DAI</div>"
-                                                        >DAI</option>
-                                                </select>
-                                            <div class="f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
-                                        </div>
-                                        <div class="col-7">
-                                            <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
-                                            <div class="text-end">
-                                                <span class="f-roboto f-14 f-400">$</span>
-                                                <span class="f-700 f-roboto f-14 to-volume">0.0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between ">
-                                <div class="fees-area">
-                                    <div class="position-card__row__info">
-                                        <p class="body">Fees</p>
-                                    </div>
-                                    <div class="position-card__row__balance">
-                                        <p class="body body--link ">
-                                            <span class="" style=""><span class="swap-fee">0</span>%</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none">Approve</button>
-                            <button type="button" class="header__btn-connect w-100 text-center button-swap">Swap</button>
-
-                        </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-3 token-swap" id="token-swap-form" style="display: none">
+                        <article class="swap__main garbi__box-1 p-3 mb-3 token-swap" id="token-swap-form" style="">
                             <div class="d-flex align-items-center justify-content-between mb-14">
                                 <div class="f-700">Token Swap</div>
                                 <div class="transaction__setting">
@@ -448,17 +361,9 @@
                         <article class="garbi__box-1 p-3 mb-3">
                             <p class="f-700">What is Swap?</p>
 
-                            <p>GarbiSwap is an AMM (like Uniswap) focused on stablecoin trading, so it is lower risk and nearly no impermanent loss.</p>
+                            <p>Breezy Swap (Preserving the core function but aligning with the "Breezy" theme)</p>
 
-                            <p>With GarbiSwap, Liquidity Providers will not earn only from trading fees, and the protocol is also supplied to Lending protocol or other DeFi pools to create more interest.</p>
-
-                            <p>The GarbiSwap Contract will move the liquidity around to do both works (trading and farming).</p>
-
-                            <p>What is Transaction Fee Mining?</p>
-
-                            <p>When you use Garbiswap to trade the assets, you'll automatically begin getting veGRB from our Cashback Treasury.</p>
-
-                            <p>Interested in providing liquidity on GarbiSwap? Purchase GEC tokens <a href="equity-cert-exchange.html" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;"><b> here</b></a>.</p>
+                            <p>Breezy Profits (Implying that users can earn or accrue profits by using the platform)</p>
 
                         </article>
 

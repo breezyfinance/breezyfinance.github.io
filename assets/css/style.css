@@ -10,6 +10,11 @@
 
 @font-face{font-family:Relative;src:url(/relative-book-pro.woff2)};
 
+@font-face {
+    font-family: "custom-font";
+    src: url("../fonts/custom-font.woff") format("woff"),url("../fonts/custom-font.woff2") format("woff2");
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -23,7 +28,7 @@ body {
     line-height: 24px;
     letter-spacing: -0.02em;
     font-weight: 300;
-    font-family: Relative;
+    font-family: 'custom-font', sans-serif;
 }
 
 
@@ -608,7 +613,7 @@ h6 {
 .header .navbar-expand-lg .navbar-nav.menu-header .nav-link {
     color: #000;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
     line-height: 36px;
     padding: 0;
     display: inline-block;
@@ -978,11 +983,10 @@ h6 {
 .pool__list-reponsive {
     overflow-x: auto;
 }
-
+.pool__list-reponsive .token-section
 .pool__list {
     width: 100%;
 }
-
 .pool__list tr th {
     padding: 6px 0;
 }
