@@ -12,7 +12,12 @@
 
 @font-face {
     font-family: "custom-font";
-    src: url("../fonts/custom-font.woff") format("woff"),url("../fonts/custom-font.woff2") format("woff2");
+    src: url("../fonts/coinbase.woff") format("woff");
+}   
+
+@font-face {
+    font-family: "coin-base";
+    src: url("../fonts/coinbase.woff") format("woff");
 }
 
 html {
@@ -28,7 +33,7 @@ body {
     line-height: 24px;
     letter-spacing: -0.02em;
     font-weight: 300;
-    font-family: 'custom-font', sans-serif;
+    font-family: "coin-base", sans-serif;
 }
 
 
@@ -649,7 +654,7 @@ h6 {
 .header__btn-connect {
     display: inline-block;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 20px;
     color: #FFFFFF;
     background: #0C3FFF;
@@ -763,7 +768,7 @@ h6 {
     font-size: 24px;
     line-height: 30px;
     color: #fff;
-    width: 55%;
+    width: 75%;
 }
 
 .home__title-normal {
@@ -780,16 +785,17 @@ h6 {
 
 .home__banner {
     min-height: 500px;
+    background: url(../images/home-bg-1.png) center no-repeat;
+    background-size: cover;
     position: relative;
 }
 .home__banner .img {
     position: absolute;
-    right: -90%;
-    top: -26%;
+    right: 5%;
+    top: -30%;
+    max-width: 45%;
 }
-.home__banner .img img {
-    width: 68%;
-}
+  
 #home__assets {
     background:  #F2F4F5;
     margin-top: 54px;
