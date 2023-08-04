@@ -751,7 +751,7 @@ h6 {
 
 .page__home {
     background: linear-gradient(225deg, #F5F7FF 0%, #FFF 0%, #EDF9FF 47.19%, #E8EDFF 100%);
-    padding-top: 200px;
+    padding-top: 100px;
 }
 
 .home__title-xlarge {
@@ -791,9 +791,9 @@ h6 {
 }
 .home-top-banner .img {
     position: absolute;
-    right: 5%;
-    top: -30%;
-    max-width: 45%;
+    right: 8%;
+    top: -20%;
+    max-width: 40%;
 }
   
 #home__assets {

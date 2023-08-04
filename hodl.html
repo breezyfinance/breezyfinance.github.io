@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-    <title>Vest</title>
+    <title>Hodl</title>
     <style id="svelte-166mr51-style">
         ul.svelte-166mr51 {
             display: flex;
@@ -219,42 +219,42 @@
                                     <fieldset>
                                         <div class="">
                                             <div class="garbi__box__farms">
-                                                <p>BCI Transform Repository</p>
+                                                <p>hodlBRE Portal</p>
                                                 <table class="pool__list" style="width: 100%;">
                                                     <tbody class="tbody">
                                                         <tr>
                                                             <td>
-                                                                Vesting Treasury
+                                                                BRE Treasury:
                                                             </td>
-                                                            <td><span class="contract-grb-balance">0</span> BCI</td>
+                                                            <td><span class="contract-grb-balance">0</span> BRE</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Staked
+                                                                Secured hodlBRE:
                                                             </td>
-                                                            <td><span class="user-deposited-vegrb">0</span> veBCI</td>
+                                                            <td><span class="user-deposited-vegrb">0</span> hodlBRE</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Vesting process
+                                                                Conversion Status: 
                                                             </td>
                                                             <td>
-                                                                <span class="user-vegrb-balance">0</span> veBCI / <span class="user-grb-claimable">0</span> BCI
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Claimable
-                                                            </td>
-                                                            <td>
-                                                                <span class="user-grb-claimable">0</span> BCI
+                                                                <span class="user-vegrb-balance">0</span> hodlBRE / <span class="user-grb-claimable">0</span> BRE
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                Your wallet
+                                                                Available for Withdrawal:
                                                             </td>
-                                                            <td><span class="user-wallet-vegrb-balance">0</span> veBCI</td>
+                                                            <td>
+                                                                <span class="user-grb-claimable">0</span> BRE
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Your hodlBRE Balance:
+                                                            </td>
+                                                            <td><span class="user-wallet-vegrb-balance">0</span> hodlBRE</td>
                                                         </tr>
                                                     </tbody>
 
@@ -263,11 +263,11 @@
                                                     <div class="addLp__form_input mb-3">
                                                         <input type="" class="swap__form-input" name="input_vegrb_amount" value="" placeholder="veBCI">
                                                     </div>
-                                                    <span class="approve_vegrb_message" style="font-style: italic; display: none">Please approve the spending of your veBCI</span>
+                                                    <span class="approve_vegrb_message" style="font-style: italic; display: none">Please approve the spending of your hodlBRE</span>
                                                     <span class="error_lock_vegrb_message" style="font-style: italic; display: none"></span>
-                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve veBCI</button>
-                                                    <button style="border-radius: 6px; margin-right: 10px" id="lock_vegrb_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Lock veBCI</button>
-                                                    <button style="border-radius: 6px;" id="claim_grb_button" type="button" class="header__btn-connect btn-claim text-center mb-4 mb-md-0">Claim BCI</button>
+                                                    <button style="border-radius: 6px; margin-right: 10px;display: none" id="approve_lock_vegrb" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Approve hodlBRE</button>
+                                                    <button style="border-radius: 6px; margin-right: 10px" id="lock_vegrb_button" type="button" class="header__btn-connect text-center mb-4 mb-md-0">Lock hodlBRE</button>
+                                                    <button style="border-radius: 6px;" id="claim_grb_button" type="button" class="header__btn-connect btn-claim text-center mb-4 mb-md-0">Claim BRE</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -283,14 +283,12 @@
                             <div class="d-flex align-items-center justify-content-between mb-11">
                                 <div class="f-700 mt-3">
                                     <fieldset>
-                                        <p>Transform veBCI tokens to BCI tokens.</p>
+                                        <p>Welcome to the hodlBRE Portal.</p>
                                         <p>
-                                            Once you lock your veGRB to the BCI Transform Repository, you will receive 40% in GRB immediately, while the remaining 60% will be gradually converted to GRB over the course of one month, block by block. This provides stability and incentivizes long-term
-                                            holding. It is worth noting that there may be instances where the Treasury of the Breezy Finance appears empty due to the timelock function in the GRB token contract. During such periods, users may experience
-                                            delays in receiving rewards or may not receive rewards at all until the timelock expires.
+                                            Our goal is to streamline the process of converting hodlBRE into BRE. When you lock your hodlBRE here, you'll immediately receive 50% of the amount in BRE. The remaining 50% is seamlessly distributed over two months. Dive in and be a part of our growing community!
                                         </p>
                                         <p>
-                                            Additionally, veBCI and BCI can be locked into pools with time durations ranging from one week to one year. This feature allows for flexible options to earn rewards and maximize profits while supporting the Garbi Protocol ecosystem.
+                                            Add Liquidity to the Bridge Pool for hodlBRE Rewards
                                         </p>
                                         <p>Please read the vesting <a style="text-decoration: underline" href="https://basecryptodigest.click/category/breezy/" target="_blank">documents</a> for more information.</p>
                                     </fieldset>
