@@ -783,13 +783,13 @@ h6 {
     line-height: 27px;
 }
 
-.home__banner {
+.home-top-banner {
     min-height: 500px;
     background: url(../images/home-bg-1.png) center no-repeat;
     background-size: cover;
     position: relative;
 }
-.home__banner .img {
+.home-top-banner .img {
     position: absolute;
     right: 5%;
     top: -30%;
@@ -1452,9 +1452,35 @@ input:checked+.slider:before {
 
 }
 @media screen and (max-width: 991px) {
+    #page-footer i.fa-bars {
+        color: #000;
+    }
+    .page__swap {
+        padding-top: 20px;
+    }
+    .header i.fa-bars {
+        color: #000;
+    }
+    .home-top-banner {
+        background: #0C3FFF;
+    }
+    .home-top-banner .img {
+        display: none   ;
+    }
+    .partner-section .partner-list {
+        display: block;
+    }
+    .partner-section .partner-list a {
+        margin-right: 15px;
+    }
+    .partner p {
+        font-size: 18px;
+    }
+    i.fa-bars {
+        color: #fff;
+    }
     .page__home {
-/*        background: url(../images/bg-home.jpg) top 0px center no-repeat;*/
-        background-size: cover;
+        padding-top: 0;
     }
     .wrapper {
         width: 100%;
@@ -1528,7 +1554,21 @@ input:checked+.slider:before {
         margin: 0;
     }
     .home__banner-title {
-        line-height: 80px;
+        font-size: 42px;
+        line-height: 40px;
+    }
+    .home__banner-title span {
+        font-size: 20px;
+    }
+    .home__title-medium {
+        font-size: 18px;
+        width: 100%;
+    }
+    .home-analytics .title {
+        font-size: 20px;
+    }
+    #home__governance .home__title-normal {
+        line-height: 50px;
     }
     .home__assets .garbi__box-1 {
         margin-bottom: 10px;
@@ -1614,9 +1654,6 @@ input:checked+.slider:before {
         min-height: 500px;
         padding: 30px 0;
     }
-    /* .ctmenu-sub {
-        margin-left: -15%;
-    } */
 
 }
 .addlp__form-item {
