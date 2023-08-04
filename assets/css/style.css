@@ -974,7 +974,9 @@ h6 {
     background-size: cover;
     padding: 104px 0;
 }
-
+.page__blog .top-title {
+    background-color: #0C3FFF;
+}
 .blog__thumb {
     border-radius: 16px;
     border-radius: 16px;
