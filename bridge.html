@@ -311,7 +311,7 @@
     <div class="wrapper">
         <header class="header" id="header">
             <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
-                <div class="message">Welcome to our preview! This is a demo, but stay tuned on our <a style="text-decoration: underline" href="#" target="_blank">Twitter</a> for the official launch date. Excited to have you with us!</div>
+                <div class="message">Welcome to our preview! This is a demo, but stay tuned on our <a style="text-decoration: underline" href="https://twitter.com/BreezyFinance" target="_blank">Twitter</a> for the official launch date. Excited to have you with us!</div>
             </div>
             <nav class="navbar navbar-expand-lg">
                 <div class="container container-1">
@@ -386,11 +386,11 @@
         </header>
         <main class="page__swap">
             <section class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-lg-6 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
                             <div class="d-flex align-items-center justify-content-between mb-14">
-                                <div class="f-700">Bridge</div>
+                                <div class="f-700">BreezyLink</div>
                             </div>
                             <div class="swap__form pb-1 stable-swap-pay">
                                 <div class="swap__form-item mb-1">
@@ -398,26 +398,21 @@
                                         <div class="col-12">
                                             <select class="selectpicker swap__form-select mb-1" name="network-from">
                                                     <option
-                                                        value="ArbitrumGoerli"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Arbitrum Goerli</div>"
-                                                        >Arbitrum Goerli
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Base</div>"
+                                                        >Base
                                                     </option>
                                                     <option
-                                                        value="ArbitrumOne"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Arbitrum One</div>"
-                                                        >Arbitrum One
-                                                    </option>
-                                                    <option
-                                                        value="ArbitrumNova"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/nova-logo.png' /></span>Arbitrum Nova</div>"
-                                                        >Arbitrum Nova
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Etherium</div>"
+                                                        >Etherium
                                                     </option>
                                                 </select>
                                             <select class="selectpicker swap__form-select mb-1" name="token-from">
                                                     <option
-                                                        value="cyberCredit"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/cyber-credit-logo.png' /></span>Cyber Credit</div>"
-                                                        >Cyber Credit
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
                                                     </option>
                                                     <!-- <option
                                                         value="vegrb"
@@ -454,27 +449,22 @@
                                         <div class="col-12">
                                             <select class=" selectpicker swap__form-select mb-1" name="network-to">
                                                 <option
-                                                    value="ArbitrumNova"
-                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/nova-logo.png' /></span>Arbitrum Nova</div>"
-                                                    >Arbitrum Nova
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Base</div>"
+                                                    >Base
                                                 </option>
                                                 <option
-                                                    value="ArbitrumGoerli"
-                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Arbitrum Goerli</div>"
-                                                    >ArbitrumGoerli
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Etherium</div>"
+                                                    >Etherium
                                                 </option>
-                                                <option
-                                                    value="ArbitrumOne"
-                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/arbitrum-logo.png' /></span>Arbitrum One</div>"
-                                                    >Arbitrum One
-                                                </option>         
                                             </select>
                                             <div class="token">
                                                 <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
                                                         <option
-                                                            value="cyberCredit"
-                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/cyber-credit-logo.png' /></span>Cyber Credit</div>"
-                                                            >Cyber Credit
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
                                                         </option>
                                                         <!-- <option
                                                             value="vegrb"
@@ -509,11 +499,11 @@
                             <div class="d-flex align-items-center justify-content-between ">
                                 <div class="fees-area">
                                     <div class="position-card__row__info">
-                                        <p class="body">Your GRB balance: <span class="grb-balance">Loading</span></p>
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
                                     </div>
                                     <div class="position-card__row__balance">
                                         <p class="body body--link ">
-                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> GRB</span>
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
                                         </p>
                                     </div>
                                 </div>
@@ -726,33 +716,12 @@
                         <article class="garbi__box-1 p-3 mb-3">
                             <p class="f-700">Asset Pool</p>
                             <div class="select-network-info">
-                                <span class="select-chain">Arbitrum One</span>: <span class="value-pool">Loading</span>
+                                <span class="select-chain">Base</span>: <span class="value-pool">Loading</span>
                             </div>
                             <div class="recieve-network-info">
-                                <span class="recieve-chain">Arbitrum Nova</span>: <span class="value-pool">Loading</span>
+                                <span class="recieve-chain">Etherium</span>: <span class="value-pool">Loading</span>
                             </div>
                         </article>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <article class="garbi__box-1 p-3 mb-3">
-                            <p class="f-700">What is Bridge?</p>
-
-                            <p>Welcome to the Garbi Stable Bridge - where blockchain interoperability meets stable, predictable transaction costs. Our platform harnesses the power of an advanced voting algorithm, facilitating seamless asset transfer between
-                                diverse blockchain networks, all with a fixed fee model.</p>
-
-                            <p>Garbi Stable Bridge presents a unique blend of democratization, community decision-making, and cost predictability. Our bridge requests are validated through a transparent voting mechanism, making the process trustworthy and
-                                verifiable.
-                            </p>
-
-                            <p>We aim to break the blockchain silos by enabling smooth transactions across different networks, with the added benefit of a fixed fee, no matter the size or frequency of your transactions. With us, you can bid farewell to fluctuating
-                                transaction costs.</p>
-
-                            <p>Step into the world of Garbi Stable Bridge and be part of our mission to connect the blockchain world under a single, predictable fee structure. Experience the next level of decentralization and control, tailored to your financial
-                                predictability.
-                            </p>
-
-                        </article>
-
                     </div>
                 </div>
 
@@ -763,25 +732,11 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container container-1">
                     <div class="row flex-grow-1 align-items-center">
-                        <div class="col-lg-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>© 2023 BreezyFinance</div>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
-                                        <i class="fas fa-bars"></i>
-                                    </button>
-                            </div>
-                        </div>
                         <div class="col-lg-8">
                             <div class="collapse navbar-collapse" id="navbar-footer">
-                                <ul class="navbar-nav menu-footer ms-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="risks.html" class="">Risks</a>
-                                    </li>
+                                <ul class="navbar-nav menu-footer mb-2 mb-lg-0">
                                     <li class="nav-item">
                                         <a class="nav-link" target="_blank" href="https://basecryptodigest.click/category/breezy/">Documents</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="https://twitter.com/BreezyFinance" rel="noopener noreferrer">Twitter</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" target="_blank" href="#" rel="noopener noreferrer">Telegram</a>
@@ -790,9 +745,23 @@
                                         <a class="nav-link" target="_blank" href="https://github.com/breezyfinance">git</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://twitter.com/BreezyFinance" rel="noopener noreferrer">Twitter</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="risks.html" class="">Risks</a>
+                                    </li>                                                  
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#">V0.0.1</a>
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div>© 2023 BreezyFinance</div>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
                             </div>
                         </div>
                     </div>
