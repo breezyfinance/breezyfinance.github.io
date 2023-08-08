@@ -752,6 +752,7 @@ h6 {
 .page__home {
     background: linear-gradient(225deg, #F5F7FF 0%, #FFF 0%, #EDF9FF 47.19%, #E8EDFF 100%);
     padding-top: 100px;
+    overflow-x: hidden;
 }
 
 .home__title-xlarge {
@@ -791,11 +792,13 @@ h6 {
 }
 .home-top-banner .img {
     position: absolute;
-    right: 8%;
-    top: -20%;
-    max-width: 40%;
+    right: -5%;
+    top: 15%;
+    width: 45%;
 }
-  
+.home-top-banner .img img {
+    width: 70%;
+}
 #home__assets {
     background:  #F2F4F5;
     margin-top: 54px;
@@ -1407,7 +1410,16 @@ input:checked+.slider:before {
     width: 100%;
     padding-right: 18px;
 }
-
+@media screen and (min-width: 1920px) {
+    .home-top-banner .img img {
+        width: 65%;
+    }
+}
+@media screen and (min-width: 2560px) {
+    .home-top-banner .img img {
+        width: 50%;
+    }
+}
 @media screen and (min-width: 1200px) {
     .container-1 {
         max-width: 1300px;
