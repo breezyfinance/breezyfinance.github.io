@@ -615,11 +615,13 @@
                     if (amountIn <= 0 || amountOut <= 0) {
                         return false;
                     }
-                    let userAssetBalances = storeHelper.getValue('balanceOf');
-                    let userTokenPayBalance = userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase()];
-                    if (amountIn > userTokenPayBalance) {
-                        amountIn = userTokenPayBalance;
-                    }
+                    let userSelectedTokenPayContract =  contractBaseHelper.getReadContract(userSelectedTokenPayAdd ,erc20TokenABI);
+                    userSelectedTokenPayContract.methods.balanceOf(userWallet).call().then(result => {
+                        let userSelectedTokenPayBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenPay)); 
+                        if (amountIn > userSelectedTokenPayBalance) {
+                            amountIn = userSelectedTokenPayBalance;
+                        }            
+                    });
                     let pairABI = abiHelper.getBreezySwapV1ABI();
                     let pairAddress = _contractsObj['breezySwapV1'][userSelectedTokenPay + userSelectedTokenOut]["contract"];
                     let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
@@ -637,7 +639,7 @@
                         slippage = 0;
                     }
                     let minOut = amountOut - amountOut * slippage / 100;
-                    if (userSelectedTokenOut === 'weth') { //token to base
+                    if (userSelectedTokenOut === 'base') { //token to base
                         pairContract
                             .methods
                             .swapTokenToBaseWithTokenInput(
