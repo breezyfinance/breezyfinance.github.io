@@ -5,7 +5,7 @@ $.BREEZY_NETWORK.prototype = (function() {
             chainId: 11155111,
             chainName: "Sepolia",
             currencySymbol: "SepoliaETH",
-            rpcList: ['https://sepolia.infura.io/v3/'],
+            rpcList: ['https://eth-sepolia.g.alchemy.com/v2/Dy4zBBd1RgIFZIn16MxMmTn0zP-l5FjT'],
             blockExplorerUrls: ['https://sepolia.etherscan.io']
         },
     };

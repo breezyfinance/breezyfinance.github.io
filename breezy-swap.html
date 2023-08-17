@@ -27,7 +27,6 @@
     <script src="./js/contract/basenetwork/data.js"></script>
     <script src="./js/contract/basenetwork/swap-info.contract.js"></script>
     <script src="./js/contract/basenetwork/swap.contract.js"></script>
-    <script src="./js/contract/basenetwork/network.js"></script>
 
     <title>BreezySwap</title>
 
@@ -275,12 +274,12 @@
                                             <select class="selectpicker swap__form-select mb-1" name="from">
                                                     <option
                                                         value="trade"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bci-token.png' /></span>BCI</div>"
-                                                        >BCI</option>
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bci-token.png' /></span>TRADE</div>"
+                                                        >TRADE</option>
                                                     <option
                                                         value="base"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>WETH</div>"
-                                                        >WETH</option>
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>BASE</div>"
+                                                        >BASE</option>
                                                 </select>
                                             <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
                                         </div>
@@ -302,12 +301,12 @@
                                             <select class="selectpicker swap__form-select mb-1" name="to">
                                                     <option
                                                         value="base"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>WETH</div>"
-                                                        >WETH</option>
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>BASE</div>"
+                                                        >BASE</option>
                                                     <option
                                                         value="trade"
-                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bci-token.png' /></span>BCI</div>"
-                                                        >BCI</option>
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bci-token.png' /></span>TRADE</div>"
+                                                        >TRADE</option>
                                                 </select>
                                             <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
                                         </div>
@@ -458,7 +457,6 @@
     var dataHelper = new $.DATA();
     var breezySwapInfoHelper = new $.BREEZY_SWAP_INFO();
     var breezySwapHelper = new $.BREEZY_SWAP();
-    var networkHelper = new $.BREEZY_NETWORK();
     var chainId = 11155111;
     // $('.alert-banner').hide();
     // if (typeof window.ethereum !== 'undefined') {
@@ -492,22 +490,41 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let _user = coreHelper.getUserAccount();
+        let userWallet = coreHelper.getUserAccount();
+        let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
+        let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
+        let userSelectedTokenPayAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase();
+        let userSelectedTokenOutAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenOut).toLowerCase();     
+        let userSelectedTokenPayContract =  contractBaseHelper.getReadContract(userSelectedTokenPayAdd ,erc20TokenABI);
+        let userSelectedTokenOutContract =  contractBaseHelper.getReadContract(userSelectedTokenOutAdd ,erc20TokenABI);
+        userSelectedTokenPayContract.methods.balanceOf(userWallet).call().then(result => {
+            let userSelectedTokenPayBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenPay));             
+            $('.token-swap-pay .user-from-bal').text(userSelectedTokenPayBalance);
+        });
+        userSelectedTokenOutContract.methods.balanceOf(userWallet).call().then(result => {
+            let userSelectedTokenOutBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenOut));            
+            $('.token-swap-out .user-to-bal').text(userSelectedTokenOutBalance);
+        });
         setInterval(function() {
             let userWallet = coreHelper.getUserAccount();
             let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
             let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
             let userSelectedTokenPayAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase();
-            let userSelectedTokenOutAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenOut).toLowerCase();
-            let userSelectedTokenPayContract =  contractBaseHelper.getReadContract(userSelectedTokenPayAdd , erc20TokenABI);
-            userSelectedTokenPayContract.methods.balanceOf(userWallet).call()
-            .then(result => {
-                console.log(result);
-                
+            let userSelectedTokenOutAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenOut).toLowerCase();     
+            let userSelectedTokenPayContract =  contractBaseHelper.getReadContract(userSelectedTokenPayAdd ,erc20TokenABI);
+            let userSelectedTokenOutContract =  contractBaseHelper.getReadContract(userSelectedTokenOutAdd ,erc20TokenABI);
+            userSelectedTokenPayContract.methods.balanceOf(userWallet).call().then(result => {
+                let userSelectedTokenPayBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenPay));             
+                $('.token-swap-pay .user-from-bal').text(userSelectedTokenPayBalance);
             });
-            // $('.token-swap-pay .user-from-bal').text(userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase()].toFixed(6));
+            userSelectedTokenOutContract.methods.balanceOf(userWallet).call().then(result => {
+                let userSelectedTokenOutBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenOut));            
+                $('.token-swap-out .user-to-bal').text(userSelectedTokenOutBalance);
+            });
+            // 
             // $('.token-swap-out .user-to-bal').text(userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenOut).toLowerCase()].toFixed(6));
             // $('.token-swap-out .user-from-bal').data('balance-no-fixed', userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase()]);
-        }, 3000);
+        }, 15000);
         //setup before functions
         var typingTimerAmountStableSwap; //timer identifier
         var doneTypingInterval = 1000; //time in ms, 3 second for example
@@ -543,8 +560,8 @@
         $('.token-swap input[name=amountIn]').on('keydown', function() {
             clearTimeout(typingTimerAmountTokenSwap);
         });
-        // let grbPrice = 0;
-        // let wethPrice = 0;
+        let tradePrice = configHelper.getPriceByTokenName(chainId , 'trade');
+        let basePrice = configHelper.getPriceByTokenName(chainId, 'base');;
         // $.get("https://api.coingecko.com/api/v3/simple/price?ids=garbi-protocol%2Cethereum&vs_currencies=usd", function(data) {
         //     wethPrice = data["ethereum"]["usd"];
         //     grbPrice = data["garbi-protocol"]["usd"];
@@ -557,25 +574,25 @@
                 let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
                 let payDecimal = configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenPay);
                 let outDecimal = configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenOut);
-                let pairABI = abiHelper.getGarbiSwapABI();
+                let pairABI = abiHelper.getBreezySwapV1ABI();
                 let pairAddress = _contractsObj['breezySwapV1'][userSelectedTokenPay + userSelectedTokenOut]["contract"];
-                let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
+                let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
                 if (userSelectedTokenOut === 'base') { //token to base
                     pairContract.methods.getBaseOutput(coreHelper.toBN(amountIn, payDecimal)).call().then(function(result) {
                         let amountOut = (parseInt(result) / (10 ** outDecimal)).toFixed(6);
                         $('.token-swap input[name=amountOut]').val(amountOut);
-                        $('.token-swap .to-volume').text((amountOut * wethPrice).toFixed(2));
-                        $('.token-swap .from-volume').text((amountIn * grbPrice).toFixed(2));
+                        $('.token-swap .to-volume').text((amountOut * basePrice).toFixed(2));
+                        $('.token-swap .from-volume').text((amountIn * tradePrice).toFixed(2));
                     });
                 } else {
                     pairContract.methods.getTokenOutput(coreHelper.toBN(amountIn, payDecimal)).call().then(function(result) {
                         let amountOut = (parseInt(result) / (10 ** outDecimal)).toFixed(6);
                         $('.token-swap input[name=amountOut]').val(amountOut);
-                        $('.token-swap .to-volume').text((amountOut * grbPrice).toFixed(2));
-                        $('.token-swap .from-volume').text((amountIn * wethPrice).toFixed(2));
+                        $('.token-swap .to-volume').text((amountOut * tradePrice).toFixed(2));
+                        $('.token-swap .from-volume').text((amountIn * basePrice).toFixed(2));
                     });
                 }
-                setTimeout(doneTypingAmountTokenSwap, 3000);
+                setTimeout(doneTypingAmountTokenSwap, 10000);
             }
         }
         $('.token-swap .button-swap').click(function(e) {
@@ -603,7 +620,7 @@
                     if (amountIn > userTokenPayBalance) {
                         amountIn = userTokenPayBalance;
                     }
-                    let pairABI = abiHelper.getGarbiSwapABI();
+                    let pairABI = abiHelper.getBreezySwapV1ABI();
                     let pairAddress = _contractsObj['breezySwapV1'][userSelectedTokenPay + userSelectedTokenOut]["contract"];
                     let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
                     let payDecimal = configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenPay);
@@ -633,7 +650,7 @@
                             })
                             .on('transactionHash', (hash) => {
                                 coreHelper.showPopup('confirm-popup');
-                                $('.transaction-hash').attr("href", "https://arbiscan.io/tx/" + hash);
+                                $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/" + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
@@ -665,7 +682,7 @@
                             })
                             .on('transactionHash', (hash) => {
                                 coreHelper.showPopup('confirm-popup');
-                                $('.transaction-hash').attr("href", "https://arbiscan.io/tx/" + hash);
+                                $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/" + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
@@ -693,7 +710,7 @@
             let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
             let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
             let userPayTokenContract = contractBaseHelper.getMainContract(configHelper.getTokenByTokenName(chainId, userSelectedTokenPay), erc20TokenABI);
-            let pairAddress = _contractsObj['garbiSwapPairs'][userSelectedTokenPay + userSelectedTokenOut]["contract"];
+            let pairAddress = _contractsObj['breezySwapV1'][userSelectedTokenPay + userSelectedTokenOut]["contract"];
             userPayTokenContract.methods
                 .approve(
                     pairAddress,
@@ -704,7 +721,7 @@
                 })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    $('.transaction-hash').attr("href", "https://arbiscan.io/tx/" + hash);
+                    $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
                     $('.button-approve').hide();

@@ -22,6 +22,9 @@ $.CONTRACTBASE.prototype = (function() {
                         {
                                 bscRpcEndPoint = 'https://nova.arbitrum.io/rpc';
                         }
+                        if(_chainId == 11155111) {
+                                bscRpcEndPoint = 'https://eth-sepolia.g.alchemy.com/v2/Dy4zBBd1RgIFZIn16MxMmTn0zP-l5FjT';
+                        }
                         return new Web3(bscRpcEndPoint);
                 },
                 getReadContract(_addr, _abi, _chainId = null) {

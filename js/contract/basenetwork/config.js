@@ -41,7 +41,8 @@ $.CONFIG.prototype = (function() {
     };
     var PRICES = {
         11155111: {
-            'weth': 1807,
+            'base': 1807,
+            'trade': 1
         },
     };
     return {
