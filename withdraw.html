@@ -425,15 +425,24 @@
         contractBaseHelper.init({
             chainId
         });
+        run();
+    });
+    let userWallet;
+    async function waitForUserWallet() {
+        let userwallet = coreHelper.getUserAccount();
 
+        while (userwallet === '0x0000000000000000000000000000000000000000') {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            userwallet = coreHelper.getUserAccount();
+        }
 
+        userWallet = userwallet;
+    }
+    async function run() {
+        await waitForUserWallet();
         let mintLp = 0;
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
-        let userWallet = coreHelper.getUserAccount();
-        while (userWallet === '0x0000000000000000000000000000000000000000') {
-            userWallet = coreHelper.getUserAccount();
-        }
         let lbPool = $('select[name=lp_token]').val();
         let pairABI = abiHelper.getBreezySwapV1ABI();
         let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
@@ -557,7 +566,6 @@
             });
             
         });
-
-    });
+    }
 </script>
 </html>
