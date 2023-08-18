@@ -431,6 +431,9 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();
+        while (userWallet === '0x0000000000000000000000000000000000000000') {
+            userWallet = coreHelper.getUserAccount();
+        }
         let lbPool = $('select[name=lp_token]').val();
         let pairABI = abiHelper.getBreezySwapV1ABI();
         let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];

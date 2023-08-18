@@ -490,6 +490,9 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();
+        while (userWallet === '0x0000000000000000000000000000000000000000') {
+            userWallet = coreHelper.getUserAccount();
+        }
         let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
         let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
         let userSelectedTokenPayAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase();
