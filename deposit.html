@@ -25,9 +25,6 @@
     <script src="./js/contract/basenetwork/core.js"></script>
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
-    <script src="./js/contract/basenetwork/swap-info.contract.js"></script>
-    <script src="./js/contract/basenetwork/swap.addlp.contract.js"></script>
-    <script src="./js/contract/basenetwork/swap.contract.js"></script>
 
     <title>Breezy Swap</title>
     <style id="svelte-166mr51-style">
@@ -436,7 +433,6 @@
         });
 
         
-        let mintLp = 0;
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();

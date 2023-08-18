@@ -17,6 +17,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/web3.min.js"></script>
+    <script src="./assets/js/trustwallet.js"></script> 
+    <script src="./js/contract/basenetwork/abi.js"></script>
+    <script src="./js/contract/basenetwork/config.js"></script>
+    <script src="./js/data/store.js"></script>
+    <script src="./js/contract/basenetwork/core.js"></script>
+    <script src="./js/contract/basenetwork/base.contract.js"></script>
+    <script src="./js/contract/basenetwork/data.js"></script>
 
     <title>Withdraw</title>
     <style id="svelte-166mr51-style">
@@ -160,7 +168,7 @@
                         </div>
                         <div class="col-6 col-lg-2 order-lg-3">
                             <div class="d-flex align-items-center justify-content-end">
-                                <!-- <span class="wrap-user-acct">0x000</span> -->
+                                <span class="wrap-user-acct">0x000</span>
                                 <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect your wallet</a>
                                 <!-- <span class="dropMenu">
                                         <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
@@ -237,13 +245,13 @@
                             <span>Remove Liquidity</span>
                             <span class="addlp__form-item">
                                     <div class='swap__form-item-select' style="display: inline-block;">
-                                        BRE-WETH
+                                        TRADE-BASE
                                     </div>
                                     <select name="lp_token" style="display:none">
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
-                                            value="grbweth">
-                                            BRE-WETH
+                                            value="tradebase">
+                                            TRADE-BASE
                                         </option>
                                     </select>
                                 </span>
@@ -290,7 +298,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"> 
-                                        <img src="./assets/images/bre-token.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">BRE</span>
+                                        <img src="./assets/images/bre-token.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">TRADE</span>
 
                                     </span>
                                 </label>
@@ -301,7 +309,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"> 
-                                        <img src="./assets/images/eth_logo.png" style="margin-left: 0;" class="token-icon img-base"> <span class="token-name base">WETH</span>
+                                        <img src="./assets/images/eth_logo.png" style="margin-left: 0;" class="token-icon img-base"> <span class="token-name base">BASE</span>
 
                                     </span>
                                 </label>
@@ -399,4 +407,155 @@
     <script src="./assets/js/custom.menu.js"></script>
 
 </body>
+<script>
+    var abiHelper = new $.ABI();
+    var coreHelper = new $.Core();
+    var configHelper = new $.CONFIG();
+    var contractBaseHelper = new $.CONTRACTBASE();
+    var storeHelper = new $.STORE();
+    var dataHelper = new $.DATA();
+    var chainId = 11155111;
+
+
+    $(document).ready(function() {
+        abiHelper.init({});
+        coreHelper.init({});
+        configHelper.init({});
+        storeHelper.init({});
+        contractBaseHelper.init({
+            chainId
+        });
+
+
+        let mintLp = 0;
+        let erc20TokenABI = abiHelper.getERC20TokenABI();
+        let _contractsObj = configHelper.getContracts(chainId);
+        let userWallet = coreHelper.getUserAccount();
+        let lbPool = $('select[name=lp_token]').val();
+        let pairABI = abiHelper.getBreezySwapV1ABI();
+        let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+        let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+        let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
+
+        pairContract.methods.balanceOf(userWallet).call().then(result => {
+            let userLPBalance = result / 10 ** lbDecimal;
+            $('#user-liquidity-balance').text(userLPBalance.toFixed(6));
+        });
+
+        setInterval(function() {
+            let userWallet = coreHelper.getUserAccount();
+            pairContract.methods.balanceOf(userWallet).call().then(result => {
+                let userLPBalance = result / 10 ** lbDecimal;
+                $('#user-liquidity-balance').text(userLPBalance.toFixed(6));
+            });
+        }, 15000);
+
+        $('#max-liquidity-button').click(function() {
+            let userBalance = parseFloat($('#user-liquidity-balance').text());
+            $('input[name=amount_of_liquidity]').val(userBalance);
+            doneTypingAmountLPToken();
+        });
+
+        var typingTimerAmountLPRemove; //timer identifier
+        var doneTypingInterval = 1000;
+        //on keyup, start the countdown
+        $('input[name=amount_of_liquidity]').on('keyup', function() {
+            clearTimeout(typingTimerAmountLPRemove);
+            typingTimerAmountLPRemove = setTimeout(doneTypingAmountLPToken, doneTypingInterval);
+        });
+
+        //on keydown, clear the countdown 
+        $('input[name=amount_of_liquidity]').on('keydown', function() {
+            clearTimeout(typingTimerAmountLPRemove);
+        });
+
+        //user is "finished typing," do something
+
+        function getSlippage() {
+            let _slippage = $('input[name=slippage]').val();
+            if (!_slippage || _slippage == '') {
+                _slippage = 0;
+            }
+            _slippage = parseFloat(_slippage);
+            if (isNaN(_slippage) == true) {
+                _slippage = 0;
+            }
+            return _slippage / 100;
+        };
+
+        function doneTypingAmountLPToken() {
+            let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();
+            
+            if (amountOfLiquidity > 0) {
+                let lbPool = $('select[name=lp_token]').val();
+                let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+                let pairABI = abiHelper.getBreezySwapV1ABI();
+                let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+                let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+                let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
+                let slippage = getSlippage();
+
+                pairContract.methods.getDataToRemoveLP(coreHelper.toBN(amountOfLiquidity, lbDecimal)).call().then(result => {
+                    let baseOutputAmount = parseInt(result[0]) / (10 ** baseTokenDecimal);
+                    let tokenOutputAmount = parseInt(result[1]) / (10 ** tradeTokenDecimal);
+
+                    baseOutputAmount -= baseOutputAmount * slippage;
+                    tokenOutputAmount -= tokenOutputAmount * slippage;
+
+                    $('input[name=token_output]').val(tokenOutputAmount);
+                    $('input[name=base_output]').val(baseOutputAmount);
+                });
+
+                setTimeout(doneTypingAmountLPToken, 10000);
+            }
+        };
+
+        $('#remove-liquidity').click(function(e) {
+            let userWallet = coreHelper.getUserAccount();
+            let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();
+            let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+            let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+            let pairABI = abiHelper.getBreezySwapV1ABI();
+            let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+            let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+            let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
+            let minTokenOutput = $('input[name=token_output]').val();
+            let minBaseTokenOutput = $('input[name=base_output]').val();
+            if (minTokenOutput <= 0 || minBaseTokenOutput <= 0) {
+                return false;
+            }
+            let _deadlineDelay = 5;
+            let _now = parseInt(Date.now() / 1000);
+            let deadline = parseInt(_now + 60 * _deadlineDelay);
+
+            pairContract.methods
+            .removeLP(coreHelper.toBN(amountOfLiquidity, lbDecimal) , coreHelper.toBN(minBaseTokenOutput, baseTokenDecimal) , coreHelper.toBN(minTokenOutput, tradeTokenDecimal), deadline)
+            .send(
+                { from: userWallet }
+            )
+            .on("transactionHash", function(hash) {
+                coreHelper.showPopup('confirm-popup');
+                $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/"+hash);
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+                $('input[name=token_output]').val("");
+                $('input[name=base_output]').val("");
+            })
+            .on('receipt', (receipt) => {
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+            })
+            .on('error', (err, receipt) => {
+                console.log(err);
+            });
+            
+        });
+
+    });
+</script>
 </html>
