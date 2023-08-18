@@ -17,6 +17,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/web3.min.js"></script>
+    <script src="./assets/js/trustwallet.js"></script> 
+    <script src="./js/contract/basenetwork/abi.js"></script>
+    <script src="./js/contract/basenetwork/config.js"></script>
+    <script src="./js/data/store.js"></script>
+    <script src="./js/contract/basenetwork/core.js"></script>
+    <script src="./js/contract/basenetwork/base.contract.js"></script>
+    <script src="./js/contract/basenetwork/data.js"></script>
 
     <title>Breezy Swap</title>
     <style id="svelte-166mr51-style">
@@ -160,7 +168,7 @@
                         </div>
                         <div class="col-6 col-lg-2 order-lg-3">
                             <div class="d-flex align-items-center justify-content-end">
-                                <!-- <span class="wrap-user-acct">0x000</span> -->
+                                <span class="wrap-user-acct">0x000</span>
                                 <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect wallet</a>
                                 <!-- <span class="dropMenu">
                                         <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
@@ -237,13 +245,13 @@
                             <span style="margin-left: 4px;">Deposit Liquidity</span>
                             <span class="addlp__form-item">
                                     <div class='swap__form-item-select' style="display: inline-block;">
-                                        BRE-WETH
+                                        TRADE-BASE
                                     </div>
                                     <select name="lp_token" style="display:none">
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
-                                            value="grbweth">
-                                            BRE-WETH
+                                            value="tradebase">
+                                            TRADE-BASE
                                         </option>
                                     </select>
                                 </span>
@@ -277,7 +285,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal" style="margin-left: -10px;"> 
-                                        <img src="./assets/images/bre-token.png" class="token-icon img-token"> <span class="token-name token">BRE</span>
+                                        <img src="./assets/images/bre-token.png" class="token-icon img-token"> <span class="token-name token">TRADE</span>
                                         <button class="maxBalanceCoin max-token-input">Max: </button>
                                         <span class="token-bal">Loading</span>
                                     </span>
@@ -289,7 +297,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"  style="margin-left: -10px;"> 
-                                        <img src="./assets/images/eth_logo.png" class="token-icon img-base"> <span class="token-name base">WETH</span>
+                                        <img src="./assets/images/eth_logo.png" class="token-icon img-base"> <span class="token-name base">BASE</span>
                                         <button class="maxBalanceCoin max-base-input">Max: </button>
                                         <span class="base-bal">Loading</span>
                                     </span>
@@ -299,8 +307,8 @@
                             </div>
                         </li>
                         <li style="list-style-type: none; margin-left: -30px;">
-                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-token" style="display: none">Approve <span class="token">GRB</span></button>
-                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: none">Approve <span class="base">WETH</span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-token" style="display: none">Approve <span class="token">TRADE</span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: none">Approve <span class="base">BASE</span></button>
                             <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-deposit">Deposit</button>
                     </ul>
                 </article>
@@ -388,3 +396,322 @@
     <script src="./assets/js/custom.js"></script>
     <script src="./assets/js/custom.menu.js"></script>
 </body>
+
+<script>
+    var abiHelper = new $.ABI();
+    var coreHelper = new $.Core();
+    var configHelper = new $.CONFIG();
+    var contractBaseHelper = new $.CONTRACTBASE();
+    var storeHelper = new $.STORE();
+    var dataHelper = new $.DATA();
+    var chainId = 11155111;
+    // $('.alert-banner').hide();
+    // if (typeof window.ethereum !== 'undefined') {
+    //     const web3 = new Web3(window.ethereum);
+    //     window.ethereum.enable();
+    //     web3.eth.getChainId()
+    //         .then(chainId => {
+    //             if (chainId !== 42161) {
+    //                 $('.alert-banner').show();
+    //             } else {
+    //                 $('.alert-banner').hide();
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // } else {
+    //     console.log("Metamask not found");
+    // }
+    $(document).ready(function() {
+        abiHelper.init({});
+        coreHelper.init({});
+        configHelper.init({});
+        storeHelper.init({});
+        contractBaseHelper.init({
+            chainId
+        });
+
+        
+        let erc20TokenABI = abiHelper.getERC20TokenABI();
+        let _contractsObj = configHelper.getContracts(chainId);
+        let userWallet = coreHelper.getUserAccount();
+        let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, 'trade').toLowerCase();
+        let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'base').toLowerCase();     
+        let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
+        let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
+        tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
+            let tradeTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'trade'));            
+            $('.token-bal').text(tradeTokenBalance.toFixed(3));
+        });
+        baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
+            let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'base'));            
+            $('.base-bal').text(baseTokenBalance.toFixed(3));
+        });
+
+
+        setInterval(function() {
+            let userWallet = coreHelper.getUserAccount();
+            let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, 'trade').toLowerCase();
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'base').toLowerCase();     
+            let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
+            let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
+            tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
+                let tradeTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'trade'));            
+                $('.token-bal').text(tradeTokenBalance.toFixed(3));
+            });
+            baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
+                let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'base'));            
+                $('.base-bal').text(baseTokenBalance.toFixed(3));
+            });
+        }, 15000);
+
+
+        $('.max-token-input').click(function() {
+            let userBalance = parseFloat($('.token-bal').text());
+            $('input[name=token_input]').val(userBalance);
+            doneTypingAmountTradeToken();
+        });
+
+        $('.max-base-input').click(function() {
+            let userBalance = parseFloat($('.base-bal').text());
+            $('input[name=base_input]').val(userBalance);
+            doneTypingAmountBaseToken();
+        });
+
+
+        var typingTimerAmountTokenSwap; //timer identifier
+        var doneTypingInterval = 1000;
+        //on keyup, start the countdown
+        $('input[name=token_input]').on('keyup', function() {
+            clearTimeout(typingTimerAmountTokenSwap);
+            typingTimerAmountTokenSwap = setTimeout(doneTypingAmountTradeToken, doneTypingInterval);
+        });
+        $('input[name=base_input]').on('keyup', function() {
+            clearTimeout(typingTimerAmountTokenSwap);
+            typingTimerAmountTokenSwap = setTimeout(doneTypingAmountBaseToken, doneTypingInterval);
+        });
+
+        //on keydown, clear the countdown 
+        $('input[name=token_input]').on('keydown', function() {
+            clearTimeout(typingTimerAmountTokenSwap);
+        });
+        $('input[name=base_input]').on('keydown', function() {
+            clearTimeout(typingTimerAmountTokenSwap);
+        });
+        //user is "finished typing," do something
+
+        function getSlippage() {
+            let _slippage = $('input[name=slippage]').val();
+            if (!_slippage || _slippage == '') {
+                _slippage = 0;
+            }
+            _slippage = parseFloat(_slippage);
+            if (isNaN(_slippage) == true) {
+                _slippage = 0;
+            }
+            return _slippage / 100;
+        };
+
+        function doneTypingAmountTradeToken() {
+            let amountTradeToken = $('input[name=token_input]').val();
+            let mintLp = 0;
+            if (amountTradeToken > 0) {
+                let lbPool = $('select[name=lp_token]').val();
+                let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+                let pairABI = abiHelper.getBreezySwapV1ABI();
+                let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+                let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+                let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
+                let slippage = getSlippage();
+                amountTradeToken -= amountTradeToken * slippage;
+
+                pairContract.methods.getDataFromTokenInputToAddLp(coreHelper.toBN(amountTradeToken, tradeTokenDecimal)).call().then(result => {
+                    mintLp = parseInt(result[0]) / (10 ** lbDecimal);
+
+                    let baseInput = parseInt(result[1]) / (10 ** baseTokenDecimal);   
+
+                    $(`input[name=base_input]`).val(baseInput.toFixed(10));
+                    $('.btn-deposit').data('mintLp', mintLp);
+                });
+
+                setTimeout(doneTypingAmountTradeToken, 10000);
+            }
+        };
+
+        function doneTypingAmountBaseToken() {
+            let amountBaseToken = $('input[name=base_input]').val();
+            if (amountBaseToken > 0) {
+                let lbPool = $('select[name=lp_token]').val();
+                let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+                let pairABI = abiHelper.getBreezySwapV1ABI();
+                let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+                let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+                let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
+                let slippage = getSlippage();
+
+                pairContract.methods.getDataFromBaseInputToAddLp(coreHelper.toBN(amountBaseToken, baseTokenDecimal)).call().then(result => {
+                    mintLp = parseInt(result[0]) / (10 ** lbDecimal);
+
+                    let tradeInput = parseInt(result[1]) / (10 ** tradeTokenDecimal);   
+                    tradeInput += tradeInput * slippage
+                    $(`input[name=token_input]`).val(tradeInput.toFixed(10));
+                    $('.btn-deposit').data('mintLp', mintLp);
+                });
+
+                setTimeout(doneTypingAmountBaseToken, 10000);
+            }
+        };
+
+
+        $('.btn-deposit').click(function(e) {
+            let mintLp = $(this).data('mintLp');
+            let userWallet = coreHelper.getUserAccount();
+            let tradeTokenDeciamal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+            let baseTokenDeciamal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+            let userInputTokenTradeValue = $('input[name=token_input]').val();
+            let userInputTokenBaseValue = $('input[name=base_input]').val();
+            tradeTokenContract.methods.allowance(userWallet, _contractsObj['breezySwapV1']['tradebase']["contract"]).call().then(result => {
+                let tradeTokenValue = result / (10 ** tradeTokenDeciamal);
+                if (tradeTokenValue < userInputTokenTradeValue) { //need approve trade token
+                    $('.btn-approve-token').show();
+                }
+                else {
+                    baseTokenContract.methods.allowance(userWallet, _contractsObj['breezySwapV1']['basetrade']["contract"]).call().then(result => {
+                        let baseTokenValue = result / (10 ** baseTokenDeciamal);
+                        if (baseTokenValue < userInputTokenBaseValue) { //need approve base token
+                            $('.btn-approve-base').show();
+                        }
+                        else {
+                            let amountTrade = $('input[name=token_input]').val();
+                            let amountBase = $('input[name=base_input]').val();
+                            if (!userWallet) {
+                                return false;
+                            }
+                            if (amountTrade <= 0 || amountBase <= 0) {
+                                return false;
+                            }
+                            tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
+                                let userTradeTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'trade')); 
+                                if (amountTrade > userTradeTokenBalance) {
+                                    amountTrade = userTradeTokenBalance;
+                                }            
+                            });
+                            baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
+                                let userBaseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'base')); 
+                                if (amountBase > userBaseTokenBalance) {
+                                    amountBase = userBaseTokenBalance;
+                                }            
+                            });
+
+                            let pairABI = abiHelper.getBreezySwapV1ABI();
+                            let pairAddress = _contractsObj['breezySwapV1']['tradebase']["contract"];
+                            let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
+                            let tradeDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
+                            let baseDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+                            let _deadlineDelay = 5;
+                            let _now = parseInt(Date.now() / 1000);
+                            let deadline = parseInt(_now + 60 * _deadlineDelay);
+                            let slippage = getSlippage();
+                            let minLp = mintLp - mintLp * slippage;
+                            let lbPool = $('select[name=lp_token]').val();
+                            let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
+
+                            pairContract.methods
+                            .addLP(coreHelper.toBN(minLp, lbDecimal) , coreHelper.toBN(amountBase, baseDecimal) , coreHelper.toBN(amountTrade, tradeDecimal), deadline)
+                            .send(
+                                { from: userWallet }
+                            )
+                            .on("transactionHash", function(hash) {
+                                coreHelper.showPopup('confirm-popup');
+                                $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/"+hash);
+                            })
+                            .on('confirmation', (confirmationNumber, receipt) => {
+                                coreHelper.hidePopup('confirm-popup', 0);
+                                coreHelper.showPopup('success-confirm-popup');
+                                coreHelper.hidePopup('success-confirm-popup', 10000);
+                                $('input[name=token_input]').val("");
+                                $('input[name=base_input]').val("");
+                                mintLp = 0
+                            })
+                            .on('receipt', (receipt) => {
+                                coreHelper.hidePopup('confirm-popup', 0);
+                                coreHelper.showPopup('success-confirm-popup');
+                                coreHelper.hidePopup('success-confirm-popup', 10000);
+                            })
+                            .on('error', (err, receipt) => {
+                                console.log(err);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.btn-approve-token').click(function() {
+            let userWallet = coreHelper.getUserAccount();
+            let tradeTokenContract = contractBaseHelper.getMainContract(tradeTokenAdd, erc20TokenABI);
+            let pairAddress = _contractsObj['breezySwapV1']['tradebase']["contract"];
+            tradeTokenContract.methods
+                .approve(
+                    pairAddress,
+                    coreHelper.getAmountAllow()
+                )
+                .send({
+                    from: userWallet
+                })
+                .on('transactionHash', (hash) => {
+                    coreHelper.showPopup('confirm-popup');
+                    $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
+                })
+                .on('confirmation', (confirmationNumber, receipt) => {
+                    $('.btn-approve-token').hide();
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('receipt', (receipt) => {
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('error', (err, receipt) => {
+                    console.log(err);
+                });
+        });
+
+        $('.btn-approve-base').click(function() {
+            let userWallet = coreHelper.getUserAccount();
+            let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
+            let pairAddress = _contractsObj['breezySwapV1']['basetrade']["contract"];
+            baseTokenContract.methods
+                .approve(
+                    pairAddress,
+                    coreHelper.getAmountAllow()
+                )
+                .send({
+                    from: userWallet
+                })
+                .on('transactionHash', (hash) => {
+                    coreHelper.showPopup('confirm-popup');
+                    $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
+                })
+                .on('confirmation', (confirmationNumber, receipt) => {
+                    $('.btn-approve-base').hide();
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('receipt', (receipt) => {
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('error', (err, receipt) => {
+                    console.log(err);
+                });
+        });
+    });
+</script>
