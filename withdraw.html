@@ -431,6 +431,9 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();
+        while (userWallet === '0x0000000000000000000000000000000000000000') {
+            userWallet = coreHelper.getUserAccount();
+        }
         let lbPool = $('select[name=lp_token]').val();
         let pairABI = abiHelper.getBreezySwapV1ABI();
         let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
@@ -539,16 +542,15 @@
                 $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/"+hash);
             })
             .on('confirmation', (confirmationNumber, receipt) => {
-                coreHelper.hidePopup('confirm-popup', 0);
-                coreHelper.showPopup('success-confirm-popup');
-                coreHelper.hidePopup('success-confirm-popup', 10000);
-                $('input[name=token_output]').val("");
-                $('input[name=base_output]').val("");
+
+                
             })
             .on('receipt', (receipt) => {
                 coreHelper.hidePopup('confirm-popup', 0);
                 coreHelper.showPopup('success-confirm-popup');
                 coreHelper.hidePopup('success-confirm-popup', 10000);
+                $('input[name=token_output]').val("");
+                $('input[name=base_output]').val("");
             })
             .on('error', (err, receipt) => {
                 console.log(err);

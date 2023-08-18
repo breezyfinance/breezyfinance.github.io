@@ -455,8 +455,6 @@
     var contractBaseHelper = new $.CONTRACTBASE();
     var storeHelper = new $.STORE();
     var dataHelper = new $.DATA();
-    var breezySwapInfoHelper = new $.BREEZY_SWAP_INFO();
-    var breezySwapHelper = new $.BREEZY_SWAP();
     var chainId = 11155111;
     // $('.alert-banner').hide();
     // if (typeof window.ethereum !== 'undefined') {
@@ -490,6 +488,9 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();
+        while (userWallet === '0x0000000000000000000000000000000000000000') {
+            userWallet = coreHelper.getUserAccount();
+        }
         let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
         let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
         let userSelectedTokenPayAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase();
@@ -520,9 +521,6 @@
                 let userSelectedTokenOutBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, userSelectedTokenOut));            
                 $('.token-swap-out .user-to-bal').text(userSelectedTokenOutBalance);
             });
-            // 
-            // $('.token-swap-out .user-to-bal').text(userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenOut).toLowerCase()].toFixed(6));
-            // $('.token-swap-out .user-from-bal').data('balance-no-fixed', userAssetBalances[configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase()]);
         }, 15000);
         //setup before functions
         var typingTimerAmountStableSwap; //timer identifier
@@ -654,6 +652,9 @@
                                 $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/" + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
+                                                 
+                            })
+                            .on('receipt', (receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
                                 coreHelper.showPopup('success-confirm-popup');
                                 coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -661,11 +662,6 @@
                                 $('.token-swap input[name=amountOut]').val("");
                                 $('.token-swap .from-volume').text("0.0");
                                 $('.token-swap .to-volume').text("0.0");
-                            })
-                            .on('receipt', (receipt) => {
-                                coreHelper.hidePopup('confirm-popup', 0);
-                                coreHelper.showPopup('success-confirm-popup');
-                                coreHelper.hidePopup('success-confirm-popup', 10000);
                             })
                             .on('error', (err, receipt) => {
                                 console.log(err);
@@ -686,6 +682,9 @@
                                 $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/" + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
+
+                            })
+                            .on('receipt', (receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
                                 coreHelper.showPopup('success-confirm-popup');
                                 coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -693,11 +692,6 @@
                                 $('.token-swap input[name=amountOut]').val("");
                                 $('.token-swap .from-volume').text("0.0");
                                 $('.token-swap .to-volume').text("0.0");
-                            })
-                            .on('receipt', (receipt) => {
-                                coreHelper.hidePopup('confirm-popup', 0);
-                                coreHelper.showPopup('success-confirm-popup');
-                                coreHelper.hidePopup('success-confirm-popup', 10000);
                             })
                             .on('error', (err, receipt) => {
                                 console.log(err);
@@ -725,12 +719,10 @@
                     $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    $('.button-approve').hide();
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+
                 })
                 .on('receipt', (receipt) => {
+                    $('.button-approve').hide();
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);

@@ -436,6 +436,9 @@
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
         let userWallet = coreHelper.getUserAccount();
+        while (userWallet === '0x0000000000000000000000000000000000000000') {
+            userWallet = coreHelper.getUserAccount();
+        }
         let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, 'trade').toLowerCase();
         let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'base').toLowerCase();     
         let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
@@ -629,17 +632,15 @@
                                 $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/"+hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
+                                
+                            })
+                            .on('receipt', (receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
                                 coreHelper.showPopup('success-confirm-popup');
                                 coreHelper.hidePopup('success-confirm-popup', 10000);
                                 $('input[name=token_input]').val("");
                                 $('input[name=base_input]').val("");
                                 mintLp = 0
-                            })
-                            .on('receipt', (receipt) => {
-                                coreHelper.hidePopup('confirm-popup', 0);
-                                coreHelper.showPopup('success-confirm-popup');
-                                coreHelper.hidePopup('success-confirm-popup', 10000);
                             })
                             .on('error', (err, receipt) => {
                                 console.log(err);
@@ -667,12 +668,10 @@
                     $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    $('.btn-approve-token').hide();
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                    
                 })
                 .on('receipt', (receipt) => {
+                    $('.btn-approve-token').hide();
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -699,12 +698,10 @@
                     $('.transaction-hash').attr("href", "https://sepolia.etherscan.io//tx/" + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    $('.btn-approve-base').hide();
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+
                 })
                 .on('receipt', (receipt) => {
+                    $('.btn-approve-base').hide();
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
