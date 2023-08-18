@@ -431,14 +431,23 @@
         contractBaseHelper.init({
             chainId
         });
+        run();
+    });
+    let userWallet;
+    async function waitForUserWallet() {
+        let userwallet = coreHelper.getUserAccount();
 
-        
+        while (userwallet === '0x0000000000000000000000000000000000000000') {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            userwallet = coreHelper.getUserAccount();
+        }
+
+        userWallet = userwallet;
+    }
+    async function run() {
+        await waitForUserWallet();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
-        let userWallet = coreHelper.getUserAccount();
-        while (userWallet === '0x0000000000000000000000000000000000000000') {
-            userWallet = coreHelper.getUserAccount();
-        }
         let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, 'trade').toLowerCase();
         let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'base').toLowerCase();     
         let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
@@ -710,5 +719,5 @@
                     console.log(err);
                 });
         });
-    });
+    }
 </script>

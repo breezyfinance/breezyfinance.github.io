@@ -25,8 +25,6 @@
     <script src="./js/contract/basenetwork/core.js"></script>
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
-    <script src="./js/contract/basenetwork/swap-info.contract.js"></script>
-    <script src="./js/contract/basenetwork/swap.contract.js"></script>
 
     <title>BreezySwap</title>
 
@@ -481,16 +479,24 @@
         storeHelper.init({});
         contractBaseHelper.init({
             chainId
-        });
-        // dataHelper.init({
-        //     chainId
-        // });
+        });;
+        run()
+    });
+    let userWallet;
+    async function waitForUserWallet() {
+        let userwallet = coreHelper.getUserAccount();
+
+        while (userwallet === '0x0000000000000000000000000000000000000000') {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            userwallet = coreHelper.getUserAccount();
+        }
+
+        userWallet = userwallet;
+    }
+    async function run() {
+        await waitForUserWallet();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
-        let userWallet = coreHelper.getUserAccount();
-        while (userWallet === '0x0000000000000000000000000000000000000000') {
-            userWallet = coreHelper.getUserAccount();
-        }
         let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
         let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
         let userSelectedTokenPayAdd = configHelper.getTokenByTokenName(chainId, userSelectedTokenPay).toLowerCase();
@@ -652,7 +658,7 @@
                                 $('.transaction-hash').attr("href", "https://sepolia.etherscan.io/tx/" + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
-                                                 
+                                                
                             })
                             .on('receipt', (receipt) => {
                                 coreHelper.hidePopup('confirm-popup', 0);
@@ -731,6 +737,6 @@
                     console.log(err);
                 });
         });
-    });
+    }
 </script>
 </html>
