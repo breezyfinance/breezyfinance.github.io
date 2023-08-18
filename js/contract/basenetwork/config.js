@@ -7,7 +7,7 @@ $.CONFIG.prototype = (function() {
         11155111: {
             breezySwapV1: {
                 'basetrade': {
-                    contract: '0x5922517B49D04f7128C9901b2C3FFd932e62dEf5',
+                    contract: '0xE265b1Eca719fd95294105019C6B14dCe698B4a4',
                     tradeFee: 0.002,
                     performanceFee: 0.5,
                     safuFund: 0,
@@ -16,7 +16,7 @@ $.CONFIG.prototype = (function() {
                     token: 'trade',
                 },
                 'tradebase': {
-                    contract: '0x5922517B49D04f7128C9901b2C3FFd932e62dEf5',
+                    contract: '0xE265b1Eca719fd95294105019C6B14dCe698B4a4',
                     tradeFee: 0.002,
                     performanceFee: 0.5,
                     safuFund: 0,
@@ -29,14 +29,14 @@ $.CONFIG.prototype = (function() {
     };
     var TOKENS = {
         11155111: { //mainnet arbitrum one
-            'base': '0xE407d640D231DC2EC32C1d0Db10776bfD6b4D001',
-            'trade': '0xafB5cc1C732DDcaa681B080771E7d6BBC14f562b',
+            'base': '0xA4aa8f1dC9dE6e4Cbd7B95c57bc59EF682995F70',
+            'trade': '0x8d919d7c7EB395aEB8e3997DE3F385b264231781',
         },
     }
     var TOKENS_DECIMAL = {
         11155111: {
-            'base': 18,
-            'trade': 18,
+            'base': 8,
+            'trade': 6,
         },
     };
     var PRICES = {
