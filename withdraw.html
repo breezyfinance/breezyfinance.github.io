@@ -308,7 +308,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"> 
-                                        <img src="./assets/images/bre-token.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">USDBC</span>
+                                        <img src="./assets/images/usdc_logo.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">USDBC</span>
 
                                     </span>
                                 </label>
@@ -460,6 +460,15 @@
         $('select[name=lp_token]').change(function() {
             let pool = lbPool = $(this).val();
             tradeTokenName = pool.slice(4);
+            if (tradeTokenName == "USDBC") {
+                $('img.img-token').attr('src', './assets/images/usdc_logo.png');
+            }
+            else if (tradeTokenName == "cbETH") {
+                $('img.img-token').attr('src', './assets/images/eth.png');
+            }
+            else if (tradeTokenName == "DAI") {
+                $('img.img-token').attr('src', './assets/images/dai_logo.png');
+            }
             $('.token').text(tradeTokenName);  
         });
         let pairABI = abiHelper.getBreezySwapV1ABI();
