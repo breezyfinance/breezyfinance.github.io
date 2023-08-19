@@ -6,43 +6,88 @@ $.CONFIG.prototype = (function() {
     var CONTRACTS = {
         11155111: {
             breezySwapV1: {
-                'basetrade': {
-                    contract: '0xE265b1Eca719fd95294105019C6B14dCe698B4a4',
+                'wethusdbc': {
+                    contract: '0xbcF0CC1e8bdEcE008a7F4958c4d2C06AF4b8D59F',
                     tradeFee: 0.002,
                     performanceFee: 0.5,
                     safuFund: 0,
                     lbDecimal: 18,
-                    base: 'base',
-                    token: 'trade',
+                    base: 'weth',
+                    token: 'usdbc',
                 },
-                'tradebase': {
-                    contract: '0xE265b1Eca719fd95294105019C6B14dCe698B4a4',
+                'usdbcweth': {
+                    contract: '0xbcF0CC1e8bdEcE008a7F4958c4d2C06AF4b8D59F',
                     tradeFee: 0.002,
                     performanceFee: 0.5,
                     safuFund: 0,
                     lbDecimal: 18,
-                    base: 'base',
-                    token: 'trade',
+                    base: 'weth',
+                    token: 'usdbc',
                 },
+                'cbethweth': {
+                    contract: '0xB44653e1791aa84f42b6fd6eb3A0080896f54cA2',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'cbeth',
+                },
+                'wethcbeth': {
+                    contract: '0xB44653e1791aa84f42b6fd6eb3A0080896f54cA2',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'cbeth',
+                },
+                'daiweth': {
+                    contract: '0x5dD76bf5a9889B21d72971b434F74fC2b8Ff2286',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'dai',
+                },
+                'wethdai': {
+                    contract: '0x5dD76bf5a9889B21d72971b434F74fC2b8Ff2286',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'dai',
+                },
+            },
+            breezySwapper: {
+                contract: '0x03bd9436f5196a0D2B84a772e5A5755ac70aeAF9',
             },
         },
     };
     var TOKENS = {
         11155111: { //mainnet arbitrum one
-            'base': '0xA4aa8f1dC9dE6e4Cbd7B95c57bc59EF682995F70',
-            'trade': '0x8d919d7c7EB395aEB8e3997DE3F385b264231781',
+            'usdbc': '0x316500301b0a501Bf04b897474365ceF52d6b863',
+            'weth': '0x8114b91c6Ae47d1679b7A32CaeCA473cbab9C14A',
+            'cbeth': '0x3563fA251beEa49f96bD1FCD9eF2CBbE9FA88343',
+            'dai': '0xE4DcDbff9f336bF236Dfa3506165f7C946522668',
         },
     }
     var TOKENS_DECIMAL = {
         11155111: {
-            'base': 8,
-            'trade': 6,
+            'weth': 18,
+            'usdbc': 6,
+            'cbeth': 18,
+            'dai': 18,
         },
     };
     var PRICES = {
         11155111: {
-            'base': 1807,
-            'trade': 1
+            'weth': 1807,
+            'usdbc': 1,
+            'cbeth': 1,
+            'dai': 1,
         },
     };
     return {
