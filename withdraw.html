@@ -244,14 +244,24 @@
                         <div class="f-700">
                             <span>Remove Liquidity</span>
                             <span class="addlp__form-item">
-                                    <div class='swap__form-item-select' style="display: inline-block;">
-                                        TRADE-BASE
-                                    </div>
-                                    <select name="lp_token" style="display:none">
+                                    <!-- <div class='swap__form-item-select' style="display: inline-block;">
+                                        USDBC-WETH
+                                    </div> -->
+                                    <select name="lp_token" style="">
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
-                                            value="tradebase">
-                                            TRADE-BASE
+                                            value="WETHUSDBC">
+                                            USDBC-WETH
+                                        </option>
+                                        <option 
+                                            data-contet="<div> class = 'addLp__form-item-select'</div>" 
+                                            value="WETHcbETH">
+                                            cbETH-WETH
+                                        </option>
+                                        <option 
+                                            data-contet="<div> class = 'addLp__form-item-select'</div>" 
+                                            value="WETHDAI">
+                                            DAI-WETH
                                         </option>
                                     </select>
                                 </span>
@@ -298,7 +308,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"> 
-                                        <img src="./assets/images/bre-token.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">TRADE</span>
+                                        <img src="./assets/images/bre-token.png" style="margin-left: 0;" class="token-icon img-token"> <span class="token-name token">USDBC</span>
 
                                     </span>
                                 </label>
@@ -309,7 +319,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal"> 
-                                        <img src="./assets/images/eth_logo.png" style="margin-left: 0;" class="token-icon img-base"> <span class="token-name base">BASE</span>
+                                        <img src="./assets/images/eth_logo.png" style="margin-left: 0;" class="token-icon img-base"> <span class="token-name base">WETH</span>
 
                                     </span>
                                 </label>
@@ -443,7 +453,15 @@
         let mintLp = 0;
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
-        let lbPool = $('select[name=lp_token]').val();
+        let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
+        let pool = $('select[name=lp_token]').val();
+        let tradeTokenName = pool.slice(4);
+        $('.token').text(tradeTokenName);
+        $('select[name=lp_token]').change(function() {
+            let pool = lbPool = $(this).val();
+            tradeTokenName = pool.slice(4);
+            $('.token').text(tradeTokenName);  
+        });
         let pairABI = abiHelper.getBreezySwapV1ABI();
         let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
         let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -456,11 +474,15 @@
 
         setInterval(function() {
             let userWallet = coreHelper.getUserAccount();
+            let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
+            let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
+            console.log(pairAddress);
+            let pairContract = contractBaseHelper.getReadContract(pairAddress, pairABI);
             pairContract.methods.balanceOf(userWallet).call().then(result => {
                 let userLPBalance = result / 10 ** lbDecimal;
                 $('#user-liquidity-balance').text(userLPBalance.toFixed(6));
             });
-        }, 15000);
+        }, 5000);
 
         $('#max-liquidity-button').click(function() {
             let userBalance = parseFloat($('#user-liquidity-balance').text());
@@ -497,11 +519,11 @@
 
         function doneTypingAmountLPToken() {
             let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();
+            let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             
             if (amountOfLiquidity > 0) {
-                let lbPool = $('select[name=lp_token]').val();
-                let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
-                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+                let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
                 let pairABI = abiHelper.getBreezySwapV1ABI();
                 let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
                 let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -525,9 +547,10 @@
 
         $('#remove-liquidity').click(function(e) {
             let userWallet = coreHelper.getUserAccount();
+            let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();
-            let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'trade');
-            let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'base');
+            let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
+            let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
             let pairABI = abiHelper.getBreezySwapV1ABI();
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -560,6 +583,7 @@
                 coreHelper.hidePopup('success-confirm-popup', 10000);
                 $('input[name=token_output]').val("");
                 $('input[name=base_output]').val("");
+                $('input[name=amount_of_liquidity]').val("");
             })
             .on('error', (err, receipt) => {
                 console.log(err);
