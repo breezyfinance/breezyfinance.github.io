@@ -26,7 +26,7 @@
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
 
-    <title>Breezy Swap</title>
+    <title>Liquidity - BreezySwap</title>
     <style id="svelte-166mr51-style">
         ul.svelte-166mr51 {
             display: flex;
@@ -250,8 +250,8 @@
                                     <select name="lp_token" style="">                   
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
-                                            value="WETHUSDBC">
-                                            USDBC-WETH
+                                            value="WETHUSDbC">
+                                            USDbC-WETH
                                         </option>
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
@@ -295,8 +295,7 @@
                         <li style="list-style-type: none; margin-left: -30px;">
                             <label for="currency_0">
                                     <span class="currency-laybal" style="margin-left: -10px;"> 
-                                        <img src="./assets/images/usdc_logo.png" class="token-icon img-token"> <span class="token-name token">USDBC</span>
-                                        <button class="maxBalanceCoin max-token-input">Max: </button>
+                                        <img src="./assets/images/usdc_logo.png" class="token-icon img-token"> <span class="token-name token">USDbC</span>
                                         <span class="token-bal">Loading</span>
                                     </span>
                                 </label>
@@ -308,7 +307,6 @@
                             <label for="currency_0">
                                     <span class="currency-laybal"  style="margin-left: -10px;"> 
                                         <img src="./assets/images/eth_logo.png" class="token-icon img-base"> <span class="token-name base">WETH</span>
-                                        <button class="maxBalanceCoin max-base-input">Max: </button>
                                         <span class="base-bal">Loading</span>
                                     </span>
                                 </label>
@@ -464,7 +462,7 @@
         $('select[name=lp_token]').change(function() {
             let pool = $(this).val();
             tradeTokenName = pool.slice(4);
-            if (tradeTokenName == "USDBC") {
+            if (tradeTokenName == "USDbC") {
                 $('img.img-token').attr('src', './assets/images/usdc_logo.png');
             }
             else if (tradeTokenName == "cbETH") {
@@ -476,6 +474,8 @@
             $('.token').text(tradeTokenName);  
             $('.btn-approve-token').hide();
             $('.btn-approve-base').hide();
+            $('.token-bal').text("Loading");
+            $('.base-bal').text("Loading");
         });
         let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
         let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'weth').toLowerCase();     
@@ -483,11 +483,11 @@
         let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
         tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
             let tradeTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName));            
-            $('.token-bal').text(tradeTokenBalance.toFixed(3));
+            $('.token-bal').text(tradeTokenBalance.toFixed(6));
         });
         baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
             let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'weth'));            
-            $('.base-bal').text(baseTokenBalance.toFixed(3));
+            $('.base-bal').text(baseTokenBalance.toFixed(6));
         });
 
 
@@ -499,22 +499,22 @@
             let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
             tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
                 let tradeTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName));            
-                $('.token-bal').text(tradeTokenBalance.toFixed(3));
+                $('.token-bal').text(tradeTokenBalance.toFixed(6));
             });
             baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
                 let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'weth'));            
-                $('.base-bal').text(baseTokenBalance.toFixed(3));
+                $('.base-bal').text(baseTokenBalance.toFixed(6));
             });
         }, 5000);
 
 
-        $('.max-token-input').click(function() {
+        $('.token-bal').click(function() {
             let userBalance = parseFloat($('.token-bal').text());
             $('input[name=token_input]').val(userBalance);
             doneTypingAmountTradeToken();
         });
 
-        $('.max-base-input').click(function() {
+        $('.base-bal').click(function() {
             let userBalance = parseFloat($('.base-bal').text());
             $('input[name=base_input]').val(userBalance);
             doneTypingAmountBaseToken();
@@ -753,6 +753,10 @@
                 .on('error', (err, receipt) => {
                     console.log(err);
                 });
+        });
+
+        $('.btn-auto-slippage').click(function() {
+            $('input[name=slippage]').val(0.5);
         });
     }
 </script>

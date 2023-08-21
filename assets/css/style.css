@@ -2519,4 +2519,20 @@ button.button-token span.active {
     color: #fff;
     text-decoration: underline;
 }
+
+.token-bal , .base-bal {
+    cursor: pointer;
+}
+
+.token-bal:hover , .base-bal:hover {
+    text-decoration: underline;
+}
+
+#user-liquidity-balance:hover {
+    text-decoration: underline;
+}
+
+.button-stable-swap-form:hover , .button-token-swap-form:hover {
+    color: #fff;
+}
 /*# sourceMappingURL=style.css.map */
