@@ -26,7 +26,7 @@
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
 
-    <title>Withdraw</title>
+    <title>Liquidity - BreezySwap</title>
     <style id="svelte-166mr51-style">
         ul.svelte-166mr51 {
             display: flex;
@@ -250,8 +250,8 @@
                                     <select name="lp_token" style="">
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
-                                            value="WETHUSDBC">
-                                            USDBC-WETH
+                                            value="WETHUSDbC">
+                                            USDbC-WETH
                                         </option>
                                         <option 
                                             data-contet="<div> class = 'addLp__form-item-select'</div>" 
@@ -292,7 +292,7 @@
                     <div class="currency">
                         <label for="currency_0">
                                 <span class="currency-laybal" style="margin-left: 0px;">
-                                    <span>Your Breezy Liquidity Token <span id="max-liquidity-button" style="cursor: pointer; margin-left: 10px;">Max: <span id="user-liquidity-balance">Loading</span></span></span>
+                                    <span>Your Breezy Liquidity Token <span id="max-liquidity-button" style="cursor: pointer; margin-left: 10px;"><span id="user-liquidity-balance">Loading</span></span></span>
                                 </span>
                             </label>
                         <div class="addLp__form_input mb-2 mt-2" style=" margin-left: 2px;">
@@ -460,7 +460,7 @@
         $('select[name=lp_token]').change(function() {
             let pool = lbPool = $(this).val();
             tradeTokenName = pool.slice(4);
-            if (tradeTokenName == "USDBC") {
+            if (tradeTokenName == "USDbC") {
                 $('img.img-token').attr('src', './assets/images/usdc_logo.png');
             }
             else if (tradeTokenName == "cbETH") {
@@ -470,6 +470,7 @@
                 $('img.img-token').attr('src', './assets/images/dai_logo.png');
             }
             $('.token').text(tradeTokenName);  
+            $('#user-liquidity-balance').text("Loading");
         });
         let pairABI = abiHelper.getBreezySwapV1ABI();
         let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
@@ -598,6 +599,10 @@
                 console.log(err);
             });
             
+        });
+
+        $('.btn-auto-slippage').click(function() {
+            $('input[name=slippage]').val(0.5);
         });
     }
 </script>
