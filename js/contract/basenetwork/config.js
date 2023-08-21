@@ -65,17 +65,90 @@ $.CONFIG.prototype = (function() {
                 contract: '0x03bd9436f5196a0D2B84a772e5A5755ac70aeAF9',
             },
         },
+        8453: {
+            breezySwapV1: {
+                'wethusdbc': {
+                    contract: '0xD45a223A66F4B291745370E16712aeBC5914BaEc',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'usdbc',
+                },
+                'usdbcweth': {
+                    contract: '0xD45a223A66F4B291745370E16712aeBC5914BaEc',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'usdbc',
+                },
+                'cbethweth': {
+                    contract: '0xb9AC04eADA919e6768FDa40F2e8B31CC22B92a3d',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'cbeth',
+                },
+                'wethcbeth': {
+                    contract: '0xb9AC04eADA919e6768FDa40F2e8B31CC22B92a3d',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'cbeth',
+                },
+                'daiweth': {
+                    contract: '0x77Ade18b0F44579a83A1832A9162bF975b0DE5d9',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'dai',
+                },
+                'wethdai': {
+                    contract: '0x77Ade18b0F44579a83A1832A9162bF975b0DE5d9',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'dai',
+                },
+            },
+            breezySwapper: {
+                contract: '0x481d372Ae471Ee6021A60a7940dbaf13432AFCa9',
+            },
+        },
     };
     var TOKENS = {
-        11155111: { //mainnet arbitrum one
+        11155111: { //Sepolia Test Net
             'usdbc': '0x316500301b0a501Bf04b897474365ceF52d6b863',
             'weth': '0x8114b91c6Ae47d1679b7A32CaeCA473cbab9C14A',
             'cbeth': '0x3563fA251beEa49f96bD1FCD9eF2CBbE9FA88343',
             'dai': '0xE4DcDbff9f336bF236Dfa3506165f7C946522668',
         },
+        8453: {//Base network
+            'usdbc': '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA',
+            'cbeth': '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22',
+            'dai': '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb',
+            'weth': '0x4200000000000000000000000000000000000006',
+        }
     }
     var TOKENS_DECIMAL = {
         11155111: {
+            'weth': 18,
+            'usdbc': 6,
+            'cbeth': 18,
+            'dai': 18,
+        },
+        8453: {
             'weth': 18,
             'usdbc': 6,
             'cbeth': 18,
@@ -87,6 +160,12 @@ $.CONFIG.prototype = (function() {
             'weth': 1807,
             'usdbc': 1,
             'cbeth': 1,
+            'dai': 1,
+        },
+        8453: {
+            'weth': 1674,
+            'usdbc': 1,
+            'cbeth': 1754,
             'dai': 1,
         },
     };
