@@ -25,6 +25,9 @@ $.CONTRACTBASE.prototype = (function() {
                         if(_chainId == 11155111) {
                                 bscRpcEndPoint = 'https://eth-sepolia.g.alchemy.com/v2/Dy4zBBd1RgIFZIn16MxMmTn0zP-l5FjT';
                         }
+                        if(_chainId == 8453) {
+                                bscRpcEndPoint = 'https://developer-access-mainnet.base.org';  
+                        }
                         return new Web3(bscRpcEndPoint);
                 },
                 getReadContract(_addr, _abi, _chainId = null) {
