@@ -522,23 +522,26 @@
 
 
         var typingTimerAmountTokenSwap; //timer identifier
+        var typingTimerAmountBaseSwap;
         var doneTypingInterval = 1000;
         //on keyup, start the countdown
-        $('input[name=token_input]').on('keyup', function() {
+        $('input[name=token_input]').on('keyup', function() {      
             clearTimeout(typingTimerAmountTokenSwap);
             typingTimerAmountTokenSwap = setTimeout(doneTypingAmountTradeToken, doneTypingInterval);
         });
         $('input[name=base_input]').on('keyup', function() {
-            clearTimeout(typingTimerAmountTokenSwap);
-            typingTimerAmountTokenSwap = setTimeout(doneTypingAmountBaseToken, doneTypingInterval);
+            clearTimeout(typingTimerAmountBaseSwap);
+            typingTimerAmountBaseSwap = setTimeout(doneTypingAmountBaseToken, doneTypingInterval);
         });
 
         //on keydown, clear the countdown 
         $('input[name=token_input]').on('keydown', function() {
+            $(`input[name=base_input]`).val("Loading");
             clearTimeout(typingTimerAmountTokenSwap);
         });
         $('input[name=base_input]').on('keydown', function() {
-            clearTimeout(typingTimerAmountTokenSwap);
+            $(`input[name=token_input]`).val("Loading");
+            clearTimeout(typingTimerAmountBaseSwap);
         });
         //user is "finished typing," do something
 
@@ -573,11 +576,14 @@
                     mintLp = parseInt(result[0]) / (10 ** lbDecimal);
                     
                     let baseInput = parseInt(result[1]) / (10 ** baseTokenDecimal);
-                    $(`input[name=base_input]`).val(baseInput.toFixed(10));
+                    $(`input[name=base_input]`).val(baseInput.toFixed(6));
                     $('.btn-deposit').data('mintLp', mintLp);
                 });
 
-                setTimeout(doneTypingAmountTradeToken, 10000);
+                setTimeout(doneTypingAmountTradeToken, 1000);
+            }
+            else if (amountTradeToken == 0 || amountTradeToken === "") {
+                $(`input[name=base_input]`).val("");
             }
         };
 
@@ -598,11 +604,14 @@
 
                     let tradeInput = parseInt(result[1]) / (10 ** tradeTokenDecimal);   
                     tradeInput += tradeInput * slippage
-                    $(`input[name=token_input]`).val(tradeInput.toFixed(10));
+                    $(`input[name=token_input]`).val(tradeInput.toFixed(6));
                     $('.btn-deposit').data('mintLp', mintLp);
                 });
 
-                setTimeout(doneTypingAmountBaseToken, 10000);
+                setTimeout(doneTypingAmountBaseToken, 1000);
+            }
+            else if (amountBaseToken == 0 || amountBaseToken === "") {
+                $(`input[name=token_input]`).val("");
             }
         };
 
