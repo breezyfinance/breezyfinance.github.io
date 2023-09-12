@@ -69,7 +69,7 @@ $.Core.prototype = (function() {
             x = parseFloat(x).toFixed(decimals);
             x = parseFloat(x).toString();
             x = x.split(".");
-            x[0] = x[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            x[0] = x[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, "");
             x = x.join('.');
             return x;
         },
