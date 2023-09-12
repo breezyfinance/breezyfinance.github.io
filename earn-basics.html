@@ -17,6 +17,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/web3.min.js"></script>
+    <script src="./assets/js/ethers-v4.min.js"></script>
+    <script src="./js/contract/basenetwork/core.js"></script>
+    <script src="./js/contract/basenetwork/base.contract.js"></script>
+    <script src="./js/contract/basenetwork/abi.js"></script>
+    <script src="./js/contract/basenetwork/config.js"></script>
+    <script src="./js/contract/basenetwork/breezy.farm.contract.js"></script>
 
     <title>Breezy Profits</title>
 </head>
@@ -42,7 +49,7 @@
                         </div>
                         <div class="col-6 col-lg-2 order-lg-3">
                             <div class="d-flex align-items-center justify-content-end">
-                                <!-- <span class="wrap-user-acct">0x000</span> -->
+                                <span class="wrap-user-acct">0x000</span>
                                 <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect wallet</a>
                                 <!-- <span class="dropMenu">
                                         <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
@@ -126,7 +133,7 @@
                                                 </thead>
                                                 <tbody class="tbody">
                                                     
-                                                        <tr onclick="window.location='#'">
+                                                        <tr onclick="window.location='single-weth-farm.html'">
                                                             <td>
                                                                 <div class="d-flex align-items-center justify-content-start">
                                                                     <div class="">
@@ -150,29 +157,9 @@
                                                                 </div>
     
                                                             </td>
-                                                            <td class="f-14" onclick="window.location='#'"><span class="chain-421613-apr-27">Loading</span></td>
-                                                            <td class="f-14 text-end" onclick="window.location='#'"><span class="chain-421613-tvl-27">Loading</span></td>
-                                                        </tr>
-                                                        <tr onclick="window.location='#'" style="border-bottom: 1px solid #D9D9D9;">
-                                                            <td>
-                                                            </td>
-                                                            <td class="network-farm">
-                                                                <div class="d-flex align-items-center justify-content-start">
-                                                                    <div class="network-name">
-                                                                        <div class="img">
-                                                                            <span><img class="" src="./assets/images/eth-network-logo.png" style="width:30px"></span>
-                                                                        </div>
-                                                                        <div class="info pl-10">
-                                                                            <span>Ethereum</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="f-14" onclick="window.location='#'"> <span class="chain-42170-apr-0">Loading</span></td>
-                                                            <td class="f-14 text-end" onclick="window.location='#'"><span class="chain-42170-tvl-0">Loading</span></td>
-                                                        </tr>
-                                                    
-                                                    
+                                                            <td class="f-14" onclick="window.location='#'"><span class="chain-11155111-apr-0">Loading</span></td>
+                                                            <td class="f-14 text-end" onclick="window.location='#'"><span class="chain-11155111-tvl-0">Loading</span></td>
+                                                        </tr>                   
                                                         <tr>
                                                             <td>
                                                                 <div class="d-flex align-items-center justify-content-start">
@@ -200,25 +187,6 @@
                                                             <td class="f-14" onclick="window.location='#'"><span class="chain-421613-apr-27">Loading</span></td>
                                                             <td class="f-14 text-end" onclick="window.location='#'"><span class="chain-421613-tvl-27">Loading</span></td>
                                                         </tr>
-                                                        <tr onclick="window.location='#'">
-                                                            <td>
-                                                            </td>
-                                                            <td class="network-farm">
-                                                                <div class="d-flex align-items-center justify-content-start">
-                                                                    <div class="network-name">
-                                                                        <div class="img">
-                                                                            <span><img class="" src="./assets/images/eth-network-logo.png" style="width:30px"></span>
-                                                                        </div>
-                                                                        <div class="info pl-10">
-                                                                            <span>Ethereum</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="f-14" onclick="window.location='#'"> <span class="chain-42170-apr-0">Loading</span></td>
-                                                            <td class="f-14 text-end" onclick="window.location='#'"><span class="chain-42170-tvl-0">Loading</span></td>
-                                                        </tr>
-                                                    
                                               </tbody>
                                                 
                                             </table>
@@ -279,5 +247,46 @@
     <script src="./assets/js/custom.menu.js"></script>
 
 </body>
+<script>
+    var abiHelper = new $.ABI();
+    var coreHelper = new $.Core();
+    var configHelper = new $.CONFIG();
+    var contractBaseHelper = new $.CONTRACTBASE();
+    var breezyFarm = new $.BREEZY_FARM();
 
+    var typeOfFarmContract = "breezy_farm_pool";
+    var chainId0 = 11155111; // sepolia
+    var pid = 0;
+    $(document).ready(function() {
+        abiHelper.init({});
+        coreHelper.init({});
+        configHelper.init({});
+        contractBaseHelper.init({
+            chainId: chainId0
+        });
+        breezyFarm.init({
+            chainId: chainId0,
+            pid: pid,
+        });
+        run();
+    });
+
+    async function run() {
+        let userAddr = coreHelper.getUserAccount();
+
+        // initData(chainId0);
+        initData(chainId0);
+
+        async function initData(chainId) {
+            let poolsOfChainId = configHelper.getAllPidOfFarmContractByType(typeOfFarmContract, chainId);
+            let lengthPoolsOfChainId = poolsOfChainId.length;
+            for (let pid = 0; pid < lengthPoolsOfChainId; pid++) {
+                let userData = await breezyFarm.GetDataUser(userAddr, chainId, poolsOfChainId[pid]);
+                $(".chain-" + chainId + "-apr-" + poolsOfChainId[pid]).text(`${coreHelper.numberWithCommas(userData.apy, 2)} %`);
+                $(".chain-" + chainId + "-tvl-" + poolsOfChainId[pid]).text(`$ ${coreHelper.numberWithCommas(userData.tvl, 2)}`);
+            }
+        }
+
+    }
+</script>
 </html>

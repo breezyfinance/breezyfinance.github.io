@@ -64,6 +64,21 @@ $.CONFIG.prototype = (function() {
             breezySwapper: {
                 contract: '0x03bd9436f5196a0D2B84a772e5A5755ac70aeAF9',
             },
+            farms: {
+                0: {
+                    type: 'breezy_farm_pool',
+                    contract: '0x644434ccbA741b2892485e857e60f332264f3aB8',
+                    want: '0x590C041AA87050b05b530baCC084615ec08CE689', // 
+                    wantDecimal: 18,
+                    pid: 0,
+                    isActive: true,
+                    isERC20: true,
+                    isActive: true,
+                    label: 'BreezyFarm.BRE_WETH',
+                    price: 1500,
+                    version: 1,
+                },
+            },
         },
         8453: {
             breezySwapV1: {
@@ -147,6 +162,7 @@ $.CONFIG.prototype = (function() {
             'usdbc': 6,
             'cbeth': 18,
             'dai': 18,
+            'bre': 18,
         },
         8453: {
             'weth': 18,
@@ -161,6 +177,7 @@ $.CONFIG.prototype = (function() {
             'usdbc': 1,
             'cbeth': 1,
             'dai': 1,
+            'bre': 1,
         },
         8453: {
             'weth': 1674,
