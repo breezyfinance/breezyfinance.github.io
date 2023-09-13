@@ -67,8 +67,8 @@ $.CONFIG.prototype = (function() {
             farms: {
                 0: {
                     type: 'breezy_farm_pool',
-                    contract: '0x644434ccbA741b2892485e857e60f332264f3aB8',
-                    want: '0x590C041AA87050b05b530baCC084615ec08CE689', // 
+                    contract: '0x750539bdC98Ed5267B70C40e2b2bD01967f8bCBE',
+                    want: '0xF0027d87F41b45BfE38A9F97703900e6DF939cb4', // 
                     wantDecimal: 18,
                     pid: 0,
                     isActive: true,
@@ -78,6 +78,19 @@ $.CONFIG.prototype = (function() {
                     price: 1500,
                     version: 1,
                 },
+                1: {
+                    type: 'breezy_farm_pool',
+                    contract: '0xC6C67e148b3e36F0D50DddB8ff8885476CbDa361',
+                    want: '0x45a34D7365c6BD0e30C6FFbE0d860665670E2C84', // 
+                    wantDecimal: 18,
+                    pid: 1,
+                    isActive: true,
+                    isERC20: true,
+                    isActive: true,
+                    label: 'BreezyFarm.BRE_cbETH',
+                    price: 1200,
+                    version: 1,
+                }
             },
         },
         8453: {
@@ -177,7 +190,7 @@ $.CONFIG.prototype = (function() {
             'usdbc': 1,
             'cbeth': 1,
             'dai': 1,
-            'bre': 1,
+            'bre': 0.0000812,
         },
         8453: {
             'weth': 1674,
