@@ -117,7 +117,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.deposit(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/" + hash;
+                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -142,7 +142,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.harvest(user).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/" + hash;
+                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -167,7 +167,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.withdraw(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/" + hash;
+                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
