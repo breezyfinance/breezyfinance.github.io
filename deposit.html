@@ -263,6 +263,16 @@
                                             value="WETHDAI">
                                             DAI-WETH
                                         </option>
+                                        <option 
+                                            data-contet="<div> class = 'addLp__form-item-select'</div>" 
+                                            value="WETHBRE">
+                                            BRE-WETH
+                                        </option>
+                                        <option 
+                                            data-contet="<div> class = 'addLp__form-item-select'</div>" 
+                                            value="cbETHBRE">
+                                            BRE-cbETH
+                                        </option>
                                     </select>
                                 </span>
                         </div>
@@ -458,10 +468,19 @@
         let _contractsObj = configHelper.getContracts(chainId);  
         let pool = $('select[name=lp_token]').val();
         let tradeTokenName = pool.slice(4);
+        let baseTokenName = pool.slice(0, 4);
         $('.token').text(tradeTokenName);
+        $('.base').text(baseTokenName); 
         $('select[name=lp_token]').change(function() {
             let pool = $(this).val();
-            tradeTokenName = pool.slice(4);
+            if (pool == "cbETHBRE") {
+                tradeTokenName = pool.slice(5);
+                baseTokenName = pool.slice(0, 5);
+            }
+            else {
+                tradeTokenName = pool.slice(4);
+                baseTokenName = pool.slice(0, 4);
+            }
             if (tradeTokenName == "USDbC") {
                 $('img.img-token').attr('src', './assets/images/usdc_logo.png');
             }
@@ -471,7 +490,17 @@
             else if (tradeTokenName == "DAI") {
                 $('img.img-token').attr('src', './assets/images/dai_logo.png');
             }
-            $('.token').text(tradeTokenName);  
+            else if (tradeTokenName == "BRE") {
+                $('img.img-token').attr('src', './assets/images/bre-token.png');
+            }
+            if (baseTokenName == "cbETH") {
+                $('img.img-base').attr('src', './assets/images/eth.png');
+            }
+            else {
+                $('img.img-base').attr('src', './assets/images/eth_logo.png');
+            }
+            $('.token').text(tradeTokenName); 
+            $('.base').text(baseTokenName); 
             $('.btn-approve-token').hide();
             $('.btn-approve-base').hide();
             $('.token-bal').text("Loading");
