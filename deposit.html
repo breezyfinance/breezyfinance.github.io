@@ -654,7 +654,9 @@
             let userInputTokenTradeValue = $('input[name=token_input]').val();
             let userInputTokenBaseValue = $('input[name=base_input]').val();
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase(); 
             let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
+            let baseTokenContract = contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
             tradeTokenContract.methods.allowance(userWallet, _contractsObj['breezySwapV1'][lbPool]["contract"]).call().then(result => {
                 let tradeTokenValue = result / (10 ** tradeTokenDeciamal);
                 if (tradeTokenValue < userInputTokenTradeValue) { //need approve trade token
@@ -663,6 +665,7 @@
                 else {
                     baseTokenContract.methods.allowance(userWallet, _contractsObj['breezySwapV1'][lbPool]["contract"]).call().then(result => {
                         let baseTokenValue = result / (10 ** baseTokenDeciamal);
+                        let a = _contractsObj['breezySwapV1'][lbPool]["contract"];
                         if (baseTokenValue < userInputTokenBaseValue) { //need approve base token
                             $('.btn-approve-base').show();
                         }
