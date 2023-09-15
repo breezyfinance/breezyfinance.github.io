@@ -231,11 +231,11 @@ $.CONFIG.prototype = (function() {
             'bre': 0.0000812,
         },
         8453: {
-            'weth': 1674,
+            'weth': 1622.21,
             'usdbc': 1,
-            'cbeth': 1754,
+            'cbeth': 1702.35,
             'dai': 1,
-            'bre': 0.0006645,
+            'bre': 0.0006780,
         },
     };
     return {
