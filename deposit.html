@@ -523,7 +523,7 @@
         setInterval(function() {
             let userWallet = coreHelper.getUserAccount();
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
-            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();     
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();   
             let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
             let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
             tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
@@ -735,7 +735,6 @@
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
             let tradeTokenContract = contractBaseHelper.getMainContract(tradeTokenAdd, erc20TokenABI);
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
-            console.log(pairAddress);
             tradeTokenContract.methods
                 .approve(
                     pairAddress,
@@ -765,6 +764,7 @@
         $('.btn-approve-base').click(function() {
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();
             let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             baseTokenContract.methods
