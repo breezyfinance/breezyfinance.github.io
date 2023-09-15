@@ -326,7 +326,7 @@
                         </li>
                         <li style="list-style-type: none; margin-left: -30px;">
                             <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-token" style="display: none">Approve <span class="token"></span></button>
-                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: block">Approve <span class="base"></span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: none">Approve <span class="base"></span></button>
                             <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-deposit">Deposit</button>
                     </ul>
                 </article>
@@ -766,7 +766,6 @@
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
-            console.log("🚀 ~ file: deposit.html:769 ~ $ ~ baseTokenAdd:", baseTokenAdd);
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             baseTokenContract.methods
                 .approve(
