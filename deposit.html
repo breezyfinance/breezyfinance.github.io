@@ -737,6 +737,8 @@
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
+            console.log("🚀 ~ file: deposit.html:740 ~ $ ~ baseTokenAdd:", baseTokenAdd);
+            
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             baseTokenContract.methods
                 .approve(

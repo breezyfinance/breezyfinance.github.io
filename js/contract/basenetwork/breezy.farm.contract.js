@@ -92,6 +92,7 @@ $.BREEZY_FARM.prototype = (function() {
             let contractAction = await this.GetContractFarmActionToReadData(chainId, pid);
             let result = await contractAction.methods.getData(user).call();
             let wantToken = await this.GetTokenWantOfFarmContractByPid(chainId, pid);
+            console.log("🚀 ~ file: breezy.farm.contract.js:95 ~ GetDataUser ~ wantToken:", wantToken);
             let data = {};
             data["miningSpeed"] = parseInt(result["miningSpeed_"]);
             data["userBREPending"] = coreHelper.parseFloatNumber(parseInt(result["userBREPending_"]) / (10 ** BRE_TOKEN_DECIMAL), BRE_TOKEN_DECIMAL);
@@ -104,11 +105,12 @@ $.BREEZY_FARM.prototype = (function() {
 
             // Calculate TVL and APY
             data["tvl"] = data["totalWantShare"] * wantToken.price;
+            console.log("🚀 ~ file: breezy.farm.contract.js:108 ~ GetDataUser ~ wantToken.price:", wantToken.price)
             
             if (data["tvl"] > 0) {
-                data["grbRewardAPY"] = data["totalMintPerDay"] * BREPrice * 36500 / (data["tvl"]);
+                data["breRewardAPY"] = data["totalMintPerDay"] * BREPrice * 36500 / (data["tvl"]);
             }
-            data["apy"] = data["grbRewardAPY"];
+            data["apy"] = data["breRewardAPY"];
             return data;
         },
 

@@ -75,7 +75,7 @@ $.CONFIG.prototype = (function() {
                     isERC20: true,
                     isActive: true,
                     label: 'BreezyFarm.BRE_WETH',
-                    price: 1500,
+                    price: 0.1,
                     version: 1,
                 },
                 1: {
@@ -88,7 +88,7 @@ $.CONFIG.prototype = (function() {
                     isERC20: true,
                     isActive: true,
                     label: 'BreezyFarm.BRE_cbETH',
-                    price: 1200,
+                    price: 0.2,
                     version: 1,
                 }
             },
