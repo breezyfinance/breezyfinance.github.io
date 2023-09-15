@@ -562,7 +562,7 @@
             
             if (amountOfLiquidity > 0) {
                 let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
                 let pairABI = abiHelper.getBreezySwapV1ABI();
                 let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
                 let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -589,7 +589,7 @@
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();
             let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-            let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+            let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
             let pairABI = abiHelper.getBreezySwapV1ABI();
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];

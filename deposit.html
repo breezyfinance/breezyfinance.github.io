@@ -326,7 +326,7 @@
                         </li>
                         <li style="list-style-type: none; margin-left: -30px;">
                             <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-token" style="display: none">Approve <span class="token"></span></button>
-                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: none">Approve <span class="base">WETH</span></button>
+                            <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-approve-base" style="display: block">Approve <span class="base"></span></button>
                             <button type="button" class="header__btn-connect w-100 mt-3 text-center btn-deposit">Deposit</button>
                     </ul>
                 </article>
@@ -507,7 +507,7 @@
             $('.base-bal').text("Loading");
         });
         let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
-        let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'weth').toLowerCase();     
+        let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();     
         let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
         let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
         tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
@@ -515,7 +515,7 @@
             $('.token-bal').text(tradeTokenBalance.toFixed(6));
         });
         baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
-            let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'weth'));            
+            let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, baseTokenName));            
             $('.base-bal').text(baseTokenBalance.toFixed(6));
         });
 
@@ -523,7 +523,7 @@
         setInterval(function() {
             let userWallet = coreHelper.getUserAccount();
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
-            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, 'weth').toLowerCase();     
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();     
             let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
             let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
             tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
@@ -531,7 +531,7 @@
                 $('.token-bal').text(tradeTokenBalance.toFixed(6));
             });
             baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
-                let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'weth'));            
+                let baseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, baseTokenName));            
                 $('.base-bal').text(baseTokenBalance.toFixed(6));
             });
         }, 5000);
@@ -592,7 +592,7 @@
             if (amountTradeToken > 0) {
                 let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
                 let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
                 let pairABI = abiHelper.getBreezySwapV1ABI();
                 let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
                 let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -621,7 +621,7 @@
             if (amountBaseToken > 0) {
                 let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
                 let tradeTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+                let baseTokenDecimal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
                 let pairABI = abiHelper.getBreezySwapV1ABI();
                 let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
                 let lbDecimal = _contractsObj['breezySwapV1'][lbPool]["lbDecimal"];
@@ -650,7 +650,7 @@
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let tradeTokenDeciamal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-            let baseTokenDeciamal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+            let baseTokenDeciamal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
             let userInputTokenTradeValue = $('input[name=token_input]').val();
             let userInputTokenBaseValue = $('input[name=base_input]').val();
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
@@ -682,7 +682,7 @@
                                 }            
                             });
                             baseTokenContract.methods.balanceOf(userWallet).call().then(result => {
-                                let userBaseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, 'weth')); 
+                                let userBaseTokenBalance = result / 10 ** (configHelper.getTokenDecimalByTokenName(chainId, baseTokenName)); 
                                 if (amountBase > userBaseTokenBalance) {
                                     amountBase = userBaseTokenBalance;
                                 }            
@@ -692,7 +692,7 @@
                             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
                             let pairContract = contractBaseHelper.getMainContract(pairAddress, pairABI);
                             let tradeDecimal = configHelper.getTokenDecimalByTokenName(chainId, tradeTokenName);
-                            let baseDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'weth');
+                            let baseDecimal = configHelper.getTokenDecimalByTokenName(chainId, baseTokenName);
                             let _deadlineDelay = 5;
                             let _now = parseInt(Date.now() / 1000);
                             let deadline = parseInt(_now + 60 * _deadlineDelay);
@@ -766,6 +766,7 @@
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
+            console.log("🚀 ~ file: deposit.html:769 ~ $ ~ baseTokenAdd:", baseTokenAdd);
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             baseTokenContract.methods
                 .approve(
