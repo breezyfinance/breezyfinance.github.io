@@ -149,6 +149,42 @@ $.CONFIG.prototype = (function() {
                     base: 'weth',
                     token: 'dai',
                 },
+                'breweth': {
+                    contract: '0xC56F985805e548B205C96271424A0dB9D2e81C74',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'bre',
+                },
+                'wethbre': {
+                    contract: '0xC56F985805e548B205C96271424A0dB9D2e81C74',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'weth',
+                    token: 'bre',
+                },
+                'brecbeth': {
+                    contract: '0xF5B45149aEba6c8353e152b05dc34B096b0aCDaE',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'cbeth',
+                    token: 'bre',
+                },
+                'cbethbre': {
+                    contract: '0xF5B45149aEba6c8353e152b05dc34B096b0aCDaE',
+                    tradeFee: 0.002,
+                    performanceFee: 0.5,
+                    safuFund: 0,
+                    lbDecimal: 18,
+                    base: 'cbeth',
+                    token: 'bre',
+                },
             },
             breezySwapper: {
                 contract: '0x481d372Ae471Ee6021A60a7940dbaf13432AFCa9',
@@ -167,6 +203,7 @@ $.CONFIG.prototype = (function() {
             'cbeth': '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22',
             'dai': '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb',
             'weth': '0x4200000000000000000000000000000000000006',
+            'bre': '0xfffB7488aB5DdDe106B5BeF56e7c179700509842',
         }
     }
     var TOKENS_DECIMAL = {
@@ -182,6 +219,7 @@ $.CONFIG.prototype = (function() {
             'usdbc': 6,
             'cbeth': 18,
             'dai': 18,
+            'bre': 18,
         },
     };
     var PRICES = {
@@ -197,6 +235,7 @@ $.CONFIG.prototype = (function() {
             'usdbc': 1,
             'cbeth': 1754,
             'dai': 1,
+            'bre': 0.0006645,
         },
     };
     return {
