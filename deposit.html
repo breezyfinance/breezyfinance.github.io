@@ -507,7 +507,9 @@
             $('.base-bal').text("Loading");
         });
         let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
+        console.log("🚀 ~ file: deposit.html:510 ~ run ~ tradeTokenName:", tradeTokenName);
         let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();     
+        console.log("🚀 ~ file: deposit.html:511 ~ run ~ baseTokenName:", baseTokenName);
         let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
         let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
         tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
@@ -523,7 +525,7 @@
         setInterval(function() {
             let userWallet = coreHelper.getUserAccount();
             let tradeTokenAdd = configHelper.getTokenByTokenName(chainId, tradeTokenName).toLowerCase();
-            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();     
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();   
             let tradeTokenContract =  contractBaseHelper.getReadContract(tradeTokenAdd ,erc20TokenABI);
             let baseTokenContract =  contractBaseHelper.getReadContract(baseTokenAdd ,erc20TokenABI);
             tradeTokenContract.methods.balanceOf(userWallet).call().then(result => {
@@ -765,7 +767,9 @@
         $('.btn-approve-base').click(function() {
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
+            let baseTokenAdd = configHelper.getTokenByTokenName(chainId, baseTokenName).toLowerCase();
             let baseTokenContract = contractBaseHelper.getMainContract(baseTokenAdd, erc20TokenABI);
+            console.log("🚀 ~ file: deposit.html:769 ~ $ ~ baseTokenAdd:", baseTokenAdd);
             let pairAddress = _contractsObj['breezySwapV1'][lbPool]["contract"];
             baseTokenContract.methods
                 .approve(
