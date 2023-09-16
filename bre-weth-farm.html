@@ -26,6 +26,7 @@
     <!-- <script src="./js/garbiBridge/garbi-bridge-config.js"></script> -->
     <script src="./js/contract/basenetwork/base.erc20.token.js"></script>
     <script src="./js/contract/basenetwork/breezy.farm.contract.js"></script>
+    <script src="./js/contract/basenetwork/network.js"></script>
 
     <title>BRE/WETH Vault</title>
     <style id="svelte-166mr51-style">
@@ -385,6 +386,7 @@
     var contractBaseHelper = new $.CONTRACTBASE();
     var erc20Helper = new $.BASE_ERC20_TOKEN();
     var breezyFarm = new $.BREEZY_FARM();
+    var networkHelper = new $.BREEZY_NETWORK();
 
     var chainId = 8453;
     var pid = 1;
@@ -461,11 +463,11 @@
         });
 
         $('.btn-deposit').click(async function() {
-            // let curChainId = 11155111;
-            // if (curChainId != chainId) {
-            //     networkHelper.SwichNetworkByChainId(chainId);
-            //     return;
-            // }
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userAddr = coreHelper.getUserAccount();
             let userInputVal = $('input[name=deposit_amt]').val();
             let checkAllowce = await breezyFarm.GetAllowanceWantToFarmContract(userAddr);
@@ -478,29 +480,29 @@
             }
         });
         $('.btn-approve').click(async function() {
-            // let curChainId = 11155111;
-            // if (curChainId != chainId) {
-            //     networkHelper.SwichNetworkByChainId(chainId);
-            //     return;
-            // }
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userAddr = coreHelper.getUserAccount();
             breezyFarm.ApproveWantToFarmContract(userAddr);
         });
         $('.btn-harvest').click(async function() {
-            // let curChainId = 11155111;
-            // if (curChainId != chainId) {
-            //     networkHelper.SwichNetworkByChainId(chainId);
-            //     return;
-            // }
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userAddr = coreHelper.getUserAccount();
             breezyFarm.Harvest(userAddr);
         });
         $('.btn-withdraw').click(async function() {
-            // let curChainId = 11155111;
-            // if (curChainId != chainId) {
-            //     networkHelper.SwichNetworkByChainId(chainId);
-            //     return;
-            // }
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userAddr = coreHelper.getUserAccount();
             let userWantWithdraw = $('input[name=withdraw_amt]').val();
             let data = await breezyFarm.GetTokenWantOfFarmContractByPid();

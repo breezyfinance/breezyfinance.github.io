@@ -25,6 +25,7 @@
     <script src="./js/contract/basenetwork/core.js"></script>
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
+    <script src="./js/contract/basenetwork/network.js"></script>
 
     <title>BreezySwap</title>
 
@@ -477,6 +478,7 @@
     var contractBaseHelper = new $.CONTRACTBASE();
     var storeHelper = new $.STORE();
     var dataHelper = new $.DATA();
+    var networkHelper = new $.BREEZY_NETWORK();
     var chainId = 8453;
     // $('.alert-banner').hide();
     // if (typeof window.ethereum !== 'undefined') {
@@ -640,7 +642,12 @@
                 setTimeout(doneTypingAmountTokenSwap, 10000);
             }
         }
-        $('.token-swap .button-swap').click(function(e) {
+        $('.token-swap .button-swap').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userWallet = coreHelper.getUserAccount();
             let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
             let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
@@ -827,7 +834,12 @@
                 });
             }
         });
-        $('.token-swap .button-approve').click(function() {
+        $('.token-swap .button-approve').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userWallet = coreHelper.getUserAccount();
             let userSelectedTokenPay = $('.token-swap-pay .selectpicker').val();
             let userSelectedTokenOut = $('.token-swap-out .selectpicker').val();
