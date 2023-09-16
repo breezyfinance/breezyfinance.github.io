@@ -282,8 +282,8 @@
             let lengthPoolsOfChainId = poolsOfChainId.length;
             for (let pid = 0; pid < lengthPoolsOfChainId; pid++) {
                 let userData = await breezyFarm.GetDataUser(userAddr, chainId, poolsOfChainId[pid]);
-                $(".chain-" + chainId + "-apr-" + poolsOfChainId[pid]).text(`${coreHelper.numberWithCommas(userData.apy, 2)} %`);
-                $(".chain-" + chainId + "-tvl-" + poolsOfChainId[pid]).text(`$ ${coreHelper.numberWithCommas(userData.tvl, 2)}`);
+                $(".chain-" + chainId + "-apr-" + poolsOfChainId[pid]).text(`${coreHelper.numberWithCommas(userData.apy, 4)} %`);
+                $(".chain-" + chainId + "-tvl-" + poolsOfChainId[pid]).text(`$ ${coreHelper.numberWithCommas(userData.tvl, 4)}`);
             }
         }
 
