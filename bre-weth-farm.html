@@ -461,11 +461,11 @@
         });
 
         $('.btn-deposit').click(async function() {
-            let curChainId = 11155111;
-            if (curChainId != chainId) {
-                networkHelper.SwichNetworkByChainId(chainId);
-                return;
-            }
+            // let curChainId = 11155111;
+            // if (curChainId != chainId) {
+            //     networkHelper.SwichNetworkByChainId(chainId);
+            //     return;
+            // }
             let userAddr = coreHelper.getUserAccount();
             let userInputVal = $('input[name=deposit_amt]').val();
             let checkAllowce = await breezyFarm.GetAllowanceWantToFarmContract(userAddr);
@@ -478,29 +478,29 @@
             }
         });
         $('.btn-approve').click(async function() {
-            let curChainId = 11155111;
-            if (curChainId != chainId) {
-                networkHelper.SwichNetworkByChainId(chainId);
-                return;
-            }
+            // let curChainId = 11155111;
+            // if (curChainId != chainId) {
+            //     networkHelper.SwichNetworkByChainId(chainId);
+            //     return;
+            // }
             let userAddr = coreHelper.getUserAccount();
             breezyFarm.ApproveWantToFarmContract(userAddr);
         });
         $('.btn-harvest').click(async function() {
-            let curChainId = 11155111;
-            if (curChainId != chainId) {
-                networkHelper.SwichNetworkByChainId(chainId);
-                return;
-            }
+            // let curChainId = 11155111;
+            // if (curChainId != chainId) {
+            //     networkHelper.SwichNetworkByChainId(chainId);
+            //     return;
+            // }
             let userAddr = coreHelper.getUserAccount();
             breezyFarm.Harvest(userAddr);
         });
         $('.btn-withdraw').click(async function() {
-            let curChainId = 11155111;
-            if (curChainId != chainId) {
-                networkHelper.SwichNetworkByChainId(chainId);
-                return;
-            }
+            // let curChainId = 11155111;
+            // if (curChainId != chainId) {
+            //     networkHelper.SwichNetworkByChainId(chainId);
+            //     return;
+            // }
             let userAddr = coreHelper.getUserAccount();
             let userWantWithdraw = $('input[name=withdraw_amt]').val();
             let data = await breezyFarm.GetTokenWantOfFarmContractByPid();
