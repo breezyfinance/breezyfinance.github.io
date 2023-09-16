@@ -189,6 +189,34 @@ $.CONFIG.prototype = (function() {
             breezySwapper: {
                 contract: '0x481d372Ae471Ee6021A60a7940dbaf13432AFCa9',
             },
+            farms: {
+                0: {
+                    type: 'breezy_farm_pool',
+                    contract: '0x148372e5d4AA7fE9bF27e297524a7979812759b9',
+                    want: '0xf5b45149aeba6c8353e152b05dc34b096b0acdae', // 
+                    wantDecimal: 18,
+                    pid: 0,
+                    isActive: true,
+                    isERC20: true,
+                    isActive: true,
+                    label: 'BreezyFarm.BRE_cbETH',
+                    price: 1200,
+                    version: 1,
+                },
+                1: {
+                    type: 'breezy_farm_pool',
+                    contract: '0x23903FFa5976f9A320C51B767A3c30A1e416F291',
+                    want: '0xc56f985805e548b205c96271424a0db9d2e81c74', // 
+                    wantDecimal: 18,
+                    pid: 1,
+                    isActive: true,
+                    isERC20: true,
+                    isActive: true,
+                    label: 'BreezyFarm.BRE_WETH',
+                    price: 1500,
+                    version: 1,
+                },
+            },
         },
     };
     var TOKENS = {
