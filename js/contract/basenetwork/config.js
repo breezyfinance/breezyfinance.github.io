@@ -200,7 +200,7 @@ $.CONFIG.prototype = (function() {
                     isERC20: true,
                     isActive: true,
                     label: 'BreezyFarm.BRE_cbETH',
-                    price: 1200,
+                    price: 3353,
                     version: 1,
                 },
                 1: {
@@ -213,7 +213,7 @@ $.CONFIG.prototype = (function() {
                     isERC20: true,
                     isActive: true,
                     label: 'BreezyFarm.BRE_WETH',
-                    price: 1500,
+                    price: 3353,
                     version: 1,
                 },
             },
