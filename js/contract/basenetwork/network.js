@@ -12,7 +12,7 @@ $.BREEZY_NETWORK.prototype = (function() {
             chainId: 8453,
             chainName: "Base",
             currencySymbol: "ETH",
-            rpcList: ['https://developer-access-mainnet.base.org'],
+            rpcList: ['https://base-mainnet.g.alchemy.com/v2/RiRR61_VDAl_rWcpolrbp_MKJiq0q_6j'],
             blockExplorerUrls: ['https://basescan.org']
         },
     };

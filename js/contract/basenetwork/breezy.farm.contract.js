@@ -66,19 +66,19 @@ $.BREEZY_FARM.prototype = (function() {
             let contractConfig = this.ValidateContractFarmByPid(chainId, pid, `Pid ${pid}} not configured in chainId[${chainId}].farms`);
             let amountDefault = coreHelper.getAmountAllow();
             let tokenActionToMain = await tokenAction.GetTokenActionToMain();
+            console.log("🚀 ~ file: breezy.farm.contract.js:69 ~ tokenActionToMain:", tokenAction);
             return await tokenActionToMain.methods.approve(contractConfig.contract, amountDefault)
                 .send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/" + hash;
+                    let blockExplorerUrl = "https://basescan.org/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+
                 })
                 .on('receipt', (receipt) => {
+                    $('.btn-approve').hide();
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -117,14 +117,11 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.deposit(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
+                    let blockExplorerUrl = "https://basescan.org/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    $('input[name=deposit_amt]').val("");
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+
                 })
                 .on('receipt', (receipt) => {
                     $('input[name=deposit_amt]').val("");
@@ -142,17 +139,14 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.harvest(user).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
+                    let blockExplorerUrl = "https://basescan.org/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
 
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
                 })
                 .on('receipt', (receipt) => {
-
+                    
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -167,14 +161,11 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.withdraw(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://sepolia.etherscan.io/tx/";
+                    let blockExplorerUrl = "https://basescan.org/tx/";
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
-                    $('input[name=withdraw_amt]').val("");
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
+
                 })
                 .on('receipt', (receipt) => {
                     $('input[name=withdraw_amt]').val("");
