@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover a holistic DeFi journey on Base, the innovative blockchain by CoinBase. Delve into seamless trading, reward harvesting, and asset cultivation, all within one decentralized ecosystem." />
+    <meta name="robots" content="max-image-preview:large" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/images/breezy-favicon.svg" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+    <title>XBot</title>
+
+    <style id="svelte-166mr51-style">
+        ul.svelte-166mr51 {
+            display: flex;
+            flex-flow: column nowrap;
+            position: fixed;
+            font-size: 16px;
+            padding: 0 0.75em;
+            margin: 0;
+            list-style-type: none;
+            width: 20em;
+            bottom: 0;
+            right: 0;
+            font-family: 'Helvetica Neue';
+            max-height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            color: #4a4a4a;
+            background: transparent;
+            scrollbar-width: none;
+            box-sizing: border-box;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99999999
+        }
+        
+        @media only screen and (max-width: 450px) {
+            ul.svelte-166mr51 {
+                width: 100%
+            }
+        }
+        
+        .bn-notify-custom.bn-notify-dark-mode {
+            background: #283944;
+            color: #ffffff;
+            background: rgba(40, 57, 68, 0.9)
+        }
+        
+        .bn-notify-clickable:hover {
+            cursor: pointer
+        }
+        
+        .svelte-166mr51::-webkit-scrollbar {
+            display: none
+        }
+        
+        li.svelte-166mr51 {
+            position: relative;
+            display: flex;
+            padding: 0.75em;
+            font-size: 0.889em;
+            font-family: inherit;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            color: inherit;
+            transition: background 300ms ease-in-out, color 300ms ease-in-out;
+            pointer-events: all;
+            background: #ffffff;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.9)
+        }
+        
+        div.svelte-166mr51 {
+            position: absolute;
+            top: 0.75em;
+            right: 0.75em;
+            font-size: inherit;
+            font-family: inherit
+        }
+        
+        */
+    </style>
+    <style id="svelte-7rn0pv-style">
+        div.svelte-7rn0pv {
+            height: 100%;
+            font-size: inherit;
+            font-family: inherit;
+            width: 1.5em
+        }
+    </style>
+    <style id="svelte-5f7pqk-style">
+        div.svelte-5f7pqk {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            font-size: inherit;
+            font-family: inherit;
+            margin-left: 0.75em;
+            width: 90%
+        }
+        
+        p.svelte-5f7pqk {
+            display: flex;
+            align-items: center;
+            margin: 0.5em 0 0 0;
+            opacity: 0.7;
+            font-size: 0.889em;
+            line-height: 1.15;
+            font-family: inherit
+        }
+        
+        span.svelte-5f7pqk {
+            font-family: inherit;
+            display: flex;
+            align-items: center
+        }
+    </style>
+    <style id="svelte-12gqi36-style">
+        p.svelte-12gqi36 {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit
+        }
+    </style>
+    <style id="svelte-1ociadw-style">
+        svg.svelte-1ociadw {
+            margin: 0 0.25em 0 0.5em
+        }
+    </style>
+
+    <!-- css popup bridge -->
+    <style>
+        .container-modal {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .voting {
+            display: flex;
+            align-items: center;
+        }
+        
+        .line {
+            margin: 0px 40px 35px 60px;
+            display: flex;
+        }
+        
+        .line:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cube {
+            width: 50px;
+            height: 50px;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg) rotateY(45deg);
+            animation: rotate 8s infinite linear;
+        }
+        
+        .cube-center {
+            width: 50px;
+            height: 50px;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg) rotateY(45deg);
+            animation: rotate 8s infinite linear;
+        }
+        
+        .face {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            background-color: #DEE1E2;
+            transition: border-color 0.5s ease-in-out;
+        }
+        
+        .front {
+            transform: translateZ(25px);
+        }
+        
+        .back {
+            transform: translateZ(-25px) rotateY(180deg);
+        }
+        
+        .right {
+            transform: translateX(25px) rotateY(90deg);
+        }
+        
+        .left {
+            transform: translateX(-25px) rotateY(-90deg);
+        }
+        
+        .top {
+            transform: translateY(-25px) rotateX(90deg);
+        }
+        
+        .bottom {
+            transform: translateY(25px) rotateX(-90deg);
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotateX(0) rotateY(0);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        
+        .line-connector-0 {
+            width: 150px;
+            /* Adjust the length as needed */
+            height: 2px;
+            background-color: blue;
+            margin-top: 25px;
+        }
+        
+        .line-connector-1 {
+            width: 225px;
+            height: 2px;
+            background-color: blue;
+            position: absolute;
+            margin-left: 125px;
+            margin-top: 25px;
+            transform: translate(-50%, -50%) rotate(35deg);
+            transform-origin: top left;
+        }
+        
+        .line-connector-1::before {
+            content: "";
+            width: 150px;
+            height: 2px;
+            /* border-top: 2px dashed white; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .line-connector-2 {
+            width: 225px;
+            /* Adjust the length as needed */
+            height: 2px;
+            background-color: blue;
+            position: absolute;
+            margin-left: -90px;
+            margin-top: 160px;
+            transform: translate(50%, 50%) rotate(-35deg);
+            transform-origin: top left;
+        }
+        
+        .line-connector-2::before {
+            content: "";
+            width: 150px;
+            height: 2px;
+            /* border-top: 2px dashed white; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .status {
+            margin-top: 70px;
+            margin-left: -86px;
+            text-align: center;
+        }
+        
+        .status span.name {
+            font-weight: bold;
+        }
+        
+        .status span.success-status {
+            color: #099105;
+        }
+        
+        .status span.success-status a {
+            color: #099105;
+        }
+        
+        #relayer-bridge .status {
+            margin-left: -80px!important;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .spin-animation {
+            animation: spin 2s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header" id="header">
+            <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
+                <div class="message">Welcome to our preview! This is a demo, but stay tuned on our <a style="text-decoration: underline" href="https://twitter.com/BreezyFinance" target="_blank">Twitter</a> for the official launch date. Excited to have you with us!</div>
+            </div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container container-1">
+                    <div class="row flex-grow-1 align-items-center">
+                        <div class="col-6 col-lg-2">
+                            <div class="d-flex align-items-center">
+                                <button class="navbar-toggler mr-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-header">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                <div class="logo" onclick="window.location='index.html'">
+                                    <img src="./assets/images/breezy-logo.svg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-2 order-lg-3">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <!-- <span class="wrap-user-acct">0x000</span> -->
+                                <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect wallet</a>
+                                <!-- <span class="dropMenu">
+                                        <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
+                                        <div class="ctmenu-sub  swap-box">
+                                            <a class="f-roboto f-400" href="dashboard.html">Dashboard</a>
+                                        </div>
+                                    </span> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="collapse navbar-collapse" id="navbar-header">
+                                <ul class="navbar-nav menu-header ms-auto mx-auto mb-2 mb-lg-0 align-items-lg-center">
+                                    <li>
+                                        <a class="nav-link" href="breezy-swap.html">BreezySwap</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Liquidity
+                                          </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+                                            <li>
+                                                <a class="dropdown-item" href="https://app.uniswap.org/#/add/ETH/0xfffB7488aB5DdDe106B5BeF56e7c179700509842/3000" target="_blank">UniSwap</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="deposit.html">BreezySwap</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="breezy-link.html">BreezyLink</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="earnDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Breezy Profits 
+                                            </a>
+                                        <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
+                                            <li>
+                                                <a class="dropdown-item" href="earn-basics.html">Earn Basics</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="bci-tradehub.html">BCI TradeHub</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="hodl.html">Hodl</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="page__swap">
+            <section class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700">BreezyLink</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="selectpicker swap__form-select mb-1" name="network-from">
+                                                    <option
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                        >Base
+                                                    </option>
+                                                    <option
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                        >Ethereum
+                                                    </option>
+                                                </select>
+                                            <select class="selectpicker swap__form-select mb-1" name="token-from">
+                                                    <option
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
+                                                    </option>
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                        >ETH</option>
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item stable-swap-out">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class=" selectpicker swap__form-select mb-1" name="network-to">
+                                                <option
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                    >Base
+                                                </option>
+                                                <option
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                    >Ethereum
+                                                </option>
+                                            </select>
+                                            <div class="token">
+                                                <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
+                                                        <option
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
+                                                        </option>
+                                                        <!-- <option
+                                                            value="vegrb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                            >veGRB</option>
+                                                        <option
+                                                            value="grb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                            >GRB</option> -->
+                                                        <option
+                                                            value="eth"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                            >ETH</option>
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve-grb" style="display:none;margin-bottom: 10px;">Approve GRB for bridge fee</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none;margin-bottom: 10px;">Approve <span class="token-select"> to Bridge</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-move-funds disable">Move funds to <span class="recieve-chain"></span></button>
+                        </article>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700">BreezyLink</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="selectpicker swap__form-select mb-1" name="network-from">
+                                                    <option
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                        >Base
+                                                    </option>
+                                                    <option
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                        >Ethereum
+                                                    </option>
+                                                </select>
+                                            <select class="selectpicker swap__form-select mb-1" name="token-from">
+                                                    <option
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
+                                                    </option>
+                                                    <!-- <option
+                                                        value="vegrb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                        >veGRB</option>
+                                                    <option
+                                                        value="grb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                        >GRB</option> -->
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                        >ETH</option>
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item stable-swap-out">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class=" selectpicker swap__form-select mb-1" name="network-to">
+                                                <option
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                    >Base
+                                                </option>
+                                                <option
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                    >Ethereum
+                                                </option>
+                                            </select>
+                                            <div class="token">
+                                                <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
+                                                        <option
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
+                                                        </option>
+                                                        <option
+                                                            value="eth"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                            >ETH</option>
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve-grb" style="display:none;margin-bottom: 10px;">Approve GRB for bridge fee</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none;margin-bottom: 10px;">Approve <span class="token-select"> to Bridge</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-move-funds disable">Move funds to <span class="recieve-chain"></span></button>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700">BreezyLink</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="selectpicker swap__form-select mb-1" name="network-from">
+                                                    <option
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                        >Base
+                                                    </option>
+                                                    <option
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                        >Ethereum
+                                                    </option>
+                                                </select>
+                                            <select class="selectpicker swap__form-select mb-1" name="token-from">
+                                                    <option
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
+                                                    </option>
+                                                    <!-- <option
+                                                        value="vegrb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                        >veGRB</option>
+                                                    <option
+                                                        value="grb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                        >GRB</option> -->
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                        >ETH</option>
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item stable-swap-out">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class=" selectpicker swap__form-select mb-1" name="network-to">
+                                                <option
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                    >Base
+                                                </option>
+                                                <option
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                    >Ethereum
+                                                </option>
+                                            </select>
+                                            <div class="token">
+                                                <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
+                                                        <option
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
+                                                        </option>
+                                                        <!-- <option
+                                                            value="vegrb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                            >veGRB</option>
+                                                        <option
+                                                            value="grb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                            >GRB</option> -->
+                                                        <option
+                                                            value="eth"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                            >ETH</option>
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve-grb" style="display:none;margin-bottom: 10px;">Approve GRB for bridge fee</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none;margin-bottom: 10px;">Approve <span class="token-select"> to Bridge</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-move-funds disable">Move funds to <span class="recieve-chain"></span></button>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700">BreezyLink</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="selectpicker swap__form-select mb-1" name="network-from">
+                                                    <option
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                        >Base
+                                                    </option>
+                                                    <option
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                        >Ethereum
+                                                    </option>
+                                                </select>
+                                            <select class="selectpicker swap__form-select mb-1" name="token-from">
+                                                    <option
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
+                                                    </option>
+                                                    <!-- <option
+                                                        value="vegrb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                        >veGRB</option>
+                                                    <option
+                                                        value="grb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                        >GRB</option> -->
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                        >ETH</option>
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item stable-swap-out">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class=" selectpicker swap__form-select mb-1" name="network-to">
+                                                <option
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                    >Base
+                                                </option>
+                                                <option
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                    >Ethereum
+                                                </option>
+                                            </select>
+                                            <div class="token">
+                                                <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
+                                                        <option
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
+                                                        </option>
+                                                        <!-- <option
+                                                            value="vegrb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                            >veGRB</option>
+                                                        <option
+                                                            value="grb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                            >GRB</option> -->
+                                                        <option
+                                                            value="eth"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                            >ETH</option>
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve-grb" style="display:none;margin-bottom: 10px;">Approve GRB for bridge fee</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none;margin-bottom: 10px;">Approve <span class="token-select"> to Bridge</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-move-funds disable">Move funds to <span class="recieve-chain"></span></button>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="bridge-form">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700">BreezyLink</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item mb-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class="selectpicker swap__form-select mb-1" name="network-from">
+                                                    <option
+                                                        value="Base"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                        >Base
+                                                    </option>
+                                                    <option
+                                                        value="Etherium"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                        >Ethereum
+                                                    </option>
+                                                </select>
+                                            <select class="selectpicker swap__form-select mb-1" name="token-from">
+                                                    <option
+                                                        value="BRE"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                        >BRE
+                                                    </option>
+                                                    <!-- <option
+                                                        value="vegrb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                        >veGRB</option>
+                                                    <option
+                                                        value="grb"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                        >GRB</option> -->
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                        >ETH</option>
+                                                    </option>
+                                                </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" name="amountIn" placeholder="0.0" autofocus value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+
+                                <div class="swap__form-item stable-swap-out">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <select class=" selectpicker swap__form-select mb-1" name="network-to">
+                                                <option
+                                                    value="Base"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/base-network.svg' /></span>Base</div>"
+                                                    >Base
+                                                </option>
+                                                <option
+                                                    value="Etherium"
+                                                    data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth-network-logo.png' /></span>Ethereum</div>"
+                                                    >Ethereum
+                                                </option>
+                                            </select>
+                                            <div class="token">
+                                                <select class="selectpicker swap__form-select mb-1" name="token-to" disabled>
+                                                        <option
+                                                            value="BRE"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/bre-token.png' /></span>BRE</div>"
+                                                            >BRE
+                                                        </option>
+                                                        <!-- <option
+                                                            value="vegrb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>veGRB</div>"
+                                                            >veGRB</option>
+                                                        <option
+                                                            value="grb"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/grb_token.png' /></span>GRB</div>"
+                                                            >GRB</option> -->
+                                                        <option
+                                                            value="eth"
+                                                            data-content="<div class='swap__form-item-select'><span><img src='./assets/images/weth.png' /></span>ETH</div>"
+                                                            >ETH</option>
+                                                        </option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="row">
+                                                <div class="col-5 d-flex align-items-center">
+                                                    <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input class="swap__form-input" placeholder="0.0" name="amountOut" readonly/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between ">
+                                <div class="fees-area">
+                                    <div class="position-card__row__info">
+                                        <p class="body">Your BRE balance: <span class="grb-balance">Loading</span></p>
+                                    </div>
+                                    <div class="position-card__row__balance">
+                                        <p class="body body--link ">
+                                            <span class="" style="">Fees:<span class="swap-fee"> 3</span> BRE</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve-grb" style="display:none;margin-bottom: 10px;">Approve GRB for bridge fee</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-approve" style="display:none;margin-bottom: 10px;">Approve <span class="token-select"> to Bridge</button>
+                            <button type="button" class="header__btn-connect w-100 text-center button-move-funds disable">Move funds to <span class="recieve-chain"></span></button>
+                        </article>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <footer class="footer" id="page-footer">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container container-1">
+                    <div class="row flex-grow-1 align-items-center">
+                        <div class="col-lg-8">
+                            <div class="collapse navbar-collapse" id="navbar-footer">
+                                <ul class="navbar-nav menu-footer mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://basecryptodigest.click/category/breezy/">Documents</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://t.me/BreezyFinanceChannel" rel="noopener noreferrer">Telegram</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://github.com/breezyfinance">git</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://twitter.com/BreezyFinance" rel="noopener noreferrer">X</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="risks.html" class="">Risks</a>
+                                    </li>                                                  
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">V1.0.0</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div>© 2023 BreezyFinance</div>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </div>
+    <ul id="confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none;top: 0; justify-content: unset;">
+        <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
+            <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
+                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is sent to the Blockchain.</p>
+            </div>
+            <div class="bn-notify-custom bn-notify-notification-close svelte-166mr51" onclick="$('#confirm-popup').hide()">
+                <div class="bn-notify-custom bn-notify-notification-close-icon svelte-r8gx3p">
+                    <svg height="8" viewBox="0 0 12 12" width="8" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#9B9B9B" stroke-linecap="square" stroke-width="2" transform="translate(2 2)" style="transition: stroke 150ms ease-in-out 0s;">
+                        <path d="m.1.1 7.82304289 7.82304289"></path>
+                        <path d="m.1.1 7.82304289 7.82304289" transform="matrix(-1 0 0 1 8 0)"></path>
+                        </g>
+                        </svg>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul id="success-confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none; top: 0; justify-content: unset;">
+        <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
+            <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
+                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is confirmed.</p>
+            </div>
+            <div class="bn-notify-custom bn-notify-notification-close svelte-166mr51" onclick="$('#success-confirm-popup').hide()">
+                <div class="bn-notify-custom bn-notify-notification-close-icon svelte-r8gx3p">
+                    <svg height="8" viewBox="0 0 12 12" width="8" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#9B9B9B" stroke-linecap="square" stroke-width="2" transform="translate(2 2)" style="transition: stroke 150ms ease-in-out 0s;">
+                        <path d="m.1.1 7.82304289 7.82304289"></path>
+                        <path d="m.1.1 7.82304289 7.82304289" transform="matrix(-1 0 0 1 8 0)"></path>
+                        </g>
+                        </svg>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/custom.js"></script>
+    <script src="./assets/js/custom.menu.js"></script>
+
+</body>
+</html>
