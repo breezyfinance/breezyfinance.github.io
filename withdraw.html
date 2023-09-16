@@ -25,6 +25,7 @@
     <script src="./js/contract/basenetwork/core.js"></script>
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
+    <script src="./js/contract/basenetwork/network.js"></script>
 
     <title>Liquidity - BreezySwap</title>
     <style id="svelte-166mr51-style">
@@ -434,6 +435,7 @@
     var contractBaseHelper = new $.CONTRACTBASE();
     var storeHelper = new $.STORE();
     var dataHelper = new $.DATA();
+    var networkHelper = new $.BREEZY_NETWORK();
     var chainId = 8453;
 
 
@@ -584,7 +586,12 @@
             }
         };
 
-        $('#remove-liquidity').click(function(e) {
+        $('#remove-liquidity').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
             let userWallet = coreHelper.getUserAccount();
             let lbPool = ($('select[name=lp_token]').val()).toLowerCase();
             let amountOfLiquidity = $('input[name=amount_of_liquidity]').val();

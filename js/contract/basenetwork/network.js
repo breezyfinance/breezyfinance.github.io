@@ -8,6 +8,13 @@ $.BREEZY_NETWORK.prototype = (function() {
             rpcList: ['https://eth-sepolia.g.alchemy.com/v2/Dy4zBBd1RgIFZIn16MxMmTn0zP-l5FjT'],
             blockExplorerUrls: ['https://sepolia.etherscan.io']
         },
+        Base: {
+            chainId: 8453,
+            chainName: "Base",
+            currencySymbol: "ETH",
+            rpcList: ['https://developer-access-mainnet.base.org'],
+            blockExplorerUrls: ['https://basescan.org']
+        },
     };
 
     return {
