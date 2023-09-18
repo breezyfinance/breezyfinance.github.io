@@ -474,6 +474,11 @@ h6 {
     padding-left: 50px;
 }
 
+.f-20 {
+    font-size: 20px;
+    line-height: 30px;
+}
+
 .f-18 {
     font-size: 18px;
     line-height: 28px;
@@ -2057,6 +2062,59 @@ button--circle, .button--circle i {
 }
 .buy-sell__main .text-end,.buy-sell__main input.swap__form-input {
     text-align: left!important;
+}
+.page-xbot #token-balance .swap__form-input {
+    text-align: right!important;
+}
+.title-block {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B2B2B2;
+}
+.page-xbot .swap__form-item {
+    background: transparent;
+    border: 1px solid #B2B2B2;
+    margin-bottom: 16px;
+}
+.page-xbot .swap__form-item:last-child {
+    margin-bottom: 0;
+}
+.page-xbot .swap__form-item .swap__form-item-select {
+    font-size: 20px;
+}
+.page-xbot .swap__form-item .swap__form-item-select span {
+    width: 40px;
+    top: -7px;
+}
+.page-xbot .swap__form-item .amount {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.page-xbot .swap__form-item .amount span {
+    font-size: 32px;
+    color: #0C3FFF;
+}
+#saving-block {
+    height: 319px;
+}
+#saving-block .swap__form-item {
+    background: #D1DBFF;
+    border: 1px solid #D1DBFF;
+}
+.page-xbot .token-status .token-name {
+    padding: 16px;
+    background: #D1DBFF;
+    border-radius: 16px;
+    font-size: 24px;
+}
+.page-xbot .token-status .status-info {
+    padding: 24px 16px;
+}
+.token-status .status-info p {
+    margin-bottom: 8px;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
 }
 .buy-sell__main .swap__form-select {
     width: 130px!important;
