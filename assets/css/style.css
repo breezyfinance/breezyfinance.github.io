@@ -2095,11 +2095,17 @@ button--circle, .button--circle i {
     color: #0C3FFF;
 }
 #saving-block {
-    height: 319px;
+    height: 335px;
 }
 #saving-block .swap__form-item {
     background: #D1DBFF;
     border: 1px solid #D1DBFF;
+}
+#saving-block .swap__form-item {
+    margin-bottom: 8px;
+}
+#saving-block .fees-area {
+    margin-bottom: 24px;
 }
 .page-xbot .token-status .token-name {
     padding: 16px;
