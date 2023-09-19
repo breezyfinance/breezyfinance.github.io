@@ -2070,7 +2070,7 @@ button--circle, .button--circle i {
     padding-bottom: 10px;
     border-bottom: 1px solid #B2B2B2;
 }
-.page-xbot .swap__form-item {
+.page-xbot #token-balance .swap__form-item {
     background: transparent;
     border: 1px solid #B2B2B2;
     margin-bottom: 16px;
@@ -2115,6 +2115,29 @@ button--circle, .button--circle i {
     font-size: 24px;
     display: flex;
     justify-content: space-between;
+}
+#referral-link p.user-referral-link {
+    margin-bottom: 8px;
+    padding: 16px;
+    background: #F5F5F5;
+    border-radius: 24px;
+    font-size: 20px;
+}
+#referral-link p.user-referral-link span {
+    padding: 10px 0;
+    padding-right: 8px;
+    margin-right: 8px;
+    font-weight: bold;
+    border-right: 1px solid #B2B2B2;
+}
+#referral-link p.note {
+    margin-bottom: 0;
+    font-size: 18px;
+    color: #666;
+}
+#buy-token-form .swap__form-item .swap__form-item-select span {
+    width: 24px;
+    top: -1px;
 }
 .buy-sell__main .swap__form-select {
     width: 130px!important;
