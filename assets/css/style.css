@@ -493,6 +493,10 @@ h6 {
     font-size: 12px;
     line-height: 16px;
 }
+.w-45 {
+    width: 45%!important;
+}
+
 
 .logo img:hover {
     cursor: pointer;
@@ -2063,6 +2067,10 @@ button--circle, .button--circle i {
 .buy-sell__main .text-end,.buy-sell__main input.swap__form-input {
     text-align: left!important;
 }
+.page-xbot {
+    padding: 200px 0;
+    background: radial-gradient(58.51% 49.08% at 50.00% 10.89%, #E9EEFF 0%, #FBFEFF 100%);
+}
 .page-xbot #token-balance .swap__form-input {
     text-align: right!important;
 }
@@ -2091,11 +2099,21 @@ button--circle, .button--circle i {
     margin-bottom: 10px;
 }
 .page-xbot .swap__form-item .amount span {
-    font-size: 32px;
+    font-size: 30px;
     color: #0C3FFF;
 }
 #saving-block {
-    height: 335px;
+
+}
+#saving-block .button-area {
+    display: flex;
+    justify-content: space-between;
+}
+#saving-block .button-withdraw {
+    background: #0DC308;
+}
+#saving-block .button-withdraw:hover {
+    background: transparent;
 }
 #saving-block .swap__form-item {
     background: #D1DBFF;
@@ -2141,7 +2159,7 @@ button--circle, .button--circle i {
     font-size: 18px;
     color: #666;
 }
-#buy-token-form .swap__form-item .swap__form-item-select span {
+#buy-xbot-form .swap__form-item .swap__form-item-select span {
     width: 24px;
     top: -1px;
 }

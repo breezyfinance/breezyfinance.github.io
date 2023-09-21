@@ -617,7 +617,8 @@
             )
             .on("transactionHash", function(hash) {
                 coreHelper.showPopup('confirm-popup');
-                $('.transaction-hash').attr("href", "https://basescan.org/tx/" + hash);
+                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                $('.transaction-hash').attr("href", blockExplorerUrl + hash);
             })
             .on('confirmation', (confirmationNumber, receipt) => {
 
