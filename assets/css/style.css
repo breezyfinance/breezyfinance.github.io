@@ -474,6 +474,11 @@ h6 {
     padding-left: 50px;
 }
 
+.f-20 {
+    font-size: 20px;
+    line-height: 30px;
+}
+
 .f-18 {
     font-size: 18px;
     line-height: 28px;
@@ -488,6 +493,10 @@ h6 {
     font-size: 12px;
     line-height: 16px;
 }
+.w-45 {
+    width: 45%!important;
+}
+
 
 .logo img:hover {
     cursor: pointer;
@@ -2057,6 +2066,108 @@ button--circle, .button--circle i {
 }
 .buy-sell__main .text-end,.buy-sell__main input.swap__form-input {
     text-align: left!important;
+}
+.page-xbot {
+    padding: 200px 0;
+    background: radial-gradient(58.51% 49.08% at 50.00% 10.89%, #E9EEFF 0%, #FBFEFF 100%);
+}
+.page-xbot #token-balance .swap__form-input {
+    text-align: right!important;
+}
+.title-block {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B2B2B2;
+}
+.page-xbot #token-balance .swap__form-item {
+    background: transparent;
+    border: 1px solid #B2B2B2;
+    margin-bottom: 16px;
+}
+.page-xbot .swap__form-item:last-child {
+    margin-bottom: 0;
+}
+.page-xbot .swap__form-item .swap__form-item-select {
+    font-size: 20px;
+}
+.page-xbot .swap__form-item .swap__form-item-select span {
+    width: 40px;
+    top: -7px;
+}
+.page-xbot .swap__form-item .amount {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+    width: 208px;
+    overflow: hidden;
+    float: left;
+}
+.page-xbot #saving-block .swap__form-item .amount {
+    width: 220px;
+}
+.page-xbot .swap__form-item .amount span {
+    font-size: 30px;
+    color: #0C3FFF;
+}
+#saving-block {
+
+}
+#saving-block .button-area {
+    display: flex;
+    justify-content: space-between;
+}
+#saving-block .button-withdraw {
+    background: #0DC308;
+}
+#saving-block .button-withdraw:hover {
+    background: transparent;
+}
+#saving-block .swap__form-item {
+    background: #D1DBFF;
+    border: 1px solid #D1DBFF;
+}
+#saving-block .swap__form-item {
+    margin-bottom: 8px;
+}
+#saving-block .fees-area {
+    margin-bottom: 24px;
+}
+.page-xbot .token-status .token-name {
+    padding: 16px;
+    background: #D1DBFF;
+    border-radius: 16px;
+    font-size: 24px;
+}
+.page-xbot .token-status .status-info {
+    padding: 24px 16px;
+}
+.token-status .status-info p {
+    margin-bottom: 8px;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+#referral-link p.user-referral-link {
+    margin-bottom: 8px;
+    padding: 16px;
+    background: #F5F5F5;
+    border-radius: 24px;
+    font-size: 20px;
+}
+#referral-link p.user-referral-link span {
+    padding: 10px 0;
+    padding-right: 8px;
+    margin-right: 8px;
+    font-weight: bold;
+    border-right: 1px solid #B2B2B2;
+}
+#referral-link p.note {
+    margin-bottom: 0;
+    font-size: 18px;
+    color: #666;
+}
+#buy-xbot-form .swap__form-item .swap__form-item-select span {
+    width: 24px;
+    top: -1px;
 }
 .buy-sell__main .swap__form-select {
     width: 130px!important;

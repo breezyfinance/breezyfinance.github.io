@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover a holistic DeFi journey on Base, the innovative blockchain by CoinBase. Delve into seamless trading, reward harvesting, and asset cultivation, all within one decentralized ecosystem." />
+    <meta name="robots" content="max-image-preview:large" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./assets/images/breezy-favicon.svg" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.48/BigInteger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./assets/js/web3.min.js"></script>
+    <script src="./assets/js/trustwallet.js"></script> 
+    <script src="./js/contract/basenetwork/abi.js"></script>
+    <script src="./js/contract/basenetwork/config.js"></script>
+    <script src="./js/data/store.js"></script>
+    <script src="./js/contract/basenetwork/core.js"></script>
+    <script src="./js/contract/basenetwork/base.contract.js"></script>
+    <script src="./js/contract/basenetwork/data.js"></script>
+    <script src="./js/contract/basenetwork/network.js"></script>
+    <script src="./js/contract/basenetwork/bignumber.js"></script>
+
+
+
+    <title>XBot</title>
+
+    <style id="svelte-166mr51-style">
+        ul.svelte-166mr51 {
+            display: flex;
+            flex-flow: column nowrap;
+            position: fixed;
+            font-size: 16px;
+            padding: 0 0.75em;
+            margin: 0;
+            list-style-type: none;
+            width: 20em;
+            bottom: 0;
+            right: 0;
+            font-family: 'Helvetica Neue';
+            max-height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            color: #4a4a4a;
+            background: transparent;
+            scrollbar-width: none;
+            box-sizing: border-box;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 99999999
+        }
+        
+        @media only screen and (max-width: 450px) {
+            ul.svelte-166mr51 {
+                width: 100%
+            }
+        }
+        
+        .bn-notify-custom.bn-notify-dark-mode {
+            background: #283944;
+            color: #ffffff;
+            background: rgba(40, 57, 68, 0.9)
+        }
+        
+        .bn-notify-clickable:hover {
+            cursor: pointer
+        }
+        
+        .svelte-166mr51::-webkit-scrollbar {
+            display: none
+        }
+        
+        li.svelte-166mr51 {
+            position: relative;
+            display: flex;
+            padding: 0.75em;
+            font-size: 0.889em;
+            font-family: inherit;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            color: inherit;
+            transition: background 300ms ease-in-out, color 300ms ease-in-out;
+            pointer-events: all;
+            background: #ffffff;
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.9)
+        }
+        
+        div.svelte-166mr51 {
+            position: absolute;
+            top: 0.75em;
+            right: 0.75em;
+            font-size: inherit;
+            font-family: inherit
+        }
+        
+        */
+    </style>
+    <style id="svelte-7rn0pv-style">
+        div.svelte-7rn0pv {
+            height: 100%;
+            font-size: inherit;
+            font-family: inherit;
+            width: 1.5em
+        }
+    </style>
+    <style id="svelte-5f7pqk-style">
+        div.svelte-5f7pqk {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            font-size: inherit;
+            font-family: inherit;
+            margin-left: 0.75em;
+            width: 90%
+        }
+        
+        p.svelte-5f7pqk {
+            display: flex;
+            align-items: center;
+            margin: 0.5em 0 0 0;
+            opacity: 0.7;
+            font-size: 0.889em;
+            line-height: 1.15;
+            font-family: inherit
+        }
+        
+        span.svelte-5f7pqk {
+            font-family: inherit;
+            display: flex;
+            align-items: center
+        }
+    </style>
+    <style id="svelte-12gqi36-style">
+        p.svelte-12gqi36 {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit
+        }
+    </style>
+    <style id="svelte-1ociadw-style">
+        svg.svelte-1ociadw {
+            margin: 0 0.25em 0 0.5em
+        }
+    </style>
+
+    <!-- css popup bridge -->
+    <style>
+        .container-modal {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .voting {
+            display: flex;
+            align-items: center;
+        }
+        
+        .line {
+            margin: 0px 40px 35px 60px;
+            display: flex;
+        }
+        
+        .line:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cube {
+            width: 50px;
+            height: 50px;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg) rotateY(45deg);
+            animation: rotate 8s infinite linear;
+        }
+        
+        .cube-center {
+            width: 50px;
+            height: 50px;
+            transform-style: preserve-3d;
+            transform: rotateX(45deg) rotateY(45deg);
+            animation: rotate 8s infinite linear;
+        }
+        
+        .face {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+            background-color: #DEE1E2;
+            transition: border-color 0.5s ease-in-out;
+        }
+        
+        .front {
+            transform: translateZ(25px);
+        }
+        
+        .back {
+            transform: translateZ(-25px) rotateY(180deg);
+        }
+        
+        .right {
+            transform: translateX(25px) rotateY(90deg);
+        }
+        
+        .left {
+            transform: translateX(-25px) rotateY(-90deg);
+        }
+        
+        .top {
+            transform: translateY(-25px) rotateX(90deg);
+        }
+        
+        .bottom {
+            transform: translateY(25px) rotateX(-90deg);
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotateX(0) rotateY(0);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        
+        .line-connector-0 {
+            width: 150px;
+            /* Adjust the length as needed */
+            height: 2px;
+            background-color: blue;
+            margin-top: 25px;
+        }
+        
+        .line-connector-1 {
+            width: 225px;
+            height: 2px;
+            background-color: blue;
+            position: absolute;
+            margin-left: 125px;
+            margin-top: 25px;
+            transform: translate(-50%, -50%) rotate(35deg);
+            transform-origin: top left;
+        }
+        
+        .line-connector-1::before {
+            content: "";
+            width: 150px;
+            height: 2px;
+            /* border-top: 2px dashed white; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .line-connector-2 {
+            width: 225px;
+            /* Adjust the length as needed */
+            height: 2px;
+            background-color: blue;
+            position: absolute;
+            margin-left: -90px;
+            margin-top: 160px;
+            transform: translate(50%, 50%) rotate(-35deg);
+            transform-origin: top left;
+        }
+        
+        .line-connector-2::before {
+            content: "";
+            width: 150px;
+            height: 2px;
+            /* border-top: 2px dashed white; */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .status {
+            margin-top: 70px;
+            margin-left: -86px;
+            text-align: center;
+        }
+        
+        .status span.name {
+            font-weight: bold;
+        }
+        
+        .status span.success-status {
+            color: #099105;
+        }
+        
+        .status span.success-status a {
+            color: #099105;
+        }
+        
+        #relayer-bridge .status {
+            margin-left: -80px!important;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .spin-animation {
+            animation: spin 2s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header" id="header">
+            <div class="alert-banner" style="background: #000 ; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
+                <div class="message">Welcome to our preview! This is a demo, but stay tuned on our <a style="text-decoration: underline" href="https://twitter.com/BreezyFinance" target="_blank">Twitter</a> for the official launch date. Excited to have you with us!</div>
+            </div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container container-1">
+                    <div class="row flex-grow-1 align-items-center">
+                        <div class="col-6 col-lg-2">
+                            <div class="d-flex align-items-center">
+                                <button class="navbar-toggler mr-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-header">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                <div class="logo" onclick="window.location='index.html'">
+                                    <img src="./assets/images/breezy-logo.svg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-2 order-lg-3">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <span class="wrap-user-acct">0x000</span>
+                                <a href="#" class="header__btn-connect btn-connect-wallet wrap-btn-connect">Connect wallet</a>
+                                <!-- <span class="dropMenu">
+                                        <button type="button" class="header__btn-swap ms-3 ctmenu-item"><i class="fas fa-ellipsis-h"></i></button>
+                                        <div class="ctmenu-sub  swap-box">
+                                            <a class="f-roboto f-400" href="dashboard.html">Dashboard</a>
+                                        </div>
+                                    </span> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="collapse navbar-collapse" id="navbar-header">
+                                <ul class="navbar-nav menu-header ms-auto mx-auto mb-2 mb-lg-0 align-items-lg-center">
+                                    <li>
+                                        <a class="nav-link" href="breezy-swap.html">BreezySwap</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Liquidity
+                                          </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+                                            <li>
+                                                <a class="dropdown-item" href="https://app.uniswap.org/#/add/ETH/0xfffB7488aB5DdDe106B5BeF56e7c179700509842/3000" target="_blank">UniSwap</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="deposit.html">BreezySwap</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="breezy-link.html">BreezyLink</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="earnDropdownMore" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Breezy Profits 
+                                            </a>
+                                        <ul class="dropdown-menu" aria-labelledby="earnDropdownMore">
+                                            <li>
+                                                <a class="dropdown-item" href="earn-basics.html">Earn Basics</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="bci-tradehub.html">BCI TradeHub</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="hodl.html">Hodl</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="page-xbot">
+            <section class="container container-2">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <article class="buy-sell__main garbi__box-1 p-3" id="token-balance">
+                            <div class="d-flex align-items-center justify-content-between mb-14 title-block">
+                                <div class="f-700">Balance of tokens</div>
+                            </div>
+                            <div class="swap__form">
+                                <div class="swap__form-item">
+                                    <div class="row">
+                                        <div class="col-4" style="position: relative;">
+                                            <div class='swap__form-item-select' style="position: absolute;top:0;left:5px;">
+                                                <span>
+                                                    <img src='./assets/images/xbot-token.png' />
+                                                </span> XBOT
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
+                                            <div class="amount">
+                                                <span class="amount-xbot">0</span>
+                                            </div>
+                                            XBOT
+                                            <div class="">
+                                                <span class="f-700 f-roboto f-20 xbot-volume">0.0</span>
+                                                <span class="color-2 f-roboto f-20 f-400">$</span>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="saving-block">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Savings</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item">
+                                    <div class="row">
+                                        <div class="col-4" style="position: relative;">
+                                            <div class='swap__form-item-select' style="position: absolute;top:0;left:5px;">
+                                                <span>
+                                                    <img src='./assets/images/eth_logo.png' />
+                                                </span> ETH
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
+                                            <div class="amount">
+                                                <span class="amount-eth">0</span>
+                                            </div>
+                                            ETH
+                                            <div class="">
+                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>
+                                                <span class="color-2 f-roboto f-20 f-400">$</span>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <div class="fees-area">
+                                        <div class="">
+                                            <p class="body body--link ">
+                                                <span class="" style="">Reinvest ~  <span class="reinvest-token">0.00</span> XBOT</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button-area">
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
+                                </div>
+                                
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4" id="#token-status">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Token network status</div>
+                            </div>
+                            <div class="token-status">
+                                <div class="token-name">
+                                    <span>
+                                        <img src='./assets/images/xbot-token.png' />
+                                    </span> XBOT
+                                </div>
+                                <div class="status-info">
+                                    <p>Price<span class="price">0</span></p>
+                                    <p>Wallet<span class="user-wallet"><span class="user-token-balance">0</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>APR<span class="apr">0</span></p>
+                                    <p>Total Supply<span class="total-supply">0</span></p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Referrals activity</div>
+                            </div>
+                            <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
+                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 BRE to active your masternode.</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <article class="buy-sell__main garbi__box-1 p-3" id="buy-xbot-form">
+                            <div class="masthead__action-buttons" style="margin-bottom:16px;">
+                                <button class="button button--large button--buy button-buy-form">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        <label class="label">Buy</label>
+                                    </button>
+                                <button class="button button--large button--sell button-sell-form button-disabled">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                        <label class="label">Sell</label>
+                                </button>
+                            </div>
+                            <div id="token-buy-form">
+                                <div class="swap__form">
+                                    <div class="swap__form-item mb-1">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                    <span class="f-700 f-roboto f-14 from-volume">0.0</span>
+                                                </div>
+                                                <input class="swap__form-input" name="amountPay" placeholder="0.0" value="" />
+                                            </div>
+                                            <div class="col-6" style=" text-align: right;">
+                                                <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                <select class="selectpicker swap__form-select mt-1" name="from">
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>ETH</div>"
+                                                        >ETH
+                                                    </option>
+                                                </select>
+    
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+    
+                                    <div class="swap__form-item">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                    <span class="f-700 f-roboto f-14 to-volume">0.0</span>
+                                                </div>
+                                                <input class="swap__form-input" style="pointer-events: none;" name="amountXbotOut" placeholder="0.0" value="" />
+                                            </div>
+                                            <div class="col-6" style=" text-align: right;position: relative;">
+                                                <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
+                                                    <span>
+                                                            <img src='./assets/images/xbot-token.png' />
+                                                        </span> XBOT
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <div class="fees-area">
+                                        <div class="position-card__row__info">
+                                            <p class="body">Fees</p>
+                                        </div>
+                                        <div class="position-card__row__balance">
+                                            <p class="body body--link ">
+                                                <span class="" style="">0%</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="button-buy-gec header__btn-connect w-100 disable text-center btn-buy" style="">Buy XBOT</button>
+                            </div>
+                            <div id="token-sell-form" style="display: none;">
+                                <div class="swap__form">
+                                    <div class="swap__form-item mb-1">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                    <span class="f-700 f-roboto f-14 from-volume">0.0</span>
+                                                </div>
+                                                <input class="swap__form-input" name="amountPay" placeholder="0.0" value="" />
+                                            </div>
+                                            <div class="col-6" style=" text-align: right;position: relative;">
+                                                <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-from-bal">Loading</span></div>
+                                                <div class='swap__form-item-select' style="position: absolute;bottom:0;right:13px;">
+                                                    <span>
+                                                            <img src='./assets/images/xbot-token.png' />
+                                                        </span> XBOT
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+    
+                                    <img src="./assets/images/swap.svg" class="cursor-pointer icon-swap btn-reverse-pair" />
+    
+                                    <div class="swap__form-item">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                    <span class="f-700 f-roboto f-14 to-volume">0.0</span>
+                                                </div>
+                                                <input class="swap__form-input" style="pointer-events: none;" name="amountEthOut" placeholder="0.0" value="" />
+                                            </div>
+                                            <div class="col-6" style=" text-align: right;position: relative;">
+                                                <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
+                                                <select class="selectpicker swap__form-select mt-1" name="from">
+                                                    <option
+                                                        value="eth"
+                                                        data-content="<div class='swap__form-item-select'><span><img src='./assets/images/eth_logo.png' /></span>ETH</div>"
+                                                        >ETH
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <div class="fees-area">
+                                        <div class="position-card__row__info">
+                                            <p class="body">Fees</p>
+                                        </div>
+                                        <div class="position-card__row__balance">
+                                            <p class="body body--link ">
+                                                <span class="" style="">0%</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="button-buy-gec header__btn-connect w-100 text-center disable btn-sell" style="">Sell XBOT</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <footer class="footer" id="page-footer">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container container-1">
+                    <div class="row flex-grow-1 align-items-center">
+                        <div class="col-lg-8">
+                            <div class="collapse navbar-collapse" id="navbar-footer">
+                                <ul class="navbar-nav menu-footer mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://basecryptodigest.click/category/breezy/">Documents</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://t.me/BreezyFinanceChannel" rel="noopener noreferrer">Telegram</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://github.com/breezyfinance">git</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="https://twitter.com/BreezyFinance" rel="noopener noreferrer">X</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="risks.html" class="">Risks</a>
+                                    </li>                                                  
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">V1.0.0</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div>© 2023 BreezyFinance</div>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-footer">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </div>
+    <ul id="confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none;top: 0; justify-content: unset;">
+        <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
+            <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
+                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is sent to the Blockchain.</p>
+            </div>
+            <div class="bn-notify-custom bn-notify-notification-close svelte-166mr51" onclick="$('#confirm-popup').hide()">
+                <div class="bn-notify-custom bn-notify-notification-close-icon svelte-r8gx3p">
+                    <svg height="8" viewBox="0 0 12 12" width="8" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#9B9B9B" stroke-linecap="square" stroke-width="2" transform="translate(2 2)" style="transition: stroke 150ms ease-in-out 0s;">
+                        <path d="m.1.1 7.82304289 7.82304289"></path>
+                        <path d="m.1.1 7.82304289 7.82304289" transform="matrix(-1 0 0 1 8 0)"></path>
+                        </g>
+                        </svg>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul id="success-confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none; top: 0; justify-content: unset;">
+        <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
+            <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
+                <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is confirmed.</p>
+            </div>
+            <div class="bn-notify-custom bn-notify-notification-close svelte-166mr51" onclick="$('#success-confirm-popup').hide()">
+                <div class="bn-notify-custom bn-notify-notification-close-icon svelte-r8gx3p">
+                    <svg height="8" viewBox="0 0 12 12" width="8" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" stroke="#9B9B9B" stroke-linecap="square" stroke-width="2" transform="translate(2 2)" style="transition: stroke 150ms ease-in-out 0s;">
+                        <path d="m.1.1 7.82304289 7.82304289"></path>
+                        <path d="m.1.1 7.82304289 7.82304289" transform="matrix(-1 0 0 1 8 0)"></path>
+                        </g>
+                        </svg>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/custom.js"></script>
+    <script src="./assets/js/custom.menu.js"></script>
+
+</body>
+<script>
+    var abiHelper = new $.ABI();
+    var coreHelper = new $.Core();
+    var configHelper = new $.CONFIG();
+    var contractBaseHelper = new $.CONTRACTBASE();
+    var storeHelper = new $.STORE();
+    var dataHelper = new $.DATA();
+    var networkHelper = new $.BREEZY_NETWORK();
+    var chainId = 11155111;
+
+    $(document).ready(function() {
+        abiHelper.init({});
+        coreHelper.init({});
+        configHelper.init({});
+        storeHelper.init({});
+        contractBaseHelper.init({
+            chainId
+        });;
+        run()
+    });
+    $('.button-sell-form').click(function() {
+        $(this).removeClass('button-disabled');
+        $('#token-buy-form').hide();
+        $('#token-sell-form').show();
+        $('.button-buy-form').addClass('button-disabled');
+    });
+    $('.button-buy-form').click(function() {
+        $(this).removeClass('button-disabled');
+        $('#token-sell-form').hide();
+        $('#token-buy-form').show();
+        $('.button-sell-form').addClass('button-disabled');
+    });
+    let userWallet;
+    async function waitForUserWallet() {
+        let userwallet = coreHelper.getUserAccount();
+
+        while (userwallet === '0x0000000000000000000000000000000000000000') {
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            userwallet = coreHelper.getUserAccount();
+        }
+
+        userWallet = userwallet;
+    }
+
+    async function getBalanceETH() {
+        if (window.ethereum) {
+            // Request access to the user's MetaMask account
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+            // Get the current Ethereum address from MetaMask
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            const ethereumAddress = accounts[0];
+
+            // Get the balance in Ether
+            const balanceWei = await window.ethereum.request({
+                method: 'eth_getBalance',
+                params: [ethereumAddress, 'latest'],
+            });
+
+            const web3 = new Web3(window.ethereum);
+            const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
+            const balanceWithDecimals = parseFloat(balanceEth).toFixed(6);
+            $('#token-buy-form .user-from-bal').text(balanceWithDecimals);
+            $('#token-sell-form .user-to-bal').text(balanceWithDecimals);
+        } else {
+            console.log("MetaMask not detected");
+        }
+    }
+    async function run() {
+        await waitForUserWallet();
+        await getBalanceETH();
+        let erc20TokenABI = abiHelper.getERC20TokenABI();
+        let xbotTokenABI = abiHelper.getXbotTokenABI();
+        let _contractsObj = configHelper.getContracts(chainId);
+        let xbotDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'xbot');
+        let xbotPrice = configHelper.getPriceByTokenName(chainId , 'xbot');
+        let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
+        let xbotAdd = configHelper.getTokenByTokenName(chainId, 'xbot').toLowerCase();
+        let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
+        let nullAdd = '0x0000000000000000000000000000000000000000';
+        xbotContract.methods.balanceOf(userWallet).call().then(result => {
+            let userXbotBalance = result / (10 ** xbotDecimal);
+            $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
+            $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
+            $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
+            $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
+        });
+        xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
+            let savingETHBalance = result;
+            $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
+            $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
+            xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
+                let tokenOutput = result / (10 ** xbotDecimal);
+                $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
+            });
+        });
+        setInterval(function() {
+            xbotContract.methods.balanceOf(userWallet).call().then(result => {
+                let userXbotBalance = result / (10 ** xbotDecimal);
+                $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
+                $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
+                $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
+                $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
+            });
+            xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
+                let savingETHBalance = result;
+                $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
+                $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
+                xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
+                    let tokenOutput = result / (10 ** xbotDecimal);             
+                    $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
+                });
+            });
+        }, 5000);
+        setInterval(function() {
+            let amountBuyIn = $('#token-buy-form input[name=amountPay]').val();
+            let amountSellIn = $('#token-sell-form input[name=amountPay]').val();
+            let amountETHSaving = $('#saving-block .amount-eth').text();
+            let balanceETH = $('#token-buy-form .user-from-bal').text();
+            let balanceXbot = $('#token-sell-form .user-from-bal').text();
+            if (amountBuyIn < 0 || amountBuyIn > balanceETH || amountBuyIn == "") {
+                $('.btn-buy').addClass("disable");
+            }
+            else {
+                $('.btn-buy').removeClass("disable");
+            }
+            if (amountSellIn < 0 || amountSellIn > balanceXbot || amountSellIn == "") {
+                $('.btn-sell').addClass("disable");
+            }
+            else {
+                $('.btn-sell').removeClass("disable");
+            }
+            if (amountETHSaving > 0) {
+                $('.button-reinvest').removeClass("disable");
+                $('.button-withdraw').removeClass("disable");
+            }
+            else {
+                $('.button-reinvest').addClass("disable");
+                $('.button-withdraw').addClass("disable");
+            }
+        }, 1000);
+        $('#token-buy-form .user-from-bal').click(function() {
+            let userBalance = parseFloat($(this).text());
+            $('#token-buy-form input[name=amountPay]').val(userBalance);
+            doneTypingAmountBuy();
+        });
+
+        $('#token-sell-form .user-from-bal').click(function() {
+            let userBalance = parseFloat($(this).text());
+            $('#token-sell-form input[name=amountPay]').val(userBalance);
+            doneTypingAmountSell();
+        });
+
+        var typingTimerAmountBuy;
+        var typingTimerAmountSell;
+        var doneTypingInterval = 1000;
+        //on keyup, start the countdown
+        $('#token-buy-form input[name=amountPay]').on('keyup', function() {
+            clearTimeout(typingTimerAmountBuy);
+            typingTimerAmountBuy = setTimeout(doneTypingAmountBuy, doneTypingInterval);
+        });
+
+        $('#token-sell-form input[name=amountPay]').on('keyup', function() {
+            clearTimeout(typingTimerAmountSell);
+            typingTimerAmountSell = setTimeout(doneTypingAmountSell, doneTypingInterval);
+        });
+
+        //on keydown, clear the countdown 
+        $('#token-buy-form input[name=amountPay]').on('keydown', function() {
+            clearTimeout(typingTimerAmountBuy);
+        });
+
+        $('#token-buy-form input[name=amountPay]').on('keydown', function() {
+            clearTimeout(typingTimerAmountSell);
+        });
+
+        function doneTypingAmountBuy() {
+            let amountIn = $('#token-buy-form input[name=amountPay]').val();
+            let amountInConvert = (amountIn * 10 ** 18);
+            if (amountIn > 0) {
+                let nullAdd = '0x0000000000000000000000000000000000000000';
+                $('#token-buy-form .from-volume').text((amountIn * ethPrice).toFixed(6));
+                xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
+                    let tokenOutput = result / (10 ** xbotDecimal);
+                    $('#token-buy-form input[name=amountXbotOut]').val(tokenOutput.toFixed(6));
+                    $('#token-buy-form .to-volume').text((tokenOutput * xbotPrice).toFixed(6));
+                });
+                setTimeout(doneTypingAmountBuy, 10000);
+            }
+            if (amountIn == "") {
+                $('#token-buy-form .from-volume').text("0.0");
+                $('#token-buy-form input[name=amountXbotOut]').val("");
+                $('#token-buy-form .to-volume').text("0.0");
+                setTimeout(doneTypingAmountBuy, 10000);
+            }
+        }
+        function doneTypingAmountSell() {
+            let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            let amountInConvert = (amountIn * 10 ** xbotDecimal);
+            if (amountIn > 0) {  
+                $('#token-sell-form .from-volume').text((amountIn * xbotPrice).toFixed(6));
+                xbotContract.methods.getAmountIn(BigInt(amountInConvert) , xbotAdd).call().then(result => {
+                    let ethOutput = result / (10 ** 18);
+                    $('#token-sell-form input[name=amountEthOut]').val(ethOutput.toFixed(6));
+                    $('#token-sell-form .to-volume').text((ethOutput * ethPrice).toFixed(6));
+                });
+                setTimeout(doneTypingAmountSell, 10000);
+            }
+            if (amountIn == "") {
+                $('#token-sell-form .from-volume').text("0.0");
+                $('#token-sell-form input[name=amountEthOut]').val("");
+                $('#token-sell-form .to-volume').text("0.0");
+                setTimeout(doneTypingAmountSell, 10000);
+            }
+        }
+
+        $('.button-reinvest').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
+            let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
+            xbotContractWrite.methods
+            .reinvest()
+            .send({
+                from: userWallet
+            })
+            .on('transactionHash', (hash) => {
+                coreHelper.showPopup('confirm-popup');
+                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+                                
+            })
+            .on('receipt', (receipt) => {
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+            })
+            .on('error', (err, receipt) => {
+                console.log(err);
+            });
+        });
+        $('.button-withdraw').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
+            let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
+            xbotContractWrite.methods
+            .withdraw()
+            .send({
+                from: userWallet
+            })
+            .on('transactionHash', (hash) => {
+                coreHelper.showPopup('confirm-popup');
+                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+                                
+            })
+            .on('receipt', (receipt) => {
+                $('#saving-block .reinvest-token').text("0");
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+            })
+            .on('error', (err, receipt) => {
+                console.log(err);
+            });
+        });
+        $('.btn-buy').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
+            let amountIn = $('#token-buy-form input[name=amountPay]').val();
+            let amountInConvert = (amountIn * 10 ** 18);
+            let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
+            xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
+                let tokenOutput = result;
+                let minTokenOut = tokenOutput - tokenOutput * 0.5 / 100;
+                xbotContractWrite.methods
+                .buy(
+                    userWallet,
+                    BigInt(minTokenOut),
+                )
+                .send({
+                    from: userWallet,
+                    value: amountInConvert,
+                })
+                .on('transactionHash', (hash) => {
+                    coreHelper.showPopup('confirm-popup');
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                    $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+                })
+                .on('confirmation', (confirmationNumber, receipt) => {
+                                    
+                })
+                .on('receipt', (receipt) => {
+                    $('#token-buy-form input[name=amountPay]').val("");
+                    $('#token-buy-form input[name=amountXbotOut]').val("");
+                    $('#token-buy-form .to-volume').text("0.0");
+                    $('#token-buy-form .from-volume').text("0.0");
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('error', (err, receipt) => {
+                    console.log(err);
+                });
+            });
+        });
+
+        $('.btn-sell').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
+            let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            let amountInConvert = (amountIn * 10 ** xbotDecimal);
+            let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
+            xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
+                let ethOutput = result;
+                let minEthOut = ethOutput - ethOutput * 0.5 / 100;
+                xbotContractWrite.methods
+                .sell(
+                    BigInt(amountInConvert),
+                    BigInt(minEthOut),
+                )
+                .send({
+                    from: userWallet,
+                })
+                .on('transactionHash', (hash) => {
+                    coreHelper.showPopup('confirm-popup');
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                    $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+                })
+                .on('confirmation', (confirmationNumber, receipt) => {
+                                    
+                })
+                .on('receipt', (receipt) => {
+                    $('#token-sell-form input[name=amountPay]').val("");
+                    $('#token-sell-form input[name=amountEthOut]').val("");
+                    $('#token-sell-form .from-volume').text("0.0");
+                    $('#token-sell-form .to-volume').text("0.0");
+                    coreHelper.hidePopup('confirm-popup', 0);
+                    coreHelper.showPopup('success-confirm-popup');
+                    coreHelper.hidePopup('success-confirm-popup', 10000);
+                })
+                .on('error', (err, receipt) => {
+                    console.log(err);
+                });
+            });
+        });
+    }
+</script>
+</html>

@@ -71,7 +71,7 @@ $.BREEZY_FARM.prototype = (function() {
                 .send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://basescan.org/tx/";
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -117,7 +117,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.deposit(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://basescan.org/tx/";
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -139,7 +139,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.harvest(user).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://basescan.org/tx/";
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -161,7 +161,7 @@ $.BREEZY_FARM.prototype = (function() {
             return await contractAction.methods.withdraw(amount).send({ from: user })
                 .on('transactionHash', (hash) => {
                     coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = "https://basescan.org/tx/";
+                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                 })
                 .on('confirmation', (confirmationNumber, receipt) => {
