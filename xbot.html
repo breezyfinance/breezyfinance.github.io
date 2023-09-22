@@ -414,10 +414,11 @@
                                                 </span> XBOT
                                             </div>
                                         </div>
-                                        <div class="col-8" style = "text-align: right;">
+                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
                                             <div class="amount">
-                                                <span class="amount-xbot">0</span>XBOT
+                                                <span class="amount-xbot">0</span>
                                             </div>
+                                            XBOT
                                             <div class="">
                                                 <span class="f-700 f-roboto f-20 xbot-volume">0.0</span>
                                                 <span class="color-2 f-roboto f-20 f-400">$</span>                                    
@@ -445,10 +446,11 @@
                                                 </span> ETH
                                             </div>
                                         </div>
-                                        <div class="col-8" style = "text-align: right;">
+                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
                                             <div class="amount">
-                                                <span class="amount-eth">0</span>ETH
-                                            </div>   
+                                                <span class="amount-eth">0</span>
+                                            </div>
+                                            ETH
                                             <div class="">
                                                 <span class="f-700 f-roboto f-20 eth-volume">0.0</span>
                                                 <span class="color-2 f-roboto f-20 f-400">$</span>                                    
@@ -466,8 +468,8 @@
                                     </div>
                                 </div>
                                 <div class="button-area">
-                                    <button type="button" class="header__btn-connect w-45 text-center button-reinvest">Reinvest</button>
-                                    <button type="button" class="header__btn-connect w-45 text-center button-withdraw">Withdraw</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
                                 </div>
                                 
                             </div>
@@ -576,7 +578,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="button-buy-gec header__btn-connect w-100 text-center btn-buy" style="">Buy XBOT</button>
+                                <button type="button" class="button-buy-gec header__btn-connect w-100 disable text-center btn-buy" style="">Buy XBOT</button>
                             </div>
                             <div id="token-sell-form" style="display: none;">
                                 <div class="swap__form">
@@ -639,7 +641,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="button-buy-gec header__btn-connect w-100 text-center btn-sell" style="">Sell XBOT</button>
+                                <button type="button" class="button-buy-gec header__btn-connect w-100 text-center disable btn-sell" style="">Sell XBOT</button>
                             </div>
                         </article>
                     </div>
@@ -843,7 +845,33 @@
                 });
             });
         }, 5000);
-
+        setInterval(function() {
+            let amountBuyIn = $('#token-buy-form input[name=amountPay]').val();
+            let amountSellIn = $('#token-sell-form input[name=amountPay]').val();
+            let amountETHSaving = $('#saving-block .amount-eth').text();
+            let balanceETH = $('#token-buy-form .user-from-bal').text();
+            let balanceXbot = $('#token-sell-form .user-from-bal').text();
+            if (amountBuyIn < 0 || amountBuyIn > balanceETH || amountBuyIn == "") {
+                $('.btn-buy').addClass("disable");
+            }
+            else {
+                $('.btn-buy').removeClass("disable");
+            }
+            if (amountSellIn < 0 || amountSellIn > balanceXbot || amountSellIn == "") {
+                $('.btn-sell').addClass("disable");
+            }
+            else {
+                $('.btn-sell').removeClass("disable");
+            }
+            if (amountETHSaving > 0) {
+                $('.button-reinvest').removeClass("disable");
+                $('.button-withdraw').removeClass("disable");
+            }
+            else {
+                $('.button-reinvest').addClass("disable");
+                $('.button-withdraw').addClass("disable");
+            }
+        }, 1000);
         $('#token-buy-form .user-from-bal').click(function() {
             let userBalance = parseFloat($(this).text());
             $('#token-buy-form input[name=amountPay]').val(userBalance);
@@ -887,9 +915,15 @@
                 $('#token-buy-form .from-volume').text((amountIn * ethPrice).toFixed(6));
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
                     let tokenOutput = result / (10 ** xbotDecimal);
-                    $('#token-buy-form input[name=amountXbotOut]').val(tokenOutput.toFixed(6))
+                    $('#token-buy-form input[name=amountXbotOut]').val(tokenOutput.toFixed(6));
                     $('#token-buy-form .to-volume').text((tokenOutput * xbotPrice).toFixed(6));
                 });
+                setTimeout(doneTypingAmountBuy, 10000);
+            }
+            if (amountIn == "") {
+                $('#token-buy-form .from-volume').text("0.0");
+                $('#token-buy-form input[name=amountXbotOut]').val("");
+                $('#token-buy-form .to-volume').text("0.0");
                 setTimeout(doneTypingAmountBuy, 10000);
             }
         }
@@ -900,9 +934,15 @@
                 $('#token-sell-form .from-volume').text((amountIn * xbotPrice).toFixed(6));
                 xbotContract.methods.getAmountIn(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                     let ethOutput = result / (10 ** 18);
-                    $('#token-sell-form input[name=amountEthOut]').val(ethOutput.toFixed(6))
+                    $('#token-sell-form input[name=amountEthOut]').val(ethOutput.toFixed(6));
                     $('#token-sell-form .to-volume').text((ethOutput * ethPrice).toFixed(6));
                 });
+                setTimeout(doneTypingAmountSell, 10000);
+            }
+            if (amountIn == "") {
+                $('#token-sell-form .from-volume').text("0.0");
+                $('#token-sell-form input[name=amountEthOut]').val("");
+                $('#token-sell-form .to-volume').text("0.0");
                 setTimeout(doneTypingAmountSell, 10000);
             }
         }
