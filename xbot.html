@@ -817,10 +817,10 @@
             $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
         });
         xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-            let savingETHBalance = result / (1e18);
-            $('#saving-block .amount-eth').text(savingETHBalance.toFixed(6));
-            $('#saving-block .eth-volume').text((savingETHBalance * ethPrice).toFixed(6));
-            xbotContract.methods.getAmountOut(BigInt(savingETHBalance * 1e18) , nullAdd).call().then(result => {
+            let savingETHBalance = result;
+            $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
+            $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
+            xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
                 let tokenOutput = result / (10 ** xbotDecimal);
                 $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
             });
@@ -834,11 +834,11 @@
                 $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
             });
             xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-                let savingXbotBalance = result / (10 ** xbotDecimal);
-                $('#saving-block .amount-eth').text(savingXbotBalance.toFixed(6));
-                $('#saving-block .eth-volume').text((savingXbotBalance * ethPrice).toFixed(6));
-                xbotContract.methods.getAmountOut(BigInt(savingETHBalance * 1e18) , nullAdd).call().then(result => {
-                    let tokenOutput = result / (10 ** xbotDecimal);
+                let savingETHBalance = result;
+                $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
+                $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
+                xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
+                    let tokenOutput = result / (10 ** xbotDecimal);             
                     $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
                 });
             });
@@ -896,12 +896,10 @@
         function doneTypingAmountSell() {
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
-            if (amountIn > 0) {
-                
+            if (amountIn > 0) {  
                 $('#token-sell-form .from-volume').text((amountIn * xbotPrice).toFixed(6));
                 xbotContract.methods.getAmountIn(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                     let ethOutput = result / (10 ** 18);
-                    console.log("🚀 ~ file: xbot.html:896 ~ xbotContract.methods.getAmountIn ~ ethOutput:", ethOutput);
                     $('#token-sell-form input[name=amountEthOut]').val(ethOutput.toFixed(6))
                     $('#token-sell-form .to-volume').text((ethOutput * ethPrice).toFixed(6));
                 });
@@ -959,6 +957,7 @@
                                 
             })
             .on('receipt', (receipt) => {
+                $('#saving-block .reinvest-token').text("0");
                 coreHelper.hidePopup('confirm-popup', 0);
                 coreHelper.showPopup('success-confirm-popup');
                 coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -997,6 +996,10 @@
                                     
                 })
                 .on('receipt', (receipt) => {
+                    $('#token-buy-form input[name=amountPay]').val("");
+                    $('#token-buy-form input[name=amountXbotOut]').val("");
+                    $('#token-buy-form .to-volume').text("0.0");
+                    $('#token-buy-form .from-volume').text("0.0");
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
@@ -1015,7 +1018,6 @@
             }
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
-            console.log("🚀 ~ file: xbot.html:1010 ~ $ ~ amountInConvert:", BigInt(amountInConvert));
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                 let ethOutput = result;
@@ -1037,6 +1039,10 @@
                                     
                 })
                 .on('receipt', (receipt) => {
+                    $('#token-sell-form input[name=amountPay]').val("");
+                    $('#token-sell-form input[name=amountEthOut]').val("");
+                    $('#token-sell-form .from-volume').text("0.0");
+                    $('#token-sell-form .to-volume').text("0.0");
                     coreHelper.hidePopup('confirm-popup', 0);
                     coreHelper.showPopup('success-confirm-popup');
                     coreHelper.hidePopup('success-confirm-popup', 10000);
