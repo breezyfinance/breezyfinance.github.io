@@ -6,14 +6,14 @@ $.BREEZY_NETWORK.prototype = (function() {
             chainName: "Sepolia",
             currencySymbol: "SepoliaETH",
             rpcList: ['https://eth-sepolia.g.alchemy.com/v2/Dy4zBBd1RgIFZIn16MxMmTn0zP-l5FjT'],
-            blockExplorerUrls: ['https://sepolia.etherscan.io/']
+            blockExplorerUrls: ['https://sepolia.etherscan.io/tx/']
         },
         Base: {
             chainId: 8453,
             chainName: "Base",
             currencySymbol: "ETH",
             rpcList: ['https://base-mainnet.g.alchemy.com/v2/RiRR61_VDAl_rWcpolrbp_MKJiq0q_6j'],
-            blockExplorerUrls: ['https://basescan.org/']
+            blockExplorerUrls: ['https://basescan.org/tx/']
         },
     };
 

@@ -460,7 +460,7 @@
                                     <div class="fees-area">
                                         <div class="">
                                             <p class="body body--link ">
-                                                <span class="" style="">Reinvest <span class="swap-fee"> ~ 0.00</span> XBOT</span>
+                                                <span class="" style="">Reinvest ~  <span class="reinvest-token">0.00</span> XBOT</span>
                                             </p>
                                         </div>
                                     </div>
@@ -485,11 +485,11 @@
                                     </span> XBOT
                                 </div>
                                 <div class="status-info">
-                                    <p>Price<span class="price">$0.957154</span></p>
-                                    <p>Wallet<span class="user-wallet"><span class="user-token-balance">0.000000 BRE</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000 BRE</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>APR<span class="apr">20.5%</span></p>
-                                    <p>Total Supply<span class="total-supply">3050.654255 BRE</span></p>
+                                    <p>Price<span class="price">0</span></p>
+                                    <p>Wallet<span class="user-wallet"><span class="user-token-balance">0</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>APR<span class="apr">0</span></p>
+                                    <p>Total Supply<span class="total-supply">0</span></p>
                                 </div>
                             </div>
                         </article>
@@ -817,9 +817,13 @@
             $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
         });
         xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-            let savingXbotBalance = result / (10 ** xbotDecimal);
-            $('#saving-block .amount-eth').text(savingXbotBalance.toFixed(6));
-            $('#saving-block .eth-volume').text((savingXbotBalance * ethPrice).toFixed(6));
+            let savingETHBalance = result / (1e18);
+            $('#saving-block .amount-eth').text(savingETHBalance.toFixed(6));
+            $('#saving-block .eth-volume').text((savingETHBalance * ethPrice).toFixed(6));
+            xbotContract.methods.getAmountOut(BigInt(savingETHBalance * 1e18) , nullAdd).call().then(result => {
+                let tokenOutput = result / (10 ** xbotDecimal);
+                $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
+            });
         });
         setInterval(function() {
             xbotContract.methods.balanceOf(userWallet).call().then(result => {
@@ -833,6 +837,10 @@
                 let savingXbotBalance = result / (10 ** xbotDecimal);
                 $('#saving-block .amount-eth').text(savingXbotBalance.toFixed(6));
                 $('#saving-block .eth-volume').text((savingXbotBalance * ethPrice).toFixed(6));
+                xbotContract.methods.getAmountOut(BigInt(savingETHBalance * 1e18) , nullAdd).call().then(result => {
+                    let tokenOutput = result / (10 ** xbotDecimal);
+                    $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
+                });
             });
         }, 5000);
 
