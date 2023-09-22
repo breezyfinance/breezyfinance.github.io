@@ -1009,10 +1009,9 @@
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
             console.log("🚀 ~ file: xbot.html:1010 ~ $ ~ amountInConvert:", BigInt(amountInConvert));
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
-            xbotContract.methods.getAmountIn(BigInt(amountInConvert) , xbotAdd).call().then(result => {
+            xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                 let ethOutput = result;
                 let minEthOut = ethOutput - ethOutput * 0.5 / 100;
-                console.log("🚀 ~ file: xbot.html:1015 ~ xbotContract.methods.getAmountIn ~ minEthOut:",minEthOut/1e18);
                 xbotContractWrite.methods
                 .sell(
                     BigInt(amountInConvert),
