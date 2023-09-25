@@ -225,7 +225,7 @@ $.CONFIG.prototype = (function() {
             'weth': '0x8114b91c6Ae47d1679b7A32CaeCA473cbab9C14A',
             'cbeth': '0x3563fA251beEa49f96bD1FCD9eF2CBbE9FA88343',
             'dai': '0xE4DcDbff9f336bF236Dfa3506165f7C946522668',
-            'xbot': '0xf822758ab15278661EF66F8F461bE67f100C34c6',
+            'xbot': '0xC0df18dd7aa0326511285722d51137911dbbceDa',
         },
         8453: {//Base network
             'usdbc': '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA',
