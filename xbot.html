@@ -876,7 +876,6 @@
 
             if (amountSellIn < 0 || BigInt(amountSellIn * 10 ** xbotDecimal) > BigInt(balanceXbot * 10 ** xbotDecimal) || amountSellIn == "") {
                 $('.btn-sell').addClass("disable");
-                console.log("123");
             }
             else {
                 $('.btn-sell').removeClass("disable");
