@@ -26,7 +26,6 @@
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
     <script src="./js/contract/basenetwork/network.js"></script>
-    <script src="./js/contract/basenetwork/bignumber.js"></script>
 
 
 
@@ -868,18 +867,21 @@
             let amountETHSaving = $('#saving-block .amount-eth').text();
             let balanceETH = $('#token-buy-form .user-from-bal').text();
             let balanceXbot = $('#token-sell-form .user-from-bal').text();
-            if (amountBuyIn < 0 || amountBuyIn > balanceETH || amountBuyIn == "") {
+            if (amountBuyIn < 0 || BigInt(amountBuyIn * 1e18) > BigInt(balanceETH * 1e18) || amountBuyIn == "") {
                 $('.btn-buy').addClass("disable");
             }
             else {
                 $('.btn-buy').removeClass("disable");
             }
-            if (amountSellIn < 0 || amountSellIn > balanceXbot || amountSellIn == "") {
+
+            if (amountSellIn < 0 || BigInt(amountSellIn * 10 ** xbotDecimal) > BigInt(balanceXbot * 10 ** xbotDecimal) || amountSellIn == "") {
                 $('.btn-sell').addClass("disable");
+                console.log("123");
             }
             else {
                 $('.btn-sell').removeClass("disable");
             }
+
             if (amountETHSaving > 0) {
                 $('.button-reinvest').removeClass("disable");
                 $('.button-withdraw').removeClass("disable");
@@ -967,9 +969,16 @@
 
         function doneTypingAmountSell() {
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            let balanceXbot = $('#token-sell-form .user-from-bal').text();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
             if (amountIn > 0) {  
                 $('#token-sell-form .from-volume').text(`$${(amountIn * xbotPrice).toFixed(6)}`);
+                if (amountIn > balanceXbot ) {
+                    $('.btn-sell').addClass("disable");
+                }
+                else {
+                    $('.btn-sell').removeClass("disable");
+                }
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                     let ethOutput = result;
                     let minEthOut = ethOutput - ethOutput * 0.5 / 100;
@@ -977,6 +986,9 @@
                     $('#token-sell-form .to-volume').text(`$${((minEthOut / 1e18) * ethPrice).toFixed(6)}`);
                 });
                 setTimeout(doneTypingAmountSell, 10000);
+            }
+            else {
+                $('.btn-sell').addClass("disable");
             }
         }
 
