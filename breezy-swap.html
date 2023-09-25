@@ -707,7 +707,7 @@
                                 })
                                 .on('transactionHash', (hash) => {
                                     coreHelper.showPopup('confirm-popup');
-                                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
+                                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
                                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                                 })
                                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -738,7 +738,7 @@
                                 })
                                 .on('transactionHash', (hash) => {
                                     coreHelper.showPopup('confirm-popup');
-                                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
+                                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
                                     $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                                 })
                                 .on('confirmation', (confirmationNumber, receipt) => {
@@ -815,7 +815,7 @@
                             })
                             .on('transactionHash', (hash) => {
                                 coreHelper.showPopup('confirm-popup');
-                                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
+                                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
                                 $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                             })
                             .on('confirmation', (confirmationNumber, receipt) => {
@@ -860,7 +860,7 @@
                     })
                     .on('transactionHash', (hash) => {
                         coreHelper.showPopup('confirm-popup');
-                        let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
+                        let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
                         $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                     })
                     .on('confirmation', (confirmationNumber, receipt) => {
@@ -889,7 +889,7 @@
                     })
                     .on('transactionHash', (hash) => {
                         coreHelper.showPopup('confirm-popup');
-                        let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(setting.chainId);
+                        let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
                         $('.transaction-hash').attr("href", blockExplorerUrl + hash);
                     })
                     .on('confirmation', (confirmationNumber, receipt) => {

@@ -26,7 +26,6 @@
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
     <script src="./js/contract/basenetwork/network.js"></script>
-    <script src="./js/contract/basenetwork/bignumber.js"></script>
 
 
 
@@ -419,9 +418,9 @@
                                                 <span class="amount-xbot">0</span>
                                             </div>
                                             XBOT
-                                            <div class="">
+                                            <div class="" style="display: flex;justify-content: end;">
+                                                <span class="color-2 f-roboto f-20 f-400">$</span>
                                                 <span class="f-700 f-roboto f-20 xbot-volume">0.0</span>
-                                                <span class="color-2 f-roboto f-20 f-400">$</span>                                    
                                             </div>
                                         </div>
                                     </div>
@@ -451,9 +450,9 @@
                                                 <span class="amount-eth">0</span>
                                             </div>
                                             ETH
-                                            <div class="">
-                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>
-                                                <span class="color-2 f-roboto f-20 f-400">$</span>                                    
+                                            <div class="" style="display: flex;justify-content: end;">
+                                                <span class="color-2 f-roboto f-20 f-400">$</span>
+                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -502,7 +501,7 @@
                                 <div class="f-700">Referrals activity</div>
                             </div>
                             <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
-                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 BRE to active your masternode.</p>
+                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
                     </div>
                     <div class="col-lg-12 col-sm-12">
@@ -523,7 +522,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                    <span class="color-2 f-roboto f-14 f-400">Pay: </span>
                                                     <span class="f-700 f-roboto f-14 from-volume">0.0</span>
                                                 </div>
                                                 <input class="swap__form-input" name="amountPay" placeholder="0.0" value="" />
@@ -548,10 +547,10 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                    <span class="color-2 f-roboto f-14 f-400">Receive: </span>
                                                     <span class="f-700 f-roboto f-14 to-volume">0.0</span>
                                                 </div>
-                                                <input class="swap__form-input" style="pointer-events: none;" name="amountXbotOut" placeholder="0.0" value="" />
+                                                <input class="swap__form-input" style="" name="amountXbotOut" placeholder="0.0" value="" />
                                             </div>
                                             <div class="col-6" style=" text-align: right;position: relative;">
                                                 <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
@@ -586,7 +585,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <span class="color-2 f-roboto f-14 f-400">Pay: $</span>
+                                                    <span class="color-2 f-roboto f-14 f-400">Pay: </span>
                                                     <span class="f-700 f-roboto f-14 from-volume">0.0</span>
                                                 </div>
                                                 <input class="swap__form-input" name="amountPay" placeholder="0.0" value="" />
@@ -609,7 +608,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="text-end">
-                                                    <span class="color-2 f-roboto f-14 f-400">Receive: $</span>
+                                                    <span class="color-2 f-roboto f-14 f-400">Receive: </span>
                                                     <span class="f-700 f-roboto f-14 to-volume">0.0</span>
                                                 </div>
                                                 <input class="swap__form-input" style="pointer-events: none;" name="amountEthOut" placeholder="0.0" value="" />
@@ -819,7 +818,7 @@
         let nullAdd = '0x0000000000000000000000000000000000000000';
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-        $('#token-status .price').text(`${xbotPrice.toFixed(6)}$`);
+        $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
@@ -842,7 +841,7 @@
             getBalanceETH();
             let xbotPriceETH = await xbotContract.methods.buyPrice().call();
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-            $('#token-status .price').text(`${xbotPrice.toFixed(6)}$`);
+            $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
             let totalSupply = await xbotContract.methods.totalSupply().call();
             $('#token-status .total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)}XBOT`);
             xbotContract.methods.balanceOf(userWallet).call().then(result => {
@@ -868,18 +867,21 @@
             let amountETHSaving = $('#saving-block .amount-eth').text();
             let balanceETH = $('#token-buy-form .user-from-bal').text();
             let balanceXbot = $('#token-sell-form .user-from-bal').text();
-            if (amountBuyIn < 0 || amountBuyIn > balanceETH || amountBuyIn == "") {
+            if (amountBuyIn < 0 || BigInt(amountBuyIn * 1e18) > BigInt(balanceETH * 1e18) || amountBuyIn == "") {
                 $('.btn-buy').addClass("disable");
             }
             else {
                 $('.btn-buy').removeClass("disable");
             }
-            if (amountSellIn < 0 || amountSellIn > balanceXbot || amountSellIn == "") {
+
+            if (amountSellIn < 0 || BigInt(amountSellIn * 10 ** xbotDecimal) > BigInt(balanceXbot * 10 ** xbotDecimal) || amountSellIn == "") {
                 $('.btn-sell').addClass("disable");
+                console.log("123");
             }
             else {
                 $('.btn-sell').removeClass("disable");
             }
+
             if (amountETHSaving > 0) {
                 $('.button-reinvest').removeClass("disable");
                 $('.button-withdraw').removeClass("disable");
@@ -901,13 +903,19 @@
             doneTypingAmountSell();
         });
 
-        var typingTimerAmountBuy;
+        var typingTimerAmountBuyWithETH;
+        var typingTimerAmountBuyWithToken;
         var typingTimerAmountSell;
         var doneTypingInterval = 1000;
         //on keyup, start the countdown
         $('#token-buy-form input[name=amountPay]').on('keyup', function() {
-            clearTimeout(typingTimerAmountBuy);
-            typingTimerAmountBuy = setTimeout(doneTypingAmountBuy, doneTypingInterval);
+            clearTimeout(typingTimerAmountBuyWithETH);
+            typingTimerAmountBuyWithETH = setTimeout(doneTypingAmountBuyWithETH, doneTypingInterval);
+        });
+
+        $('#token-buy-form input[name=amountXbotOut]').on('keyup', function() {
+            clearTimeout(typingTimerAmountBuyWithToken);
+            typingTimerAmountBuyWithToken = setTimeout(doneTypingAmountBuyWithToken, doneTypingInterval);
         });
 
         $('#token-sell-form input[name=amountPay]').on('keyup', function() {
@@ -917,50 +925,70 @@
 
         //on keydown, clear the countdown 
         $('#token-buy-form input[name=amountPay]').on('keydown', function() {
-            clearTimeout(typingTimerAmountBuy);
+            clearTimeout(typingTimerAmountBuyWithETH);
+        });
+
+        $('#token-buy-form input[name=amountXbotOut]').on('keydown', function() {
+            clearTimeout(typingTimerAmountBuyWithToken);
         });
 
         $('#token-buy-form input[name=amountPay]').on('keydown', function() {
             clearTimeout(typingTimerAmountSell);
         });
 
-        function doneTypingAmountBuy() {
+        function doneTypingAmountBuyWithETH() {
             let amountIn = $('#token-buy-form input[name=amountPay]').val();
             let amountInConvert = (amountIn * 10 ** 18);
             if (amountIn > 0) {
                 let nullAdd = '0x0000000000000000000000000000000000000000';
-                $('#token-buy-form .from-volume').text((amountIn * ethPrice).toFixed(6));
+                $('#token-buy-form .from-volume').text(`$${(amountIn * ethPrice).toFixed(6)}`);
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
-                    let tokenOutput = result / (10 ** xbotDecimal);
-                    $('#token-buy-form input[name=amountXbotOut]').val(tokenOutput.toFixed(6));
-                    $('#token-buy-form .to-volume').text((tokenOutput * xbotPrice).toFixed(6));
+                    let tokenOutput = result;
+                    let minTokenOut = tokenOutput - tokenOutput * 0.5 / 100;
+                    $('#token-buy-form input[name=amountXbotOut]').val((minTokenOut / 10 ** xbotDecimal).toFixed(6));
+                    $('#token-buy-form .to-volume').text(`$${((minTokenOut / 10 ** xbotDecimal) * xbotPrice).toFixed(6)}`);
                 });
-                setTimeout(doneTypingAmountBuy, 10000);
-            }
-            if (amountIn == "") {
-                $('#token-buy-form .from-volume').text("0.0");
-                $('#token-buy-form input[name=amountXbotOut]').val("");
-                $('#token-buy-form .to-volume').text("0.0");
-                setTimeout(doneTypingAmountBuy, 10000);
+                setTimeout(doneTypingAmountBuyWithETH, 10000);
             }
         }
+
+        function doneTypingAmountBuyWithToken() {
+            let amountInToken = $('#token-buy-form input[name=amountXbotOut]').val();
+            let amountTokenOutConvert = amountInToken * 10 ** xbotDecimal;
+            if (amountInToken > 0) {
+                $('#token-buy-form .to-volume').text(`$${(amountInToken * xbotPrice).toFixed(6)}`);
+                xbotContract.methods.getAmountIn(BigInt(amountTokenOutConvert) , xbotAdd).call().then(result => {
+                    let ethOutput = result;
+                    $('#token-buy-form input[name=amountPay]').val((ethOutput / 1e18).toFixed(6));
+                    $('#token-buy-form .from-volume').text(`$${((ethOutput / 1e18) * ethPrice).toFixed(6)}`);
+                });
+                setTimeout(doneTypingAmountBuyWithToken, 10000);
+            }
+        }
+
+
         function doneTypingAmountSell() {
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            let balanceXbot = $('#token-sell-form .user-from-bal').text();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
             if (amountIn > 0) {  
-                $('#token-sell-form .from-volume').text((amountIn * xbotPrice).toFixed(6));
-                xbotContract.methods.getAmountIn(BigInt(amountInConvert) , xbotAdd).call().then(result => {
-                    let ethOutput = result / (10 ** 18);
-                    $('#token-sell-form input[name=amountEthOut]').val(ethOutput.toFixed(6));
-                    $('#token-sell-form .to-volume').text((ethOutput * ethPrice).toFixed(6));
+                $('#token-sell-form .from-volume').text(`$${(amountIn * xbotPrice).toFixed(6)}`);
+                if (amountIn > balanceXbot ) {
+                    $('.btn-sell').addClass("disable");
+                }
+                else {
+                    $('.btn-sell').removeClass("disable");
+                }
+                xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
+                    let ethOutput = result;
+                    let minEthOut = ethOutput - ethOutput * 0.5 / 100;
+                    $('#token-sell-form input[name=amountEthOut]').val((minEthOut / 1e18).toFixed(6));
+                    $('#token-sell-form .to-volume').text(`$${((minEthOut / 1e18) * ethPrice).toFixed(6)}`);
                 });
                 setTimeout(doneTypingAmountSell, 10000);
             }
-            if (amountIn == "") {
-                $('#token-sell-form .from-volume').text("0.0");
-                $('#token-sell-form input[name=amountEthOut]').val("");
-                $('#token-sell-form .to-volume').text("0.0");
-                setTimeout(doneTypingAmountSell, 10000);
+            else {
+                $('.btn-sell').addClass("disable");
             }
         }
 
@@ -1023,6 +1051,7 @@
                 console.log(err);
             });
         });
+
         $('.btn-buy').click(async function() {
             let curChainId = await networkHelper.GetChainIdToMain();
             if (curChainId != chainId) {
@@ -1030,41 +1059,41 @@
                 return;
             }
             let amountIn = $('#token-buy-form input[name=amountPay]').val();
-            let amountInConvert = (amountIn * 10 ** 18);
+            console.log("🚀 ~ file: xbot.html:1057 ~ $ ~ amountIn:", amountIn)
+            let amountInConvert = (amountIn * 1e18);
+            let amountTokenOut = $('#token-buy-form input[name=amountXbotOut]').val();
+            console.log("🚀 ~ file: xbot.html:1059 ~ $ ~ amountTokenOut:", amountTokenOut)
+            let amountTokenOutConvert = amountTokenOut * 10 ** xbotDecimal;
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
-            xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
-                let tokenOutput = result;
-                let minTokenOut = tokenOutput - tokenOutput * 0.5 / 100;
-                xbotContractWrite.methods
-                .buy(
-                    userWallet,
-                    BigInt(minTokenOut),
-                )
-                .send({
-                    from: userWallet,
-                    value: amountInConvert,
-                })
-                .on('transactionHash', (hash) => {
-                    coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
-                    $('.transaction-hash').attr("href", blockExplorerUrl + hash);
-                })
-                .on('confirmation', (confirmationNumber, receipt) => {
-                                    
-                })
-                .on('receipt', (receipt) => {
-                    $('#token-buy-form input[name=amountPay]').val("");
-                    $('#token-buy-form input[name=amountXbotOut]').val("");
-                    $('#token-buy-form .to-volume').text("0.0");
-                    $('#token-buy-form .from-volume').text("0.0");
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
-                })
-                .on('error', (err, receipt) => {
-                    console.log(err);
-                });
-            });
+            xbotContractWrite.methods
+            .buy(
+                userWallet,
+                BigInt(amountTokenOutConvert),
+            )
+            .send({
+                from: userWallet,
+                value: amountInConvert,
+            })
+            .on('transactionHash', (hash) => {
+                coreHelper.showPopup('confirm-popup');
+                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+                                
+            })
+            .on('receipt', (receipt) => {
+                $('#token-buy-form input[name=amountPay]').val("");
+                $('#token-buy-form input[name=amountXbotOut]').val("");
+                $('#token-buy-form .to-volume').text("0.0");
+                $('#token-buy-form .from-volume').text("0.0");
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+            })
+            .on('error', (err, receipt) => {
+                console.log(err);
+            })
         });
 
         $('.btn-sell').click(async function() {
@@ -1075,39 +1104,37 @@
             }
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
+            let amountEthOut = $('#token-sell-form input[name=amountEthOut]').val();
+            let amountEthOutConvert = amountEthOut * 1e18;
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
-            xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
-                let ethOutput = result;
-                let minEthOut = ethOutput - ethOutput * 0.5 / 100;
-                xbotContractWrite.methods
-                .sell(
-                    BigInt(amountInConvert),
-                    BigInt(minEthOut),
-                )
-                .send({
-                    from: userWallet,
-                })
-                .on('transactionHash', (hash) => {
-                    coreHelper.showPopup('confirm-popup');
-                    let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
-                    $('.transaction-hash').attr("href", blockExplorerUrl + hash);
-                })
-                .on('confirmation', (confirmationNumber, receipt) => {
-                                    
-                })
-                .on('receipt', (receipt) => {
-                    $('#token-sell-form input[name=amountPay]').val("");
-                    $('#token-sell-form input[name=amountEthOut]').val("");
-                    $('#token-sell-form .from-volume').text("0.0");
-                    $('#token-sell-form .to-volume').text("0.0");
-                    coreHelper.hidePopup('confirm-popup', 0);
-                    coreHelper.showPopup('success-confirm-popup');
-                    coreHelper.hidePopup('success-confirm-popup', 10000);
-                })
-                .on('error', (err, receipt) => {
-                    console.log(err);
-                });
-            });
+            xbotContractWrite.methods
+            .sell(
+                BigInt(amountInConvert),
+                BigInt(amountEthOutConvert),
+            )
+            .send({
+                from: userWallet,
+            })
+            .on('transactionHash', (hash) => {
+                coreHelper.showPopup('confirm-popup');
+                let blockExplorerUrl = networkHelper.GetblockExplorerUrlsNetworkId(chainId);
+                $('.transaction-hash').attr("href", blockExplorerUrl + hash);
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+                                
+            })
+            .on('receipt', (receipt) => {
+                $('#token-sell-form input[name=amountPay]').val("");
+                $('#token-sell-form input[name=amountEthOut]').val("");
+                $('#token-sell-form .from-volume').text("0.0");
+                $('#token-sell-form .to-volume').text("0.0");
+                coreHelper.hidePopup('confirm-popup', 0);
+                coreHelper.showPopup('success-confirm-popup');
+                coreHelper.hidePopup('success-confirm-popup', 10000);
+            })
+            .on('error', (err, receipt) => {
+                console.log(err);
+            })
         });
     }
 </script>
