@@ -26,6 +26,7 @@
     <script src="./js/contract/basenetwork/base.contract.js"></script>
     <script src="./js/contract/basenetwork/data.js"></script>
     <script src="./js/contract/basenetwork/network.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 
 
 
@@ -396,10 +397,30 @@
             </nav>
         </header>
         <main class="page-xbot">
-            <section class="container container-2">
+            <section class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-12">
-                        <article class="buy-sell__main garbi__box-1 p-3" id="token-balance">
+                    <div class="col-lg-7 col-sm-12">
+                        <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Token network status</div>
+                            </div>
+                            <div class="token-status">
+                                <div class="token-name">
+                                    <span>
+                                        <img src='./assets/images/xbot-token.png' />
+                                    </span> XBOT
+                                </div>
+                                <div class="status-info">
+                                    <!-- <p>Price<span class="price">0</span></p> -->
+                                    <!-- <p>Wallet<span class="user-wallet"><span class="user-token-balance">0</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
+                                    <p>APR<span class="apr">0</span></p> -->
+                                    <!-- <p>Total Supply<span class="total-supply">0</span></p> -->
+                                    <div id="chartContainer" style="height: 370px; width:100%;"></div>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- <article class="buy-sell__main garbi__box-1 p-3" id="token-balance">
                             <div class="d-flex align-items-center justify-content-between mb-14 title-block">
                                 <div class="f-700">Balance of tokens</div>
                             </div>
@@ -428,74 +449,9 @@
 
                             </div>
 
-                        </article>
+                        </article> -->
                     </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="saving-block">
-                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Savings</div>
-                            </div>
-                            <div class="swap__form pb-1 stable-swap-pay">
-                                <div class="swap__form-item">
-                                    <div class="row">
-                                        <div class="col-4" style="position: relative;">
-                                            <div class='swap__form-item-select' style="position: absolute;top:0;left:5px;">
-                                                <span>
-                                                    <img src='./assets/images/eth_logo.png' />
-                                                </span> ETH
-                                            </div>
-                                        </div>
-                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
-                                            <div class="amount">
-                                                <span class="amount-eth">0</span>
-                                            </div>
-                                            ETH
-                                            <div class="" style="display: flex;justify-content: end;">
-                                                <span class="color-2 f-roboto f-20 f-400">$</span>
-                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>                                                    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between ">
-                                    <div class="fees-area">
-                                        <div class="">
-                                            <p class="body body--link ">
-                                                <span class="" style="">Reinvest ~  <span class="reinvest-token">0.00</span> XBOT</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="button-area">
-                                    <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
-                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
-                                </div>
-                                
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-12 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
-                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Token network status</div>
-                            </div>
-                            <div class="token-status">
-                                <div class="token-name">
-                                    <span>
-                                        <img src='./assets/images/xbot-token.png' />
-                                    </span> XBOT
-                                </div>
-                                <div class="status-info">
-                                    <p>Price<span class="price">0</span></p>
-                                    <!-- <p>Wallet<span class="user-wallet"><span class="user-token-balance">0</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>APR<span class="apr">0</span></p> -->
-                                    <p>Total Supply<span class="total-supply">0</span></p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-12 col-sm-12">
+                    <div class="col-lg-5 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referrals activity</div>
@@ -503,8 +459,6 @@
                             <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
                             <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
-                    </div>
-                    <div class="col-lg-12 col-sm-12">
                         <article class="buy-sell__main garbi__box-1 p-3" id="buy-xbot-form">
                             <div class="masthead__action-buttons" style="margin-bottom:16px;">
                                 <button class="button button--large button--buy button-buy-form">
@@ -611,7 +565,7 @@
                                                     <span class="color-2 f-roboto f-14 f-400">Receive: </span>
                                                     <span class="f-700 f-roboto f-14 to-volume">0.0</span>
                                                 </div>
-                                                <input class="swap__form-input" style="pointer-events: none;" name="amountEthOut" placeholder="0.0" value="" />
+                                                <input class="swap__form-input" style="" name="amountEthOut" placeholder="0.0" value="" />
                                             </div>
                                             <div class="col-6" style=" text-align: right;position: relative;">
                                                 <div class="color-2 f-roboto f-14 f-400">Balance: <span class="user-to-bal">Loading</span></div>
@@ -641,6 +595,48 @@
                                     </div>
                                 </div>
                                 <button type="button" class="button-buy-gec header__btn-connect w-100 text-center disable btn-sell" style="">Sell XBOT</button>
+                            </div>
+                        </article>
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="saving-block">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Savings</div>
+                            </div>
+                            <div class="swap__form pb-1 stable-swap-pay">
+                                <div class="swap__form-item">
+                                    <div class="row">
+                                        <div class="col-4" style="position: relative;">
+                                            <div class='swap__form-item-select' style="position: absolute;top:0;left:5px;">
+                                                <span>
+                                                    <img src='./assets/images/eth_logo.png' />
+                                                </span> ETH
+                                            </div>
+                                        </div>
+                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
+                                            <div class="amount">
+                                                <span class="amount-eth">0</span>
+                                            </div>
+                                            ETH
+                                            <div class="" style="display: flex;justify-content: end;">
+                                                <span class="color-2 f-roboto f-20 f-400">$</span>
+                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <div class="fees-area">
+                                        <div class="">
+                                            <p class="body body--link ">
+                                                <span class="" style="">Reinvest ~  <span class="reinvest-token">0.00</span> XBOT</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="button-area">
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
+                                </div>
+                                
                             </div>
                         </article>
                     </div>
@@ -768,6 +764,46 @@
         $('#token-buy-form').show();
         $('.button-sell-form').addClass('button-disabled');
     });
+    async function chartPriceXbotToken() {
+        fetch('dataPrice.txt')
+        .then(response => response.text())
+        .then(data => {
+            const dataLines = data.trim().split('\n');
+
+            const dataPoints = dataLines.map(line => {
+            const [label, value] = line.split(',');
+            return { label: label, y: parseFloat(value) };
+            });
+
+            const chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: ""
+                },
+                axisX: {
+                    title: "",
+                    labelAngle: 0,
+                    interval: 1,
+                },
+                axisY: {
+                    title: "",
+                    suffix: "$",
+                    valueFormatString: "0.0",
+                    includeZero: false,
+                },
+                data: [{
+                    type: "line",
+                    name: "Data",
+                    dataPoints: dataPoints
+                }]
+            });
+
+            chart.render();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
     let userWallet;
     async function waitForUserWallet() {
         let userwallet = coreHelper.getUserAccount();
@@ -807,6 +843,7 @@
     async function run() {
         await waitForUserWallet();
         await getBalanceETH();
+        await chartPriceXbotToken();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let xbotTokenABI = abiHelper.getXbotTokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
@@ -818,6 +855,7 @@
         let nullAdd = '0x0000000000000000000000000000000000000000';
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+        
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
@@ -905,6 +943,7 @@
         var typingTimerAmountBuyWithETH;
         var typingTimerAmountBuyWithToken;
         var typingTimerAmountSell;
+        var typingTimerAmountSellWithETH;
         var doneTypingInterval = 1000;
         //on keyup, start the countdown
         $('#token-buy-form input[name=amountPay]').on('keyup', function() {
@@ -922,6 +961,11 @@
             typingTimerAmountSell = setTimeout(doneTypingAmountSell, doneTypingInterval);
         });
 
+        $('#token-sell-form input[name=amountEthOut]').on('keyup', function() {
+            clearTimeout(typingTimerAmountSellWithETH);
+            typingTimerAmountSellWithETH = setTimeout(doneTypingAmountSellWithETH, doneTypingInterval);
+        });
+
         //on keydown, clear the countdown 
         $('#token-buy-form input[name=amountPay]').on('keydown', function() {
             $('#token-buy-form input[name=amountXbotOut]').val("Loading");
@@ -937,14 +981,20 @@
             clearTimeout(typingTimerAmountSell);
         });
 
-        function doneTypingAmountBuyWithETH() {
+        $('#token-buy-form input[name=amountEthOut]').on('keydown', function() {
+            clearTimeout(typingTimerAmountSellWithETH);
+        });
+
+        async function doneTypingAmountBuyWithETH() {
             let amountIn = $('#token-buy-form input[name=amountPay]').val();
             let amountInConvert = (amountIn * 10 ** 18);
+            let xbotPriceETH = await xbotContract.methods.buyPrice().call();
+            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
             if (amountIn > 0) {
                 let nullAdd = '0x0000000000000000000000000000000000000000';
                 $('#token-buy-form .from-volume').text(`$${(amountIn * ethPrice).toFixed(6)}`);
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
-                    let tokenOutput = result;
+                    let tokenOutput = parseInt(result);
                     let minTokenOut = tokenOutput - tokenOutput * 0.5 / 100;
                     $('#token-buy-form input[name=amountXbotOut]').val((minTokenOut / 10 ** xbotDecimal).toFixed(6));
                     $('#token-buy-form .to-volume').text(`$${((minTokenOut / 10 ** xbotDecimal) * xbotPrice).toFixed(6)}`);
@@ -953,16 +1003,20 @@
             }
             else if (amountIn == 0 || amountIn === "") {
                 $(`#token-buy-form input[name=amountXbotOut]`).val("");
+                $('#token-buy-form .from-volume').text("0.0");
+                $('#token-buy-form .to-volume').text("0.0");
             }
         }
 
-        function doneTypingAmountBuyWithToken() {
+        async function doneTypingAmountBuyWithToken() {
             let amountInToken = $('#token-buy-form input[name=amountXbotOut]').val();
             let amountTokenOutConvert = amountInToken * 10 ** xbotDecimal;
+            let xbotPriceETH = await xbotContract.methods.buyPrice().call();
+            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
             if (amountInToken > 0) {
                 $('#token-buy-form .to-volume').text(`$${(amountInToken * xbotPrice).toFixed(6)}`);
                 xbotContract.methods.getAmountIn(BigInt(amountTokenOutConvert) , xbotAdd).call().then(result => {
-                    let ethOutput = result;
+                    let ethOutput = parseInt(result);
                     $('#token-buy-form input[name=amountPay]').val((ethOutput / 1e18).toFixed(6));
                     $('#token-buy-form .from-volume').text(`$${((ethOutput / 1e18) * ethPrice).toFixed(6)}`);
                 });
@@ -970,26 +1024,54 @@
             }
             else if (amountInToken == 0 || amountInToken === "") {
                 $(`#token-buy-form input[name=amountPay]`).val("");
+                $('#token-buy-form .from-volume').text("0.0");
+                $('#token-buy-form .to-volume').text("0.0");
             }
         }
 
 
-        function doneTypingAmountSell() {
+        async function doneTypingAmountSell() {
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
             let balanceXbot = $('#token-sell-form .user-from-bal').text();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
+            let xbotPriceETH = await xbotContract.methods.sellPrice().call();
+            let xbotPriceSell = xbotPriceETH * ethPrice / 1e18;
             if (amountIn > 0) {  
-                $('#token-sell-form .from-volume').text(`$${(amountIn * xbotPrice).toFixed(6)}`);
+                $('#token-sell-form .from-volume').text(`$${(amountIn * xbotPriceSell).toFixed(6)}`);
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
-                    let ethOutput = result;
+                    let ethOutput = parseInt(result);
                     let minEthOut = ethOutput - ethOutput * 0.5 / 100;
                     $('#token-sell-form input[name=amountEthOut]').val((minEthOut / 1e18).toFixed(6));
                     $('#token-sell-form .to-volume').text(`$${((minEthOut / 1e18) * ethPrice).toFixed(6)}`);
                 });
-                setTimeout(doneTypingAmountSell, 10000);
+                setTimeout(doneTypingAmountSell, 1000);
             }
             else if (amountIn == 0 || amountIn === "") {
                 $(`#token-sell-form input[name=amountEthOut]`).val("");
+                $('#token-sell-form .from-volume').text("0.0");
+                $('#token-sell-form .to-volume').text("0.0");
+            }
+        }
+        async function doneTypingAmountSellWithETH() {
+            let amountIn = $('#token-sell-form input[name=amountEthOut]').val();
+            let balanceXbot = $('#token-sell-form .user-from-bal').text();
+            let amountInConvert = (amountIn * 1e18);
+            let xbotPriceETH = await xbotContract.methods.sellPrice().call();
+            let xbotPriceSell = xbotPriceETH * ethPrice / 1e18;
+            if (amountIn > 0) {  
+                $('#token-sell-form .to-volume').text(`$${(amountIn * ethPrice).toFixed(6)}`);
+                xbotContract.methods.getAmountIn(BigInt(amountInConvert) , nullAdd).call().then(result => {
+                    let tokenOutput = parseInt(result);
+                    let minTokenOut = tokenOutput + tokenOutput * 0.5 / 100;
+                    $('#token-sell-form input[name=amountPay]').val((minTokenOut / 10 ** xbotDecimal).toFixed(6));
+                    $('#token-sell-form .from-volume').text(`$${((minTokenOut / 10 ** xbotDecimal) * xbotPriceSell).toFixed(6)}`);
+                });
+                setTimeout(doneTypingAmountSellWithETH, 1000);
+            }
+            else if (amountIn == 0 || amountIn === "") {
+                $(`#token-sell-form input[name=amountPay]`).val("");
+                $('#token-sell-form .from-volume').text("0.0");
+                $('#token-sell-form .to-volume').text("0.0");
             }
         }
 
