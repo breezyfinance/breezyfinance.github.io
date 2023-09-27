@@ -406,7 +406,7 @@
                                     <span class="icon-token">
                                         <img src='./assets/images/xbot-token.png' />XBOT
                                     </span> 
-                                    <span class="price-status"><span class="price"></span><span class="upDownStatus"></span></span>
+                                    <span class="price-status"><span class="price">Loading</span><span class="upDownStatus"></span></span>
                                 </div>
                                 <div class="status-info">
                                     <div id="chartContainer" style="height: 370px; width:100%;"></div>
@@ -749,7 +749,7 @@
             let pricelastDay = dataPoints[dataPoints.length - 1].y;
 
             let upDownStatus = (1 - pricelastDay/price1stDay) * -1;
-            console.log("🚀 ~ file: xbot.html:752 ~ chartPriceXbotToken ~ upDownStatus:", upDownStatus.toFixed(2))
+
             if (upDownStatus >= 0) {
                 $('.upDownStatus').addClass("priceUp");
                 $('.upDownStatus').text(` +${(upDownStatus * 100).toFixed(2)}%`)
@@ -770,8 +770,8 @@
                 },
                 axisY: {
                     title: "",
-                    suffix: "$",
-                    valueFormatString: "0.0",
+                    suffix: "",
+                    valueFormatString: "$0.0",
                     includeZero: false,
                 },
                 data: [{
@@ -824,9 +824,7 @@
             console.log("MetaMask not detected");
         }
     }
-    async function run() {
-        await waitForUserWallet();
-        await getBalanceETH();
+    async function run() {     
         await chartPriceXbotToken();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let xbotTokenABI = abiHelper.getXbotTokenABI();
@@ -842,6 +840,7 @@
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
+        await waitForUserWallet(); 
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
             $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
@@ -924,7 +923,7 @@
             $('#token-sell-form input[name=amountPay]').val(userBalance);
             doneTypingAmountSell();
         });
-
+        await getBalanceETH();
         var typingTimerAmountBuyWithETH;
         var typingTimerAmountBuyWithToken;
         var typingTimerAmountSell;
