@@ -2102,14 +2102,11 @@ button--circle, .button--circle i {
     float: left;
 }
 .page-xbot #saving-block .swap__form-item .amount {
-    width: 90%;
+    width: 87%;
 }
 .page-xbot .swap__form-item .amount span {
     font-size: 30px;
     color: #0C3FFF;
-}
-#saving-block {
-
 }
 #saving-block .button-area {
     display: flex;
@@ -2133,12 +2130,30 @@ button--circle, .button--circle i {
 }
 .page-xbot .token-status .token-name {
     padding: 16px;
-    background: #D1DBFF;
     border-radius: 16px;
     font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.page-xbot .token-status .token-name .icon-token {
+    display: flex;
+    align-items: center;
+}
+.page-xbot .token-status .token-name .icon-token img {
+    margin-right: 10px;
 }
 .page-xbot .token-status .status-info {
     padding: 24px 16px;
+}
+.page-xbot .token-status .upDownStatus {
+    font-size: 16px;
+}
+.priceUp {
+    color: #0DC308;
+}
+.priceDown {
+    color: red;
 }
 .token-status .status-info p {
     margin-bottom: 8px;

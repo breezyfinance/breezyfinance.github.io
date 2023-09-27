@@ -401,55 +401,26 @@
                 <div class="row">
                     <div class="col-lg-7 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
-                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Token network status</div>
-                            </div>
                             <div class="token-status">
                                 <div class="token-name">
-                                    <span>
-                                        <img src='./assets/images/xbot-token.png' />
-                                    </span> XBOT
+                                    <span class="icon-token">
+                                        <img src='./assets/images/xbot-token.png' />XBOT
+                                    </span> 
+                                    <span class="price-status"><span class="price"></span><span class="upDownStatus"></span></span>
                                 </div>
                                 <div class="status-info">
-                                    <!-- <p>Price<span class="price">0</span></p> -->
-                                    <!-- <p>Wallet<span class="user-wallet"><span class="user-token-balance">0</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>Staked<span class="user-stake"><span class="value-stake">0.0000</span>(<span class="convers-to-usd">$0.00</span>)</span></p>
-                                    <p>APR<span class="apr">0</span></p> -->
-                                    <!-- <p>Total Supply<span class="total-supply">0</span></p> -->
                                     <div id="chartContainer" style="height: 370px; width:100%;"></div>
                                 </div>
                             </div>
                         </article>
-                        <!-- <article class="buy-sell__main garbi__box-1 p-3" id="token-balance">
-                            <div class="d-flex align-items-center justify-content-between mb-14 title-block">
-                                <div class="f-700">Balance of tokens</div>
+                        <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
+                            <div class="d-flex align-items-center justify-content-between mb-14">
+                                <div class="f-700" style="font-size: 24px;">What is XBOT?</div>
                             </div>
-                            <div class="swap__form">
-                                <div class="swap__form-item">
-                                    <div class="row">
-                                        <div class="col-4" style="position: relative;">
-                                            <div class='swap__form-item-select' style="position: absolute;top:0;left:5px;">
-                                                <span>
-                                                    <img src='./assets/images/xbot-token.png' />
-                                                </span> XBOT
-                                            </div>
-                                        </div>
-                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
-                                            <div class="amount">
-                                                <span class="amount-xbot">0</span>
-                                            </div>
-                                            XBOT
-                                            <div class="" style="display: flex;justify-content: end;">
-                                                <span class="color-2 f-roboto f-20 f-400">$</span>
-                                                <span class="f-700 f-roboto f-20 xbot-volume">0.0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </article> -->
+                            <p>Interdum nunc volutpat a tellus felis at arcu ac. Nulla risus amet parturient enim. Lorem dictumst vitae in quis sed. Vitae commodo arcu vulputate malesuada quam viverra. Vivamus tortor sit dignissim sed dis eros dui. Elementum sit massa massa turpis. Tempus quis laoreet neque lectus tincidunt proin tortor venenatis in. Donec at donec felis amet porta facilisi arcu. Facilisis non congue eget diam ut.
+                                Risus neque eget feugiat varius lacus nisi facilisi. In hac malesuada quis tincidunt quisque. Eget ultricies in urna augue sit non blandit. Commodo quam est risus massa. Eget in pharetra pulvinar vitae proin. Viverra fames sit imperdiet scelerisque mauris quis eget netus. Diam amet urna maecenas montes. Ut condimentum non ultrices habitant hendrerit. Pharetra laoreet ipsum tristique convallis sed adipiscing quis facilisis. Interdum rhoncus placerat eget scelerisque. Lectus orci morbi lorem a diam a nunc convallis duis. Ultrices quis etiam lacus ultrices.
+                                Malesuada tincidunt sed donec sed cras adipiscing purus feugiat. Vulputate aliquam malesuada arcu viverra eros dictum fringilla. In lectus aliquet sit aliquet a. Quis iaculis tristique in ultrices iaculis viverra ultricies. Massa odio viverra nisl arcu est at aenean.</p>
+                        </article>
                     </div>
                     <div class="col-lg-5 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
@@ -526,7 +497,7 @@
                                         </div>
                                         <div class="position-card__row__balance">
                                             <p class="body body--link ">
-                                                <span class="" style="">0%</span>
+                                                <span class="" style="">10%</span>
                                             </p>
                                         </div>
                                     </div>
@@ -589,7 +560,7 @@
                                         </div>
                                         <div class="position-card__row__balance">
                                             <p class="body body--link ">
-                                                <span class="" style="">0%</span>
+                                                <span class="" style="">4%</span>
                                             </p>
                                         </div>
                                     </div>
@@ -774,6 +745,19 @@
             const [label, value] = line.split(',');
             return { label: label, y: parseFloat(value) };
             });
+            let price1stDay = dataPoints[0].y;
+            let pricelastDay = dataPoints[dataPoints.length - 1].y;
+
+            let upDownStatus = (1 - pricelastDay/price1stDay) * -1;
+            console.log("🚀 ~ file: xbot.html:752 ~ chartPriceXbotToken ~ upDownStatus:", upDownStatus.toFixed(2))
+            if (upDownStatus >= 0) {
+                $('.upDownStatus').addClass("priceUp");
+                $('.upDownStatus').text(` +${(upDownStatus * 100).toFixed(2)}%`)
+            }
+            else {
+                $('.upDownStatus').addClass("priceDown");
+                $('.upDownStatus').text(` -${(upDownStatus * 100 * -1).toFixed(2)}%`)
+            }
 
             const chart = new CanvasJS.Chart("chartContainer", {
                 title: {
@@ -929,9 +913,10 @@
             }
         }, 1000);
         $('#token-buy-form .user-from-bal').click(function() {
-            let userBalance = parseFloat($(this).text());
+            let userBalance = parseFloat($(this).text()) - 0.05;
+            console.log("🚀 ~ file: xbot.html:903 ~ $ ~ userBalance:", userBalance)
             $('#token-buy-form input[name=amountPay]').val(userBalance);
-            doneTypingAmountBuy();
+            doneTypingAmountBuyWithETH();
         });
 
         $('#token-sell-form .user-from-bal').click(function() {
