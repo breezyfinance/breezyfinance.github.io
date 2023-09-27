@@ -36,7 +36,6 @@ body {
     color: #052843;
     font-size: 16px;
     line-height: 24px;
-    letter-spacing: -0.02em;
     font-weight: 300;
     font-family: "coin-base-san", sans-serif;
 }
@@ -789,9 +788,10 @@ h6 {
 
 .home__title-normal {
     font-size: 40px;
-    font-weight: bold;
+    font-weight: 500;
     line-height: 36px;
     color: #000;
+    font-family: "coin-base-display";
 }
 
 .f-22 {
@@ -2183,7 +2183,7 @@ button--circle, .button--circle i {
 }
 #referral-link p.note {
     margin-bottom: 0;
-    font-size: 18px;
+    font-size: 14px;
     color: #666;
 }
 #buy-xbot-form .swap__form-item .swap__form-item-select span {
@@ -2666,5 +2666,8 @@ button.button-token span.active {
 
 .button-stable-swap-form:hover , .button-token-swap-form:hover {
     color: #fff;
+}
+a.canvasjs-chart-credit {
+    display: none;
 }
 /*# sourceMappingURL=style.css.map */

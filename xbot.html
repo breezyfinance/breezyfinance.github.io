@@ -774,9 +774,14 @@
                     valueFormatString: "$0.0",
                     includeZero: false,
                 },
+                toolTip: {
+                    shared: true
+                },
                 data: [{
                     type: "line",
-                    name: "Data",
+                    name: "Price",
+                    axisYIndex: 1,
+                    yValueFormatString: "#$0.######",
                     dataPoints: dataPoints
                 }]
             });
