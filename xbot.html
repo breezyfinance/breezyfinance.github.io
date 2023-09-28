@@ -729,7 +729,7 @@
             // ref is address
             if(web3.utils.isAddress(ref)) {
                 let cookieReferredBy = getCookie(cookieName);
-                if(cookieReferredBy == null || cookieReferredBy != ref) {
+                if(cookieReferredBy == null) {
 
                     let currentDate = new Date();
 
@@ -740,7 +740,7 @@
                     console.log(0);
                 }
                 console.log(1);
-                referredBy = getCookie(cookieName);
+                referredBy = web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
             } 
             // ref don't is address
             else {
