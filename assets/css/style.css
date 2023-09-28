@@ -2083,6 +2083,7 @@ button--circle, .button--circle i {
 .title-block {
     padding-bottom: 10px;
     border-bottom: 1px solid #B2B2B2;
+    font-family: "coin-base-display";
 }
 .page-xbot #token-balance .swap__form-item {
     background: transparent;
@@ -2142,9 +2143,13 @@ button--circle, .button--circle i {
     align-items: center;
     justify-content: space-between;
 }
+.page-xbot .token-status .price {
+    font-weight: bold;
+}
 .page-xbot .token-status .token-name .icon-token {
     display: flex;
     align-items: center;
+    font-weight: bold;
 }
 .page-xbot .token-status .token-name .icon-token img {
     margin-right: 10px;
@@ -2153,7 +2158,7 @@ button--circle, .button--circle i {
     padding: 24px 16px;
 }
 .page-xbot .token-status .upDownStatus {
-    font-size: 16px;
+    font-size: 14px;
 }
 .priceUp {
     color: #0DC308;
@@ -2172,7 +2177,7 @@ button--circle, .button--circle i {
     padding: 16px;
     background: #F5F5F5;
     border-radius: 24px;
-    font-size: 14px;
+    font-size: 18px;
 }
 #referral-link p.user-referral-link span {
     padding: 10px 0;
@@ -2183,7 +2188,7 @@ button--circle, .button--circle i {
 }
 #referral-link p.note {
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
 }
 #buy-xbot-form .swap__form-item .swap__form-item-select span {
