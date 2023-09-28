@@ -415,7 +415,7 @@
                         </article>
                         <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
                             <div class="d-flex align-items-center justify-content-between mb-14">
-                                <div class="f-700" style="font-size: 24px;">What is XBOT?</div>
+                                <div class="f-700" style="font-size: 20px;font-family: 'coin-base-display';">What is XBOT?</div>
                             </div>
                             <p>Interdum nunc volutpat a tellus felis at arcu ac. Nulla risus amet parturient enim. Lorem dictumst vitae in quis sed. Vitae commodo arcu vulputate malesuada quam viverra. Vivamus tortor sit dignissim sed dis eros dui. Elementum sit massa massa turpis. Tempus quis laoreet neque lectus tincidunt proin tortor venenatis in. Donec at donec felis amet porta facilisi arcu. Facilisis non congue eget diam ut.
                                 Risus neque eget feugiat varius lacus nisi facilisi. In hac malesuada quis tincidunt quisque. Eget ultricies in urna augue sit non blandit. Commodo quam est risus massa. Eget in pharetra pulvinar vitae proin. Viverra fames sit imperdiet scelerisque mauris quis eget netus. Diam amet urna maecenas montes. Ut condimentum non ultrices habitant hendrerit. Pharetra laoreet ipsum tristique convallis sed adipiscing quis facilisis. Interdum rhoncus placerat eget scelerisque. Lectus orci morbi lorem a diam a nunc convallis duis. Ultrices quis etiam lacus ultrices.
@@ -423,13 +423,6 @@
                         </article>
                     </div>
                     <div class="col-lg-6 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
-                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Referrals activity</div>
-                            </div>
-                            <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
-                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
-                        </article>
                         <article class="buy-sell__main garbi__box-1 p-3" id="buy-xbot-form">
                             <div class="masthead__action-buttons" style="margin-bottom:16px;">
                                 <button class="button button--large button--buy button-buy-form">
@@ -610,6 +603,13 @@
                                 
                             </div>
                         </article>
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Referrals activity</div>
+                            </div>
+                            <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
+                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
+                        </article>
                     </div>
                 </div>
 
@@ -715,7 +715,7 @@
         contractBaseHelper.init({
             chainId
         });;
-        run()
+        run();
     });
     $('#token-sell-form .btn-reverse-pair').click(function() {
         $('.button-buy-form').trigger("click");
@@ -760,6 +760,7 @@
             }
 
             const chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
                 title: {
                     text: ""
                 },
@@ -807,30 +808,39 @@
 
     async function getBalanceETH() {
         if (window.ethereum) {
-            // Request access to the user's MetaMask account
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
 
-            // Get the current Ethereum address from MetaMask
-            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-            const ethereumAddress = accounts[0];
+                if (accounts.length === 0) {
+                    const defaultBalance = '0.000000';
+                    $('#token-buy-form .user-from-bal').text(defaultBalance);
+                    $('#token-sell-form .user-to-bal').text(defaultBalance);
+                    return;
+                }
 
-            // Get the balance in Ether
-            const balanceWei = await window.ethereum.request({
-                method: 'eth_getBalance',
-                params: [ethereumAddress, 'latest'],
-            });
+                const ethereumAddress = accounts[0];
 
-            const web3 = new Web3(window.ethereum);
-            const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
-            const balanceWithDecimals = parseFloat(balanceEth).toFixed(6);
-            $('#token-buy-form .user-from-bal').text(balanceWithDecimals);
-            $('#token-sell-form .user-to-bal').text(balanceWithDecimals);
+                const balanceWei = await window.ethereum.request({
+                    method: 'eth_getBalance',
+                    params: [ethereumAddress, 'latest'],
+                });
+
+                const web3 = new Web3(window.ethereum);
+                const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
+                const balanceWithDecimals = parseFloat(balanceEth).toFixed(6);
+                console.log("🚀 ~ getBalanceETH ~ balanceWithDecimals:", balanceWithDecimals);
+                $('#token-buy-form .user-from-bal').text(balanceWithDecimals);
+                $('#token-sell-form .user-to-bal').text(balanceWithDecimals);
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
             console.log("MetaMask not detected");
         }
     }
     async function run() {     
         await chartPriceXbotToken();
+        await waitForUserWallet();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let xbotTokenABI = abiHelper.getXbotTokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
@@ -844,8 +854,7 @@
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
-        let totalSupply = await xbotContract.methods.totalSupply().call();
-        await waitForUserWallet(); 
+        let totalSupply = await xbotContract.methods.totalSupply().call(); 
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
             $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
@@ -863,7 +872,8 @@
                 $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
             });
         });
-        setInterval(async function() {
+        
+        setInterval(async function() { 
             getBalanceETH();
             let xbotPriceETH = await xbotContract.methods.buyPrice().call();
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
@@ -918,8 +928,12 @@
         }, 1000);
         $('#token-buy-form .user-from-bal').click(function() {
             let userBalance = parseFloat($(this).text()) - 0.05;
-            console.log("🚀 ~ file: xbot.html:903 ~ $ ~ userBalance:", userBalance)
-            $('#token-buy-form input[name=amountPay]').val(userBalance);
+            if (userBalance < 0) {
+                $('#token-buy-form input[name=amountPay]').val("0.0");
+            }
+            else {
+                $('#token-buy-form input[name=amountPay]').val(userBalance);
+            }    
             doneTypingAmountBuyWithETH();
         });
 
