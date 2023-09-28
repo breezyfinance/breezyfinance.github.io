@@ -423,13 +423,6 @@
                         </article>
                     </div>
                     <div class="col-lg-6 col-sm-12">
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
-                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Referrals activity</div>
-                            </div>
-                            <p class="user-referral-link"><span>Your referral link</span>0x00000000000000000000000000</p>
-                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
-                        </article>
                         <article class="buy-sell__main garbi__box-1 p-3" id="buy-xbot-form">
                             <div class="masthead__action-buttons" style="margin-bottom:16px;">
                                 <button class="button button--large button--buy button-buy-form">
@@ -609,6 +602,13 @@
                                 </div>
                                 
                             </div>
+                        </article>
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Referrals activity</div>
+                            </div>
+                            <p class="user-referral-link"><span>Your referral link</span>https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
+                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
                     </div>
                 </div>
@@ -981,7 +981,9 @@
         }, 1000);
         $('#token-buy-form .user-from-bal').click(function() {
             let userBalance = parseFloat($(this).text()) - 0.05;
-            console.log("🚀 ~ file: xbot.html:903 ~ $ ~ userBalance:", userBalance)
+            if (userBalance < 0) {
+                userBalance = 0;
+            }  
             $('#token-buy-form input[name=amountPay]').val(userBalance);
             doneTypingAmountBuyWithETH();
         });
@@ -1194,15 +1196,13 @@
                 return;
             }
             let amountIn = $('#token-buy-form input[name=amountPay]').val();
-            console.log("🚀 ~ file: xbot.html:1057 ~ $ ~ amountIn:", amountIn)
             let amountInConvert = (amountIn * 1e18);
             let amountTokenOut = $('#token-buy-form input[name=amountXbotOut]').val();
-            console.log("🚀 ~ file: xbot.html:1059 ~ $ ~ amountTokenOut:", amountTokenOut)
             let amountTokenOutConvert = amountTokenOut * 10 ** xbotDecimal;
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
             .buy(
-                userWallet,
+                referredBy,
                 BigInt(amountTokenOutConvert),
             )
             .send({
