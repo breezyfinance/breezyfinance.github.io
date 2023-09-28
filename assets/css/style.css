@@ -498,7 +498,7 @@ h6 {
     line-height: 16px;
 }
 .w-45 {
-    width: 45%!important;
+    width: 49%!important;
 }
 
 
@@ -2084,7 +2084,7 @@ button--circle, .button--circle i {
     padding-bottom: 10px;
     border-bottom: 1px solid #B2B2B2;
     font-family: "coin-base-display";
-    font-size: 20px;
+    /Users/tus/Desktop/Screenshot 2023-09-28 at 14.40.12.png
 }
 .page-xbot #token-balance .swap__form-item {
     background: transparent;
