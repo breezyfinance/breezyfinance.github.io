@@ -2084,7 +2084,7 @@ button--circle, .button--circle i {
     padding-bottom: 10px;
     border-bottom: 1px solid #B2B2B2;
     font-family: "coin-base-display";
-    /Users/tus/Desktop/Screenshot 2023-09-28 at 14.40.12.png
+    font-size: 20px;
 }
 .page-xbot #token-balance .swap__form-item {
     background: transparent;
@@ -2173,24 +2173,47 @@ button--circle, .button--circle i {
     display: flex;
     justify-content: space-between;
 }
-#referral-link p.user-referral-link {
-    margin-bottom: 8px;
+#referral-link .referral-area {
     padding: 16px;
     background: #F5F5F5;
     border-radius: 24px;
-    font-size: 18px;
+    margin-bottom: 8px; 
+    position: relative;
+    display: flex;
+    align-items: center;
 }
-#referral-link p.user-referral-link span {
-    padding: 10px 0;
+#referral-link .referral-area a.copy-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+}
+#referral-link p.user-referral-link {  
+    margin-bottom: 0; 
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 65%;
+}
+#referral-link .referral-area span {
     padding-right: 8px;
     margin-right: 8px;
     font-weight: bold;
     border-right: 1px solid #B2B2B2;
 }
+#referral-link p.user-referral-link span.user-referral {
+    border:0;
+    font-weight: 300;
+}
+.referral-disable {
+    background: #EBEBEB;
+    color: #808080!important;
+}
 #referral-link p.note {
     margin-bottom: 0;
     font-size: 16px;
-    color: #666;
+    color: #808080;
 }
 #buy-xbot-form .swap__form-item .swap__form-item-select span {
     width: 24px;

@@ -415,7 +415,7 @@
                         </article>
                         <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
                             <div class="d-flex align-items-center justify-content-between mb-14">
-                                <div class="f-700" style="font-size: 24px;">What is XBOT?</div>
+                                <div class="f-700" style="font-size: 20px;font-family:'coin-base-display'">What is XBOT?</div>
                             </div>
                             <p>Interdum nunc volutpat a tellus felis at arcu ac. Nulla risus amet parturient enim. Lorem dictumst vitae in quis sed. Vitae commodo arcu vulputate malesuada quam viverra. Vivamus tortor sit dignissim sed dis eros dui. Elementum sit massa massa turpis. Tempus quis laoreet neque lectus tincidunt proin tortor venenatis in. Donec at donec felis amet porta facilisi arcu. Facilisis non congue eget diam ut.
                                 Risus neque eget feugiat varius lacus nisi facilisi. In hac malesuada quis tincidunt quisque. Eget ultricies in urna augue sit non blandit. Commodo quam est risus massa. Eget in pharetra pulvinar vitae proin. Viverra fames sit imperdiet scelerisque mauris quis eget netus. Diam amet urna maecenas montes. Ut condimentum non ultrices habitant hendrerit. Pharetra laoreet ipsum tristique convallis sed adipiscing quis facilisis. Interdum rhoncus placerat eget scelerisque. Lectus orci morbi lorem a diam a nunc convallis duis. Ultrices quis etiam lacus ultrices.
@@ -607,7 +607,18 @@
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referrals activity</div>
                             </div>
-                            <p class="user-referral-link"><span>Your referral link</span>https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
+                            <div class="referral-area">
+                                <span>Your referral link</span>
+                                <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
+                                <a class="copy-btn">Copy</a>
+                            </div>        
+                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
+                        </article>
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap referral-disable" style="" id="referral-link">
+                            <div class="d-flex align-items-center justify-content-between title-block mb-14">
+                                <div class="f-700">Referrals activity</div>
+                            </div>
+                            <p>Your referral link is currently disabled</p>        
                             <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
                     </div>
@@ -707,6 +718,8 @@
     var networkHelper = new $.BREEZY_NETWORK();
     var chainId = 11155111;
     var referredBy = "";
+
+    
     
     $(document).ready(function() {
         abiHelper.init({});
@@ -716,7 +729,7 @@
         contractBaseHelper.init({
             chainId
         });
-
+        
         const cookieName = "referredBy";
         const addressOwner = "0x0000000000000000000000000000000000000000";  // replate to address owner
         let url = window.location.href;
@@ -797,6 +810,25 @@
         $('#token-buy-form').show();
         $('.button-sell-form').addClass('button-disabled');
     });
+    function copyFunction() {
+        const copyText = document.getElementById("user-referral-link").textContent;
+
+        // Create a temporary textarea element to hold the text
+        const tempTextArea = document.createElement("textarea");
+        tempTextArea.value = copyText;
+        document.body.appendChild(tempTextArea);
+
+        // Select the text in the textarea and copy it to the clipboard
+        tempTextArea.select();
+        document.execCommand("copy");
+
+        // Remove the temporary textarea
+        document.body.removeChild(tempTextArea);
+
+        alert("Copied");
+    }
+
+
     async function chartPriceXbotToken() {
         fetch('dataPrice.txt')
         .then(response => response.text())
@@ -891,7 +923,10 @@
             console.log("MetaMask not detected");
         }
     }
-    async function run() {     
+    async function run() {   
+        $('.copy-btn').click(function() {
+            copyFunction();
+        });
         console.log("referredBy: ", referredBy);
         await chartPriceXbotToken();
         let erc20TokenABI = abiHelper.getERC20TokenABI();
@@ -909,8 +944,17 @@
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
         await waitForUserWallet(); 
+        $('.user-referral').text(userWallet);
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
+            if (userXbotBalance < 50) {
+                $('.referral-disable').show();
+                $('#referral-link').hide();
+            }
+            else {
+                $('.referral-disable').hide();
+                $('#referral-link').show();
+            }
             $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
             $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
             $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
@@ -935,6 +979,14 @@
             $('#token-status .total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)}XBOT`);
             xbotContract.methods.balanceOf(userWallet).call().then(result => {
                 let userXbotBalance = result / (10 ** xbotDecimal);
+                if (userXbotBalance < 50) {
+                    $('.referral-disable').show();
+                    $('#referral-link').hide();
+                }
+                else {
+                    $('.referral-disable').hide();
+                    $('#referral-link').show();
+                }
                 $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
                 $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
                 $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
@@ -1038,9 +1090,11 @@
         $('#token-buy-form input[name=amountEthOut]').on('keydown', function() {
             clearTimeout(typingTimerAmountSellWithETH);
         });
-
+        let amountOutToAction;
+        let amountInToAction;
         async function doneTypingAmountBuyWithETH() {
             let amountIn = $('#token-buy-form input[name=amountPay]').val();
+            amountInToAction = amountIn;
             let amountInConvert = (amountIn * 10 ** 18);
             let xbotPriceETH = await xbotContract.methods.buyPrice().call();
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
@@ -1050,6 +1104,7 @@
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , nullAdd).call().then(result => {
                     let tokenOutput = parseInt(result);
                     let minTokenOut = tokenOutput - tokenOutput * 0.5 / 100;
+                    amountOutToAction = minTokenOut / 10 ** xbotDecimal;
                     $('#token-buy-form input[name=amountXbotOut]').val((minTokenOut / 10 ** xbotDecimal).toFixed(6));
                     $('#token-buy-form .to-volume').text(`$${((minTokenOut / 10 ** xbotDecimal) * xbotPrice).toFixed(6)}`);
                 });
@@ -1064,6 +1119,7 @@
 
         async function doneTypingAmountBuyWithToken() {
             let amountInToken = $('#token-buy-form input[name=amountXbotOut]').val();
+            amountOutToAction = amountInToken;
             let amountTokenOutConvert = amountInToken * 10 ** xbotDecimal;
             let xbotPriceETH = await xbotContract.methods.buyPrice().call();
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
@@ -1071,6 +1127,8 @@
                 $('#token-buy-form .to-volume').text(`$${(amountInToken * xbotPrice).toFixed(6)}`);
                 xbotContract.methods.getAmountIn(BigInt(amountTokenOutConvert) , xbotAdd).call().then(result => {
                     let ethOutput = parseInt(result);
+                    let minETHoutput = (ethOutput + ethOutput * 0.5 / 100).toFixed(0);
+                    amountInToAction = minETHoutput / 1e18;
                     $('#token-buy-form input[name=amountPay]').val((ethOutput / 1e18).toFixed(6));
                     $('#token-buy-form .from-volume').text(`$${((ethOutput / 1e18) * ethPrice).toFixed(6)}`);
                 });
@@ -1086,6 +1144,7 @@
 
         async function doneTypingAmountSell() {
             let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            amountInToAction = amountIn;
             let balanceXbot = $('#token-sell-form .user-from-bal').text();
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
             let xbotPriceETH = await xbotContract.methods.sellPrice().call();
@@ -1095,6 +1154,7 @@
                 xbotContract.methods.getAmountOut(BigInt(amountInConvert) , xbotAdd).call().then(result => {
                     let ethOutput = parseInt(result);
                     let minEthOut = ethOutput - ethOutput * 0.5 / 100;
+                    amountOutToAction = minEthOut / 1e18;
                     $('#token-sell-form input[name=amountEthOut]').val((minEthOut / 1e18).toFixed(6));
                     $('#token-sell-form .to-volume').text(`$${((minEthOut / 1e18) * ethPrice).toFixed(6)}`);
                 });
@@ -1108,6 +1168,7 @@
         }
         async function doneTypingAmountSellWithETH() {
             let amountIn = $('#token-sell-form input[name=amountEthOut]').val();
+            amountOutToAction = amountIn;
             let balanceXbot = $('#token-sell-form .user-from-bal').text();
             let amountInConvert = (amountIn * 1e18);
             let xbotPriceETH = await xbotContract.methods.sellPrice().call();
@@ -1117,6 +1178,7 @@
                 xbotContract.methods.getAmountIn(BigInt(amountInConvert) , nullAdd).call().then(result => {
                     let tokenOutput = parseInt(result);
                     let minTokenOut = tokenOutput + tokenOutput * 0.5 / 100;
+                    amountInToAction = minTokenOut / 10 ** xbotDecimal;
                     $('#token-sell-form input[name=amountPay]').val((minTokenOut / 10 ** xbotDecimal).toFixed(6));
                     $('#token-sell-form .from-volume').text(`$${((minTokenOut / 10 ** xbotDecimal) * xbotPriceSell).toFixed(6)}`);
                 });
@@ -1195,9 +1257,9 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
-            let amountIn = $('#token-buy-form input[name=amountPay]').val();
+            let amountIn = amountInToAction;
             let amountInConvert = (amountIn * 1e18);
-            let amountTokenOut = $('#token-buy-form input[name=amountXbotOut]').val();
+            let amountTokenOut = amountOutToAction;
             let amountTokenOutConvert = amountTokenOut * 10 ** xbotDecimal;
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
@@ -1237,9 +1299,9 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
-            let amountIn = $('#token-sell-form input[name=amountPay]').val();
+            let amountIn = amountInToAction
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
-            let amountEthOut = $('#token-sell-form input[name=amountEthOut]').val();
+            let amountEthOut = amountOutToAction;
             let amountEthOutConvert = amountEthOut * 1e18;
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
