@@ -745,27 +745,21 @@
                 if(cookieReferredBy == null) {
 
                     let currentDate = new Date();
-
                     let numberOfDaysToAdd = 30;
                     currentDate.setUTCDate(currentDate.getUTCDate() + numberOfDaysToAdd);
 
                     setCookie(cookieName, ref, currentDate.toUTCString());
-                    console.log(0);
                 }
-                console.log(1);
                 referredBy = web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
             } 
             // ref don't is address
             else {
-                console.log(2);
                 referredBy = addressOwner         
             }
             // ref == null
         } else {
-            console.log(3);
             referredBy = getCookie(cookieName);
-            if(referredBy == null) {
-                console.log(4);
+            if(referredBy == null || !web3.utils.isAddress(referredBy)) {
                 referredBy = addressOwner         
             }
         }
