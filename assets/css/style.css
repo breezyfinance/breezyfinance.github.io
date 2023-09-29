@@ -2103,14 +2103,15 @@ button--circle, .button--circle i {
 }
 .page-xbot .swap__form-item .amount {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 10px;
     width: 208px;
     overflow: hidden;
     float: left;
 }
 .page-xbot #saving-block .swap__form-item .amount {
-    width: 87%;
+    width: 100%;
+    margin-bottom: 4px;
 }
 .page-xbot .swap__form-item .amount span {
     font-size: 30px;

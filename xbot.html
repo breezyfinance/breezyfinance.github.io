@@ -575,14 +575,13 @@
                                                 </span> ETH
                                             </div>
                                         </div>
-                                        <div class="col-8" style = "text-align: right;font-weight: bold;">
+                                        <div class="col-8" style = "text-align: right;">
                                             <div class="amount">
-                                                <span class="amount-eth">0</span>
-                                            </div>
-                                            ETH
-                                            <div class="" style="display: flex;justify-content: end;">
-                                                <span class="color-2 f-roboto f-20 f-400">$</span>
-                                                <span class="f-700 f-roboto f-20 eth-volume">0.0</span>                                                    
+                                                <span class="amount-eth">0</span> ETH
+                                            </div>    
+                                            <div class="">
+                                                <span class="color-2 f-20 f-300">$</span>
+                                                <span class="f-400  f-20 eth-volume">0.0</span>                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -603,7 +602,7 @@
                                 
                             </div>
                         </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="referral-link">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" style="display: none;" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referrals activity</div>
                             </div>
@@ -614,7 +613,7 @@
                             </div>        
                             <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap referral-disable" style="" id="referral-link">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap referral-disable" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referrals activity</div>
                             </div>
@@ -742,7 +741,7 @@
             // ref is address
             if(web3.utils.isAddress(ref)) {
                 let cookieReferredBy = getCookie(cookieName);
-                if(cookieReferredBy == null) {
+                if(cookieReferredBy == null || cookieReferredBy != ref) {
 
                     let currentDate = new Date();
                     let numberOfDaysToAdd = 30;
@@ -819,7 +818,7 @@
         // Remove the temporary textarea
         document.body.removeChild(tempTextArea);
 
-        alert("Copied");
+        // alert("Copied");
     }
 
 
