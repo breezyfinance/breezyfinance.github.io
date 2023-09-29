@@ -609,7 +609,8 @@
                             <div class="referral-area">
                                 <span>Your referral link</span>
                                 <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
-                                <a class="copy-btn">Copy</a>
+                                <a class="copy-btn">Copy<div class="tooltip" id="copy-tooltip">Copied!</div></a>
+                                
                             </div>        
                             <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
                         </article>
@@ -818,6 +819,14 @@
         // Remove the temporary textarea
         document.body.removeChild(tempTextArea);
 
+        // Show the tooltip
+        const tooltip = document.getElementById("copy-tooltip");
+        tooltip.style.display = "block";
+
+        // Hide the tooltip after a short delay (e.g., 2 seconds)
+        setTimeout(() => {
+            tooltip.style.display = "none";
+        }, 2000);
     }
 
 

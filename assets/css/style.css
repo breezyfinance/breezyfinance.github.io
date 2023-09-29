@@ -2701,4 +2701,20 @@ button.button-token span.active {
 a.canvasjs-chart-credit {
     display: none;
 }
+.tooltip {
+    width: 100px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 100%;
+    margin-left: -75px;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+}
 /*# sourceMappingURL=style.css.map */
