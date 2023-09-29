@@ -2702,6 +2702,7 @@ a.canvasjs-chart-credit {
     display: none;
 }
 .tooltip {
+    display: none;
     width: 100px;
     background-color: #555;
     color: #fff;
