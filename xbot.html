@@ -667,7 +667,7 @@
             </nav>
         </footer>
     </div>
-    <ul id="confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none;top: 0; justify-content: unset;">
+    <ul id="confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none;top: 0; justify-content: unset;font-family: 'coin-base-san';">
         <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
             <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
                 <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is sent to the Blockchain.</p>
@@ -684,7 +684,7 @@
             </div>
         </li>
     </ul>
-    <ul id="success-confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none; top: 0; justify-content: unset;">
+    <ul id="success-confirm-popup" class="bn-notify-custom bn-notify-notifications svelte-166mr51" style="display:none; top: 0; justify-content: unset;font-family: 'coin-base-san';">
         <li style="margin: 0.75rem 0px 0px;" class="bn-notify-custom bn-notify-notification svelte-166mr51">
             <div class="bn-notify-custom bn-notify-notification-info svelte-5f7pqk">
                 <p class="bn-notify-custom bn-notify-notification-info-message svelte-12gqi36">Your <a href="" target="_blank" class="transaction-hash">transaction</a> is confirmed.</p>
@@ -818,7 +818,6 @@
         // Remove the temporary textarea
         document.body.removeChild(tempTextArea);
 
-        alert("Copied");
     }
 
 
@@ -965,6 +964,8 @@
         });
         setInterval(async function() {
             getBalanceETH();
+            await waitForUserWallet(); 
+            $('.user-referral').text(userWallet);
             let xbotPriceETH = await xbotContract.methods.buyPrice().call();
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
             $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
@@ -1190,6 +1191,7 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
+            await waitForUserWallet();
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
             .reinvest()
@@ -1219,6 +1221,7 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
+            await waitForUserWallet(); 
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
             .withdraw()
@@ -1250,6 +1253,7 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
+            await waitForUserWallet(); 
             let amountIn = amountInToAction;
             let amountInConvert = (amountIn * 1e18);
             let amountTokenOut = amountOutToAction;
@@ -1292,6 +1296,7 @@
                 networkHelper.SwichNetworkByChainId(chainId);
                 return;
             }
+            await waitForUserWallet(); 
             let amountIn = amountInToAction
             let amountInConvert = (amountIn * 10 ** xbotDecimal);
             let amountEthOut = amountOutToAction;
