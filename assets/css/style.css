@@ -8,7 +8,10 @@
     box-sizing: border-box;
 }
 
-@font-face{font-family:Relative;src:url(/relative-book-pro.woff2)};
+@font-face{
+    font-family:Relative;
+    src:url("../fonts/relative-book-pro.woff2") format("woff2")
+}
 
 @font-face {
     font-family: "custom-font";
@@ -498,7 +501,7 @@ h6 {
     line-height: 16px;
 }
 .w-45 {
-    width: 45%!important;
+    width: 49%!important;
 }
 
 
@@ -1803,7 +1806,6 @@ input::-webkit-inner-spin-button {
 }
 
 #confirm-popup {
-    font-family: Relative !important;
     width: 25em !important;
     top: 90px !important;
     font-size: 20px !important;
@@ -1816,7 +1818,6 @@ input::-webkit-inner-spin-button {
 }
 
 #success-confirm-popup {
-    font-family: Relative !important;
     width: 21em !important;
     top: 90px !important;
     font-size: 20px !important;
@@ -2084,6 +2085,7 @@ button--circle, .button--circle i {
     padding-bottom: 10px;
     border-bottom: 1px solid #B2B2B2;
     font-family: "coin-base-display";
+    font-size: 20px;
 }
 .page-xbot #token-balance .swap__form-item {
     background: transparent;
@@ -2102,14 +2104,15 @@ button--circle, .button--circle i {
 }
 .page-xbot .swap__form-item .amount {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 10px;
     width: 208px;
     overflow: hidden;
     float: left;
 }
 .page-xbot #saving-block .swap__form-item .amount {
-    width: 87%;
+    width: 100%;
+    margin-bottom: 4px;
 }
 .page-xbot .swap__form-item .amount span {
     font-size: 30px;
@@ -2172,24 +2175,47 @@ button--circle, .button--circle i {
     display: flex;
     justify-content: space-between;
 }
-#referral-link p.user-referral-link {
-    margin-bottom: 8px;
+#referral-link .referral-area {
     padding: 16px;
     background: #F5F5F5;
     border-radius: 24px;
-    font-size: 18px;
+    margin-bottom: 8px; 
+    position: relative;
+    display: flex;
+    align-items: center;
 }
-#referral-link p.user-referral-link span {
-    padding: 10px 0;
+#referral-link .referral-area a.copy-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+}
+#referral-link p.user-referral-link {  
+    margin-bottom: 0; 
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 65%;
+}
+#referral-link .referral-area span {
     padding-right: 8px;
     margin-right: 8px;
     font-weight: bold;
     border-right: 1px solid #B2B2B2;
 }
+#referral-link p.user-referral-link span.user-referral {
+    border:0;
+    font-weight: 300;
+}
+.referral-disable {
+    background: #EBEBEB;
+    color: #808080!important;
+}
 #referral-link p.note {
     margin-bottom: 0;
-    font-size: 18px;
-    color: #666;
+    font-size: 16px;
+    color: #808080;
 }
 #buy-xbot-form .swap__form-item .swap__form-item-select span {
     width: 24px;
@@ -2674,5 +2700,21 @@ button.button-token span.active {
 }
 a.canvasjs-chart-credit {
     display: none;
+}
+.tooltip {
+    display: none;
+    width: 100px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 100%;
+    margin-left: -75px;
+    opacity: 1;
+    transition: opacity 0.3s;
 }
 /*# sourceMappingURL=style.css.map */
