@@ -750,6 +750,7 @@
 
                     setCookie(cookieName, ref, currentDate.toUTCString());
                 }
+                cookieReferredBy = getCookie(cookieName);
                 referredBy = web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
             } 
             // ref don't is address
