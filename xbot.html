@@ -406,20 +406,39 @@
                                     <span class="icon-token">
                                         <img src='./assets/images/xbot-token.png' />XBOT
                                     </span> 
-                                    <span class="price-status"><span class="price">Loading</span><span class="upDownStatus"></span></span>
+                                    <span class="price-status"><span class="price">Loading</span><span class="upDownStatus"></span></span>        
                                 </div>
+                                <span class="total-supply">Total Supply: <span class="number-total-supply"></span></span>
                                 <div class="status-info">
                                     <div id="chartContainer" style="height: 370px; width:100%;"></div>
                                 </div>
                             </div>
                         </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
+                        <article class="swap__main garbi__box-1 p-3 mb-4" id="token-description">
                             <div class="d-flex align-items-center justify-content-between mb-14">
                                 <div class="f-700" style="font-size: 20px;font-family:'coin-base-display'">What is XBOT?</div>
                             </div>
-                            <p>XBOT serves as the governance token for DeFiXBot, employing a unique tokenomic system to prevent manipulation and ensure fair profit distribution. Its circulating supply is dynamically determined by the ecosystem's users, promoting balance. Users earn money through XBOT via token trading commissions, referral link commissions, and dividends from subsequent games built on the XBOT platform. The mathematical model includes a 10% deposit commission fee and a 4% withdrawal fee, with 33% of all fees shared among users with referral links and the remaining 67% distributed proportionally to XBOT holders. XBOT use cases encompass profit and revenue sharing, governance, referral program registration, access to premium features, and participation in a Telegram private channel for insights. Additionally, 15% of DeFiXBot's revenue is distributed to BRE token holders, requiring a minimum holding of 100k BRE.
-
-                                In essence, XBOT ensures a transparent and equitable ecosystem where the circulating supply is directly linked to user actions—increasing with demand and decreasing with supply, fostering a secure and fair environment for all participants.</p>
+                            <ul>
+                                <li><span>Governance Token:</span> XBOT is the governance token for the DeFiXBot project, a Telegram bot designed to integrate DeFi with AI and automated bot technology.</li>
+                                <li><span>Zero Initial Supply:</span> XBOT starts with zero tokens in circulation, ensuring its value can only rise initially.</li>
+                                <li><span>Dividend Rewards:</span> Receive a 10% dividend in ETH on each buy-in and a 4% dividend on each sell-off.</li>
+                                <li><span>Additional Earnings:</span> 50% of transaction fees from the DeFiXBot Telegram bot are shared with XBOT token holders.</li>
+                                <li><span>Additional Earnings:</span> </li>
+                                <li><span>Profit Potential:</span>
+                                    <ul>
+                                        <li><span>Fluctuating Price Scenario:</span>
+                                            <ul>
+                                                <li>Buy at price X</li>
+                                                <li>Price rises to Y and then falls back to X</li>
+                                                <li>Earn dividends on all transactions made by others that occurred while the price fluctuated from X to Y and back to X</li>
+                                                <li>Sell at the initial price X</li>
+                                                <li>Result: You profit from the dividends earned during the price fluctuation, even if you sell at the initial price X</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><span>Low-Risk Investment:</span> With diversified ways to earn and a built-in safety net through dividends, XBOT offers a uniquely low-risk, high-reward investment opportunity in the DeFi ecosystem.</li>
+                            </ul>
                         </article>
                     </div>
                     <div class="col-lg-6 col-sm-12">
@@ -616,10 +635,10 @@
                         </article>
                         <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap referral-disable" style="" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Referrals activity</div>
+                                <div class="f-700">Referral Program Status</div>
                             </div>
-                            <p>Your referral link is currently disabled</p>        
-                            <p class="note">33% of the 10% purchase fee is commissioned to the referrer. You need have 50 XBOT to active your masternode.</p>
+                            <p>Your referral link is currently inactive.</p>        
+                            <p class="note">To activate your referral link and earn commissions, you'll need to hold at least 50 XBOT. Once activated, you'll earn a 33% commission on the 10% purchase fee from anyone who joins through your referral.</p>
                         </article>
                     </div>
                 </div>
@@ -945,6 +964,7 @@
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
+        $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
         await waitForUserWallet(); 
         $('.user-referral').text(userWallet);
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
@@ -980,7 +1000,7 @@
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
             $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
             let totalSupply = await xbotContract.methods.totalSupply().call();
-            $('#token-status .total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)}XBOT`);
+            $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
             xbotContract.methods.balanceOf(userWallet).call().then(result => {
                 let userXbotBalance = result / (10 ** xbotDecimal);
                 if (userXbotBalance < 50) {

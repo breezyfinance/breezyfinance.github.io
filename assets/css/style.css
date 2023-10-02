@@ -2163,6 +2163,14 @@ button--circle, .button--circle i {
 .page-xbot .token-status .upDownStatus {
     font-size: 14px;
 }
+.page-xbot .token-status .total-supply {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+.page-xbot #token-description ul li span {
+    font-weight: 700;
+}
 .priceUp {
     color: #0DC308;
 }
