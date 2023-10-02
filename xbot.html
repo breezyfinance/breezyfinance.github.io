@@ -399,7 +399,7 @@
         <main class="page-xbot">
             <section class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-sm-12">
+                    <div class="col-lg-7 col-sm-12">
                         <article class="swap__main garbi__box-1 p-3 mb-4" id="token-status">
                             <div class="token-status">
                                 <div class="token-name">
@@ -441,7 +441,7 @@
                             </ul>
                         </article>
                     </div>
-                    <div class="col-lg-6 col-sm-12">
+                    <div class="col-lg-5 col-sm-12">
                         <article class="buy-sell__main garbi__box-1 p-3" id="buy-xbot-form">
                             <div class="masthead__action-buttons" style="margin-bottom:16px;">
                                 <button class="button button--large button--buy button-buy-form">
@@ -502,7 +502,7 @@
     
                                 </div>
     
-                                <div class="d-flex align-items-center justify-content-between ">
+                                <!-- <div class="d-flex align-items-center justify-content-between ">
                                     <div class="fees-area">
                                         <div class="position-card__row__info">
                                             <p class="body">Fees</p>
@@ -513,7 +513,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <button type="button" class="button-buy-gec header__btn-connect w-100 disable text-center btn-buy" style="">Buy XBOT</button>
                             </div>
                             <div id="token-sell-form" style="display: none;">
@@ -565,7 +565,7 @@
     
                                 </div>
     
-                                <div class="d-flex align-items-center justify-content-between ">
+                                <!-- <div class="d-flex align-items-center justify-content-between ">
                                     <div class="fees-area">
                                         <div class="position-card__row__info">
                                             <p class="body">Fees</p>
@@ -576,13 +576,13 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <button type="button" class="button-buy-gec header__btn-connect w-100 text-center disable btn-sell" style="">Sell XBOT</button>
                             </div>
                         </article>
                         <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" id="saving-block">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
-                                <div class="f-700">Savings</div>
+                                <div class="f-700">Pending Balance</div>
                             </div>
                             <div class="swap__form pb-1 stable-swap-pay">
                                 <div class="swap__form-item">
@@ -599,8 +599,8 @@
                                                 <span class="amount-eth">0</span> ETH
                                             </div>
                                             <div class="" >
-                                                <span class="color-2 f-20 f-400">$</span>
-                                                <span class="f-20 eth-volume">0.0</span>                                                    
+                                                <span class=" f-20 f-400">USD Equivalent: $</span>
+                                                <span class="f-20 eth-volume">0.00</span>                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -609,14 +609,14 @@
                                     <div class="fees-area">
                                         <div class="">
                                             <p class="body body--link ">
-                                                <span class="" style="">Reinvest ~  <span class="reinvest-token">0.00</span> XBOT</span>
+                                                <span class="" style="">Reinvest into Approximate XBOT: ~ <span class="reinvest-token">0.00</span> XBOT</span>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="button-area">
                                     <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
-                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw to External Wallet</button>
                                 </div>
                                 
                             </div>
@@ -850,7 +850,7 @@
     }
 
 
-    async function chartPriceXbotToken() {
+    async function chartPriceXbotToken(xbotPrice) {
         fetch('dataPrice.txt')
         .then(response => response.text())
         .then(data => {
@@ -860,6 +860,8 @@
             const [label, value] = line.split(',');
             return { label: label, y: parseFloat(value) };
             });
+            const newPrice = xbotPrice; // Giá trị mới cần thêm
+            dataPoints.push({ label: 'Today', y: newPrice });
             let price1stDay = dataPoints[0].y;
             let pricelastDay = dataPoints[dataPoints.length - 1].y;
 
@@ -875,6 +877,7 @@
             }
 
             const chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
                 title: {
                     text: ""
                 },
@@ -949,7 +952,7 @@
             copyFunction();
         });
         console.log("referredBy: ", referredBy);
-        await chartPriceXbotToken();
+        
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let xbotTokenABI = abiHelper.getXbotTokenABI();
         let _contractsObj = configHelper.getContracts(chainId);
@@ -961,6 +964,7 @@
         let nullAdd = '0x0000000000000000000000000000000000000000';
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+        await chartPriceXbotToken(xbotPrice);
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();

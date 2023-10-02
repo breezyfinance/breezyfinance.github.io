@@ -2225,6 +2225,9 @@ button--circle, .button--circle i {
     font-size: 16px;
     color: #808080;
 }
+#token-buy-form .swap__form , #token-sell-form .swap__form{
+    margin-bottom: 20px;
+}
 #buy-xbot-form .swap__form-item .swap__form-item-select span {
     width: 24px;
     top: -1px;
