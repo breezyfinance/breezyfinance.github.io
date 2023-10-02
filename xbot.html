@@ -616,7 +616,7 @@
                                 </div>
                                 <div class="button-area">
                                     <button type="button" class="header__btn-connect w-45 text-center disable button-reinvest">Reinvest</button>
-                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw to External Wallet</button>
+                                    <button type="button" class="header__btn-connect w-45 text-center disable button-withdraw">Withdraw</button>
                                 </div>
                                 
                             </div>
@@ -860,7 +860,7 @@
             const [label, value] = line.split(',');
             return { label: label, y: parseFloat(value) };
             });
-            const newPrice = xbotPrice; // Giá trị mới cần thêm
+            const newPrice = xbotPrice;
             dataPoints.push({ label: 'Today', y: newPrice });
             let price1stDay = dataPoints[0].y;
             let pricelastDay = dataPoints[dataPoints.length - 1].y;

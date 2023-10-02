@@ -2204,7 +2204,7 @@ button--circle, .button--circle i {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 65%;
+    width: 55%;
 }
 #referral-link .referral-area span {
     padding-right: 8px;
