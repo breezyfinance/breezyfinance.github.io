@@ -2191,11 +2191,10 @@ button--circle, .button--circle i {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
 }
-#referral-link .referral-area a.copy-btn {
-    position: absolute;
-    right: 20px;
-    top: 15px;
+#referral-link .referral-area a.copy-btn, #referral-link .referral-area a.ref-btn {
     cursor: pointer;
 }
 #referral-link p.user-referral-link {  
@@ -2204,13 +2203,10 @@ button--circle, .button--circle i {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 55%;
+    width: 85%;
 }
-#referral-link .referral-area span {
-    padding-right: 8px;
-    margin-right: 8px;
+#referral-link span {
     font-weight: bold;
-    border-right: 1px solid #B2B2B2;
 }
 #referral-link p.user-referral-link span.user-referral {
     border:0;

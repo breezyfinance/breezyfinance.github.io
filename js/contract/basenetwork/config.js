@@ -64,6 +64,9 @@ $.CONFIG.prototype = (function() {
             breezySwapper: {
                 contract: '0x03bd9436f5196a0D2B84a772e5A5755ac70aeAF9',
             },
+            breezyReferral: {
+                contract: '0x13ac1FAa16a20D7708C651A7534b89bcfc8cd292',
+            },
             farms: {
                 0: {
                     type: 'breezy_farm_pool',
