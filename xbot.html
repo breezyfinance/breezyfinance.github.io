@@ -625,22 +625,22 @@
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referral Program Status</div>   
                             </div>
-                            <span>Your referral link</span>
                             <div class="referral-area">
+                                <span>Your referral link</span>
                                 <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
                                 <a class="copy-btn">Copy<div class="tooltip" id="copy-tooltip">Copied!</div></a>
                                 
                             </div>        
                             <p class="note">To activate your referral link and earn commissions, you'll need to hold at least 50 XBOT. Once activated, you'll earn a 33% commission on the 10% purchase fee from anyone who joins through your referral.</p>
                         </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap user-add-ref" style="" id="referral-link">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap user-add-ref" style="display: none;" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referral Program Status</div>   
                             </div>
-                            <span>Your referral link</span>
                             <div class="referral-area">
-                                <input class="user-referral-link" id ="user-referral-link" type="text" value="" id="refInput" style="border: 0;outline: 0;background: transparent;width: 60%;">
-                                <a class="set-ref-btn">Set your referral code</a>
+                                <span>Your referral link</span>
+                                <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
+                                <a class="copy-btn">Copy<div class="tooltip" id="copy-tooltip">Copied!</div></a>
                                 
                             </div>        
                             <p class="note">To activate your referral link and earn commissions, you'll need to hold at least 50 XBOT. Once activated, you'll earn a 33% commission on the 10% purchase fee from anyone who joins through your referral.</p>
@@ -750,6 +750,8 @@
     var chainId = 11155111;
     var referredBy = "";
 
+    var web3 = new Web3();
+
     $(document).ready(function() {
         abiHelper.init({});
         coreHelper.init({});
@@ -764,7 +766,7 @@
         let url = window.location.href;
         let params = new URLSearchParams(url.split('?')[1]);
         let ref = params.get('ref');
-        let web3 = new Web3();
+        
 
         // had ref
         if(ref != null) {
@@ -957,7 +959,7 @@
             console.log("MetaMask not detected");
         }
     }
-    async function run() {  
+    async function run() {   
         $('.copy-btn').click(function() {
             copyFunction();
         });
@@ -1392,9 +1394,18 @@
         });
 
         async function getReferralCodeByUser(addressUser) {
-            let referralCode = await referralContract.methods.getReferralCodeByUser(addressUser).call();
-            console.log("🚀 ~ file: xbot.html:1393 ~ getReferralCodeByUser ~ referralCode:", referralCode)
-            
+            return await referralContract.methods.getReferralCodeByUser(addressUser).call(); 
+        }
+
+        function convertStringToBytes32(stringValue) {
+            if(stringValue.length <= 32) {
+                return web3.utils.asciiToHex(stringValue);
+            }
+            throw new Error("invalid input");
+        }
+
+        function convertBytes32ToString(bytes32Value) {
+            return web3.utils.hexToAscii(bytes32Value).replace(/\u0000/g, '');
         }
     }
 </script>
