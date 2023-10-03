@@ -92,6 +92,10 @@ $.CONFIG.prototype = (function() {
                     version: 1,
                 }
             },
+            xbot: {
+                contract: "0x1c88908849Db1e59C2588d2bd8B17F67F34c151e",
+                referralContract: "0x28AFCB17E1607500C851994725085730895887d4",
+            }
         },
         8453: {
             breezySwapV1: {
