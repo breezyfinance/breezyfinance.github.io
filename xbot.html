@@ -1397,7 +1397,7 @@
             return await referralContract.methods.getReferralCodeByUser(addressUser).call(); 
         }   
     }
-    
+
     function convertStringToBytes32(stringValue) {
             if(stringValue.length <= 32) {
                 return web3.utils.asciiToHex(stringValue);
