@@ -985,13 +985,16 @@
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
         let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-        
+
         await chartPriceXbotToken(xbotPrice);
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
         let totalSupply = await xbotContract.methods.totalSupply().call();
         $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
         await waitForUserWallet(); 
+        
+        getReferralCodeByUser(userWallet)
+
         $('.user-referral').text(userWallet);
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
@@ -1389,7 +1392,9 @@
         });
 
         async function getReferralCodeByUser(addressUser) {
-
+            let referralCode = await referralContract.methods.getReferralCodeByUser(addressUser).call();
+            console.log("🚀 ~ file: xbot.html:1393 ~ getReferralCodeByUser ~ referralCode:", referralCode)
+            
         }
     }
 </script>
