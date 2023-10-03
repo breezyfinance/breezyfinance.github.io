@@ -750,8 +750,6 @@
     var chainId = 11155111;
     var referredBy = "";
 
-    
-    
     $(document).ready(function() {
         abiHelper.init({});
         coreHelper.init({});
@@ -964,18 +962,30 @@
             copyFunction();
         });
         console.log("referredBy: ", referredBy);
+
+        let _contractsObj = configHelper.getContracts(chainId);
         
+        // abi
         let erc20TokenABI = abiHelper.getERC20TokenABI();
         let xbotTokenABI = abiHelper.getXbotTokenABI();
-        let _contractsObj = configHelper.getContracts(chainId);
+        let referralContractABI = abiHelper.getReferralContractABI();
+
         let xbotDecimal = configHelper.getTokenDecimalByTokenName(chainId, 'xbot');
-        
-        let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
-        let xbotAdd = configHelper.getTokenByTokenName(chainId, 'xbot').toLowerCase();
-        let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
+
+        //address
+        let xbotAdd = _contractsObj?.xbot?.contract;
+        let referralContractAdd = _contractsObj?.xbot?.referralContract;
         let nullAdd = '0x0000000000000000000000000000000000000000';
+        
+        // init contract
+        let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
+        let referralContract = contractBaseHelper.getReadContract(referralContractAdd, referralContractABI)
+        
+        // get price
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
+        let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+        
         await chartPriceXbotToken(xbotPrice);
         
         $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
@@ -1377,6 +1387,10 @@
                 console.log(err);
             })
         });
+
+        async function getReferralCodeByUser(addressUser) {
+
+        }
     }
 </script>
 </html>
