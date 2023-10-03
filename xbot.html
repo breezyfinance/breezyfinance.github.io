@@ -621,12 +621,12 @@
                                 
                             </div>
                         </article>
-                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap" style="display: none;" id="referral-link">
+                        <article class="swap__main garbi__box-1 p-3 mb-4 stable-swap referral-link" style="display: none;" id="referral-link">
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referral Program Status</div>   
                             </div>
-                            <div class="referral-area">
-                                <span>Your referral link</span>
+                            <span>Your referral link</span>
+                            <div class="referral-area">    
                                 <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
                                 <a class="copy-btn">Copy<div class="tooltip" id="copy-tooltip">Copied!</div></a>
                                 
@@ -637,11 +637,10 @@
                             <div class="d-flex align-items-center justify-content-between title-block mb-14">
                                 <div class="f-700">Referral Program Status</div>   
                             </div>
-                            <div class="referral-area">
-                                <span>Your referral link</span>
-                                <p class="user-referral-link" id ="user-referral-link">https://breezy.finance/xbot.html?ref=<span class="user-referral"></span></span></p>
-                                <a class="copy-btn">Copy<div class="tooltip" id="copy-tooltip">Copied!</div></a>
-                                
+                            <span>Your referral link</span>
+                            <div class="referral-area">                 
+                                <input class="user-referral-link" id ="user-referral-link" type="text" value="" maxlength="32" id="refInput" style="border: 0;outline: 0;background: transparent;width: 60%;">
+                                <a class="set-ref-btn">Set your referral code</a>
                             </div>        
                             <p class="note">To activate your referral link and earn commissions, you'll need to hold at least 50 XBOT. Once activated, you'll earn a 33% commission on the 10% purchase fee from anyone who joins through your referral.</p>
                         </article>
@@ -1006,7 +1005,7 @@
             }
             else {
                 $('.referral-disable').hide();
-                $('#referral-link').show();
+                $('.user-add-ref').show();
             }
             $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
             $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
@@ -1036,11 +1035,13 @@
                 let userXbotBalance = result / (10 ** xbotDecimal);
                 if (userXbotBalance < 50) {
                     $('.referral-disable').show();
-                    $('#referral-link').hide();
+                    $('.referral-link').hide();
+                    $('.user-add-ref').hide();
                 }
                 else {
                     $('.referral-disable').hide();
-                    $('#referral-link').show();
+                    $('.user-add-ref').show();
+                    $('.referral-link').show();
                 }
                 $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
                 $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
