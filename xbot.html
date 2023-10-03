@@ -1395,9 +1395,10 @@
 
         async function getReferralCodeByUser(addressUser) {
             return await referralContract.methods.getReferralCodeByUser(addressUser).call(); 
-        }
-
-        function convertStringToBytes32(stringValue) {
+        }   
+    }
+    
+    function convertStringToBytes32(stringValue) {
             if(stringValue.length <= 32) {
                 return web3.utils.asciiToHex(stringValue);
             }
@@ -1407,6 +1408,5 @@
         function convertBytes32ToString(bytes32Value) {
             return web3.utils.hexToAscii(bytes32Value).replace(/\u0000/g, '');
         }
-    }
 </script>
 </html>
