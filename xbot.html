@@ -750,7 +750,7 @@
     var chainId = 11155111;
     var referredBy = "";
 
-    var web3 = new Web3();
+    var _web3 = new Web3();
 
     $(document).ready(function() {
         abiHelper.init({});
@@ -771,7 +771,7 @@
         // had ref
         if(ref != null) {
             // ref is address
-            if(web3.utils.isAddress(ref)) {
+            if(_web3.utils.isAddress(ref)) {
                 let cookieReferredBy = getCookie(cookieName);
                 if(cookieReferredBy == null) {
 
@@ -782,7 +782,7 @@
                     setCookie(cookieName, ref, currentDate.toUTCString());
                 }
                 cookieReferredBy = getCookie(cookieName);
-                referredBy = web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
+                referredBy = _web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
             } 
             // ref don't is address
             else {
@@ -791,7 +791,7 @@
             // ref == null
         } else {
             referredBy = getCookie(cookieName);
-            if(referredBy == null || !web3.utils.isAddress(referredBy)) {
+            if(referredBy == null || !_web3.utils.isAddress(referredBy)) {
                 referredBy = addressOwner         
             }
         }
@@ -1400,13 +1400,13 @@
 
     function convertStringToBytes32(stringValue) {
         if(stringValue.length <= 32) {
-            return web3.utils.asciiToHex(stringValue);
+            return _web3.utils.asciiToHex(stringValue);
         }
         throw new Error("invalid input");
     }
 
     function convertBytes32ToString(bytes32Value) {
-        return web3.utils.hexToAscii(bytes32Value).replace(/\u0000/g, '');
+        return _web3.utils.hexToAscii(bytes32Value).replace(/\u0000/g, '');
     }
 </script>
 </html>
