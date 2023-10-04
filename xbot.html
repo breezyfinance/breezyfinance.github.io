@@ -766,33 +766,23 @@
         let params = new URLSearchParams(url.split('?')[1]);
         let ref = params.get('ref');
         
-
         // had ref
         if(ref != null) {
-            // ref is address
-            if(_web3.utils.isAddress(ref)) {
-                let cookieReferredBy = getCookie(cookieName);
-                if(cookieReferredBy == null) {
+            let cookieReferredBy = getCookie(cookieName);
+            if(cookieReferredBy == null) {
 
-                    let currentDate = new Date();
-                    let numberOfDaysToAdd = 30;
-                    currentDate.setUTCDate(currentDate.getUTCDate() + numberOfDaysToAdd);
+                let currentDate = new Date();
+                let numberOfDaysToAdd = 30;
+                currentDate.setUTCDate(currentDate.getUTCDate() + numberOfDaysToAdd);
 
-                    setCookie(cookieName, ref, currentDate.toUTCString());
-                }
-                cookieReferredBy = getCookie(cookieName);
-                referredBy = _web3.utils.isAddress(cookieReferredBy) ? cookieReferredBy : addressOwner;
-            } 
-            // ref don't is address
-            else {
-                referredBy = addressOwner         
+                setCookie(cookieName, ref, currentDate.toUTCString());
             }
-            // ref == null
-        } else {
-            referredBy = getCookie(cookieName);
-            if(referredBy == null || !_web3.utils.isAddress(referredBy)) {
-                referredBy = addressOwner         
-            }
+        } 
+
+        referredBy = getCookie(cookieName);
+        
+        if(referredBy == null) {
+            referredBy = addressOwner         
         }
         
         function getCookie(cname) {
@@ -1401,7 +1391,7 @@
 
     function convertStringToBytes32(stringValue) {
         if(stringValue.length <= 32) {
-            return _web3.utils.asciiToHex(stringValue);
+            return _web3.utils.asciiToHex(stringValue);u
         }
         throw new Error("invalid input");
     }
