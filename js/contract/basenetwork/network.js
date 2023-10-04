@@ -93,10 +93,8 @@ $.BREEZY_NETWORK.prototype = (function() {
         },
 
         async GetChainIdToMain() {
-            console.log("🚀 ~ file: network.js:97 ~ GetChainIdToMain ~ web3.currentProvider:", web3.currentProvider)
             let chainId = await web3.currentProvider.request({ method: 'eth_chainId' });
             
-
             if (`${chainId.charAt(0)}${chainId.charAt(1)}` == '0x') {
                 return parseInt(chainId.slice(2), 16);
             } else {

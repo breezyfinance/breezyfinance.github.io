@@ -639,7 +639,7 @@
                             </div>
                             <span>Your referral link</span>
                             <div class="referral-area">                 
-                                <input class="user-referral-link" id ="user-referral-link" type="text" value="" maxlength="32" id="refInput" style="border: 0;outline: 0;background: transparent;width: 60%;">
+                                <input class="user-referral-link" id ="user-referral-link" name="refInput" type="text" value="" maxlength="32" id="refInput" style="border: 0;outline: 0;background: transparent;width: 60%;">
                                 <a class="set-ref-btn">Set your referral code</a>
                             </div>        
                             <p class="note">To activate your referral link and earn commissions, you'll need to hold at least 50 XBOT. Once activated, you'll earn a 33% commission on the 10% purchase fee from anyone who joins through your referral.</p>
@@ -970,7 +970,7 @@
         
         // init contract
         let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
-        let referralContract = contractBaseHelper.getReadContract(referralContractAdd, referralContractABI)
+        let referralContract = contractBaseHelper.getReadContract(referralContractAdd, referralContractABI);
         
         // get price
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
@@ -991,11 +991,23 @@
             let userXbotBalance = result / (10 ** xbotDecimal);
             if (userXbotBalance < 50) {
                 $('.referral-disable').show();
-                $('#referral-link').hide();
+                $('.referral-link').hide();
+                $('.user-add-ref').hide();
             }
             else {
-                $('.referral-disable').hide();
-                $('.user-add-ref').show();
+                referralContract.methods.getReferralCodeByUser(userWallet).call().then(result => {
+                    let referralCode = result;
+                    if (referralCode == '0x0000000000000000000000000000000000000000000000000000000000000000') {
+                        $('.referral-disable').hide();
+                        $('.user-add-ref').show();
+                        $('.referral-link').hide();
+                    }
+                    else {
+                        $('.referral-link').show();
+                        $('.referral-disable').hide();
+                        $('.user-add-ref').hide();
+                    }
+                })
             }
             $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
             $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
@@ -1029,9 +1041,19 @@
                     $('.user-add-ref').hide();
                 }
                 else {
-                    $('.referral-disable').hide();
-                    $('.user-add-ref').show();
-                    $('.referral-link').show();
+                    referralContract.methods.getReferralCodeByUser(userWallet).call().then(result => {
+                        let referralCode = result;
+                        if (referralCode == '0x0000000000000000000000000000000000000000000000000000000000000000') {
+                            $('.referral-disable').hide();
+                            $('.user-add-ref').show();
+                            $('.referral-link').hide();
+                        }
+                        else {
+                            $('.referral-link').show();
+                            $('.referral-disable').hide();
+                            $('.user-add-ref').hide();
+                        }
+                    })
                 }
                 $('#token-balance .amount-xbot').text(userXbotBalance.toFixed(6));
                 $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
@@ -1382,6 +1404,20 @@
             .on('error', (err, receipt) => {
                 console.log(err);
             })
+        });
+
+        $('.set-ref-btn').click(async function() {
+            let curChainId = await networkHelper.GetChainIdToMain();
+            if (curChainId != chainId) {
+                networkHelper.SwichNetworkByChainId(chainId);
+                return;
+            }
+            let userRefInput = $('input[name=refInput]').val();
+            console.log("🚀 ~ file: xbot.html:1426 ~ $ ~ userRefInput:", userRefInput);
+            let userRefInputConvertBytes32 = convertStringToBytes32(userRefInput);
+            referralContract.methods.setReferralCode(userRefInputConvertBytes32).call().then(result => {
+                console.log(result);
+            });
         });
 
         async function getReferralCodeByUser(addressUser) {

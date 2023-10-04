@@ -2194,7 +2194,7 @@ button--circle, .button--circle i {
     justify-content: space-between;
     margin-top: 10px;
 }
-#referral-link .referral-area a.copy-btn, #referral-link .referral-area a.ref-btn {
+#referral-link .referral-area a {
     cursor: pointer;
 }
 #referral-link p.user-referral-link {  
