@@ -1332,7 +1332,7 @@
             let xbotContractWrite = contractBaseHelper.getMainContract(xbotAdd , xbotTokenABI);
             xbotContractWrite.methods
             .buy(
-                referredBy,
+                convertStringToBytes32(referredBy),
                 BigInt(amountTokenOutConvert),
             )
             .send({
