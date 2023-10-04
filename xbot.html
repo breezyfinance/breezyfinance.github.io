@@ -761,7 +761,7 @@
         });
         
         const cookieName = "referredBy";
-        const addressOwner = "0x0000000000000000000000000000000000000000";  // replate to address owner
+        const refOwner = "0x726976657261";  // replate to address owner
         let url = window.location.href;
         let params = new URLSearchParams(url.split('?')[1]);
         let ref = params.get('ref');
@@ -782,7 +782,7 @@
         referredBy = getCookie(cookieName);
         
         if(referredBy == null) {
-            referredBy = addressOwner         
+            referredBy = refOwner         
         }
         
         function getCookie(cname) {
