@@ -217,6 +217,9 @@ $.CONFIG.prototype = (function() {
                     version: 1,
                 },
             },
+            xbot: {
+                contract: "0x0e01585577A3Ed718983c33170e40B988853d1a4",
+            }
         },
     };
     var TOKENS = {
@@ -233,6 +236,7 @@ $.CONFIG.prototype = (function() {
             'dai': '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb',
             'weth': '0x4200000000000000000000000000000000000006',
             'bre': '0xfffB7488aB5DdDe106B5BeF56e7c179700509842',
+            'xbot': '0x0e01585577A3Ed718983c33170e40B988853d1a4',
         }
     }
     var TOKENS_DECIMAL = {
@@ -251,6 +255,7 @@ $.CONFIG.prototype = (function() {
             'cbeth': 18,
             'dai': 18,
             'bre': 18,
+            'xbot': 18,
         },
     };
     var PRICES = {
