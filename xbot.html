@@ -959,6 +959,7 @@
         let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
         let nullAdd = '0x0000000000000000000000000000000000000000';
         let xbotPriceETH = await xbotContract.methods.buyPrice().call();
+        console.log("🚀 ~ file: xbot.html:962 ~ run ~ xbotPriceETH:", xbotPriceETH);
         let xbotPrice = xbotPriceETH * ethPrice / 1e18;
         await chartPriceXbotToken(xbotPrice);
         
