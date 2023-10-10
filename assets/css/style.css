@@ -1568,19 +1568,19 @@ input:checked+.slider:before {
         margin-left: -6%;
     } */
     .masthead__action-buttons {
-        display: block!important;
+        display: flex!important;
+        justify-content: space-between;
         width: 100%;
         margin-top: 1.25rem;
     }
     .masthead__action-buttons button, .button {
-        width: 100%;
+        width: 49%;
     }
     .masthead__action-buttons .btn-close {
         width: 11px;
     }
     .masthead__action-buttons button+button, button+.button, .button+button, .button+.button {
         margin-left: 0!important;
-        margin-top: 1rem;
     }
     .grb-farm-2 .masthead {
         margin: 0;
