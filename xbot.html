@@ -431,6 +431,7 @@
                                                 <li>Price rises to Y and then falls back to X</li>
                                                 <li>Earn dividends on all transactions made by others that occurred while the price fluctuated from X to Y and back to X</li>
                                                 <li>Sell at the initial price X</li>
+                                                
                                             </ul>
                                         </li>
                                         <li><span>Result:</span> You profit from the dividends earned during the price fluctuation, even if you sell at the initial price X</li>
@@ -734,7 +735,7 @@
     var storeHelper = new $.STORE();
     var dataHelper = new $.DATA();
     var networkHelper = new $.BREEZY_NETWORK();
-    var chainId = 8453;
+    var chainId = 11155111;
     var referredBy = "";
 
     
@@ -959,17 +960,24 @@
         
         let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
         let xbotAdd = configHelper.getTokenByTokenName(chainId, 'xbot').toLowerCase();
+        let xbotGetDataAdd = _contractsObj["xbot"]["data"];
+        let xbotGetDataABI = abiHelper.getXbotDataABI();
+        let xbotGetDataContract = contractBaseHelper.getReadContract(xbotGetDataAdd , xbotGetDataABI);
         let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
         let nullAdd = '0x0000000000000000000000000000000000000000';
-        let xbotPriceETH = await xbotContract.methods.buyPrice().call();
-        console.log("🚀 ~ file: xbot.html:962 ~ run ~ xbotPriceETH:", xbotPriceETH);
-        let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-        await chartPriceXbotToken(xbotPrice);
         
-        $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
-        let totalSupply = await xbotContract.methods.totalSupply().call();
-        $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
         await waitForUserWallet(); 
+        xbotGetDataContract.methods.getData(false , userWallet).call().then(async result => {
+            let xbotPriceETH = result.buyPrice;
+            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+            await chartPriceXbotToken(xbotPrice);
+            $('#token-status .price').text(`$${(xbotPrice).toFixed(6)}`);
+
+            let totalSupply = result.totalSupply;
+            $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+
+        })
         $('.user-referral').text(userWallet);
         xbotContract.methods.balanceOf(userWallet).call().then(result => {
             let userXbotBalance = result / (10 ** xbotDecimal);
