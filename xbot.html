@@ -735,7 +735,7 @@
     var storeHelper = new $.STORE();
     var dataHelper = new $.DATA();
     var networkHelper = new $.BREEZY_NETWORK();
-    var chainId = 11155111;
+    var chainId = 8453;
     var referredBy = "";
 
     
@@ -966,8 +966,8 @@
             $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
             $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
 
-            $('#token-buy-form .user-from-bal').text(result.ethBalanceUser / 1e18);
-            $('#token-sell-form .user-to-bal').text(result.ethBalanceUser / 1e18);
+            $('#token-buy-form .user-from-bal').text((result.ethBalanceUser / 1e18).toFixed(6));
+            $('#token-sell-form .user-to-bal').text((result.ethBalanceUser / 1e18).toFixed(6));
 
             $('#token-status .number-total-supply').text(`${(result.totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
 

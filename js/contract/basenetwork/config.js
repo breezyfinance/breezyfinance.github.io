@@ -223,6 +223,7 @@ $.CONFIG.prototype = (function() {
             },
             xbot: {
                 contract: "0x0e01585577A3Ed718983c33170e40B988853d1a4",
+                data: "0x009049f2C8D81941bAE908732f37B26D025a2061",
             }
         },
     };
