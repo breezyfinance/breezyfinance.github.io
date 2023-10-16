@@ -976,11 +976,7 @@
             let totalSupply = result.totalSupply;
             $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
 
-
-        })
-        $('.user-referral').text(userWallet);
-        xbotContract.methods.balanceOf(userWallet).call().then(result => {
-            let userXbotBalance = result / (10 ** xbotDecimal);
+            let userXbotBalance = result.balanceUser / 10 ** xbotDecimal;
             if (userXbotBalance < 50) {
                 $('.referral-disable').show();
                 $('#referral-link').hide();
@@ -993,7 +989,20 @@
             $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
             $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
             $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
+
+            $('#token-status .number-total-supply').text(`${(result.totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+            let savingETHBalance = result.myDividends;
+            $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
+            $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
+            xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
+                let tokenOutput = result / (10 ** xbotDecimal);             
+                $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
+            });
         });
+        
+        
+        $('.user-referral').text(userWallet);
 
         xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
             let savingETHBalance = result;
@@ -1008,13 +1017,15 @@
             getBalanceETH();
             await waitForUserWallet(); 
             $('.user-referral').text(userWallet);
-            let xbotPriceETH = await xbotContract.methods.buyPrice().call();
-            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-            $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
-            let totalSupply = await xbotContract.methods.totalSupply().call();
-            $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
-            xbotContract.methods.balanceOf(userWallet).call().then(result => {
-                let userXbotBalance = result / (10 ** xbotDecimal);
+            xbotGetDataContract.methods.getData(false , userWallet).call().then(async result => {
+                let xbotPriceETH = result.buyPrice;
+                let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+                $('#token-status .price').text(`$${(xbotPrice).toFixed(6)}`);
+
+                let totalSupply = result.totalSupply;
+                $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+                let userXbotBalance = result.balanceUser / 10 ** xbotDecimal;
                 if (userXbotBalance < 50) {
                     $('.referral-disable').show();
                     $('#referral-link').hide();
@@ -1027,16 +1038,17 @@
                 $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
                 $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
                 $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
-            });
-            xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-                let savingETHBalance = result;
+
+                $('#token-status .number-total-supply').text(`${(result.totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+                let savingETHBalance = result.myDividends;
                 $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
                 $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
                 xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
                     let tokenOutput = result / (10 ** xbotDecimal);             
                     $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
                 });
-            });
+            })
         }, 5000);
         setInterval(async function() {
             let amountBuyIn = $('#token-buy-form input[name=amountPay]').val();

@@ -94,7 +94,7 @@ $.CONFIG.prototype = (function() {
             },
             xbot: {
                 contract: "0xf55d10baea959a54afb9f4e4e05c52cc8cc8ecf1",
-                data: "0x3aF7fD5E1160170E6c049556BA8c73e7849d9de8",
+                data: "0x107fd5A7Cf5479914637E83b5d4D318A2C511831",
             }
         },
         8453: {
