@@ -967,7 +967,7 @@
         let nullAdd = '0x0000000000000000000000000000000000000000';
         
         await waitForUserWallet(); 
-        xbotGetDataContract.methods.getData(false , userWallet).call().then(async result => {
+        xbotGetDataContract.methods.getData(true , userWallet).call().then(async result => {
             let xbotPriceETH = result.buyPrice;
             let xbotPrice = xbotPriceETH * ethPrice / 1e18;
             await chartPriceXbotToken(xbotPrice);
@@ -1017,7 +1017,7 @@
             getBalanceETH();
             await waitForUserWallet(); 
             $('.user-referral').text(userWallet);
-            xbotGetDataContract.methods.getData(false , userWallet).call().then(async result => {
+            xbotGetDataContract.methods.getData(true , userWallet).call().then(async result => {
                 let xbotPriceETH = result.buyPrice;
                 let xbotPrice = xbotPriceETH * ethPrice / 1e18;
                 $('#token-status .price').text(`$${(xbotPrice).toFixed(6)}`);
