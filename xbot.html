@@ -431,6 +431,7 @@
                                                 <li>Price rises to Y and then falls back to X</li>
                                                 <li>Earn dividends on all transactions made by others that occurred while the price fluctuated from X to Y and back to X</li>
                                                 <li>Sell at the initial price X</li>
+                                                
                                             </ul>
                                         </li>
                                         <li><span>Result:</span> You profit from the dividends earned during the price fluctuation, even if you sell at the initial price X</li>
@@ -922,30 +923,6 @@
         userWallet = userwallet;
     }
 
-    async function getBalanceETH() {
-        if (window.ethereum) {
-            // Request access to the user's MetaMask account
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-            // Get the current Ethereum address from MetaMask
-            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-            const ethereumAddress = accounts[0];
-
-            // Get the balance in Ether
-            const balanceWei = await window.ethereum.request({
-                method: 'eth_getBalance',
-                params: [ethereumAddress, 'latest'],
-            });
-
-            const web3 = new Web3(window.ethereum);
-            const balanceEth = web3.utils.fromWei(balanceWei, 'ether');
-            const balanceWithDecimals = parseFloat(balanceEth).toFixed(6);
-            $('#token-buy-form .user-from-bal').text(balanceWithDecimals);
-            $('#token-sell-form .user-to-bal').text(balanceWithDecimals);
-        } else {
-            console.log("MetaMask not detected");
-        }
-    }
     async function run() {   
         $('.copy-btn').click(function() {
             copyFunction();
@@ -959,20 +936,23 @@
         
         let ethPrice = configHelper.getPriceByTokenName(chainId , 'eth');
         let xbotAdd = configHelper.getTokenByTokenName(chainId, 'xbot').toLowerCase();
+        let xbotGetDataAdd = _contractsObj["xbot"]["data"];
+        let xbotGetDataABI = abiHelper.getXbotDataABI();
+        let xbotGetDataContract = contractBaseHelper.getReadContract(xbotGetDataAdd , xbotGetDataABI);
         let xbotContract = contractBaseHelper.getReadContract(xbotAdd , xbotTokenABI);
         let nullAdd = '0x0000000000000000000000000000000000000000';
-        let xbotPriceETH = await xbotContract.methods.buyPrice().call();
-        console.log("🚀 ~ file: xbot.html:962 ~ run ~ xbotPriceETH:", xbotPriceETH);
-        let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-        await chartPriceXbotToken(xbotPrice);
         
-        $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
-        let totalSupply = await xbotContract.methods.totalSupply().call();
-        $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
         await waitForUserWallet(); 
-        $('.user-referral').text(userWallet);
-        xbotContract.methods.balanceOf(userWallet).call().then(result => {
-            let userXbotBalance = result / (10 ** xbotDecimal);
+        xbotGetDataContract.methods.getData(true , userWallet).call().then(async result => {
+            let xbotPriceETH = result.buyPrice;
+            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+            await chartPriceXbotToken(xbotPrice);
+            $('#token-status .price').text(`$${(xbotPrice).toFixed(6)}`);
+
+            let totalSupply = result.totalSupply;
+            $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+            let userXbotBalance = result.balanceUser / 10 ** xbotDecimal;
             if (userXbotBalance < 50) {
                 $('.referral-disable').show();
                 $('#referral-link').hide();
@@ -985,28 +965,35 @@
             $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
             $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
             $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
-        });
 
-        xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-            let savingETHBalance = result;
+            $('#token-buy-form .user-from-bal').text((result.ethBalanceUser / 1e18).toFixed(6));
+            $('#token-sell-form .user-to-bal').text((result.ethBalanceUser / 1e18).toFixed(6));
+
+            $('#token-status .number-total-supply').text(`${(result.totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+            let savingETHBalance = result.myDividends;
             $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
             $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
             xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
-                let tokenOutput = result / (10 ** xbotDecimal);
+                let tokenOutput = result / (10 ** xbotDecimal);             
                 $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
             });
         });
+        
+        
+        $('.user-referral').text(userWallet);
         setInterval(async function() {
-            getBalanceETH();
             await waitForUserWallet(); 
             $('.user-referral').text(userWallet);
-            let xbotPriceETH = await xbotContract.methods.buyPrice().call();
-            let xbotPrice = xbotPriceETH * ethPrice / 1e18;
-            $('#token-status .price').text(`$${xbotPrice.toFixed(6)}`);
-            let totalSupply = await xbotContract.methods.totalSupply().call();
-            $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
-            xbotContract.methods.balanceOf(userWallet).call().then(result => {
-                let userXbotBalance = result / (10 ** xbotDecimal);
+            xbotGetDataContract.methods.getData(true , userWallet).call().then(async result => {
+                let xbotPriceETH = result.buyPrice;
+                let xbotPrice = xbotPriceETH * ethPrice / 1e18;
+                $('#token-status .price').text(`$${(xbotPrice).toFixed(6)}`);
+
+                let totalSupply = result.totalSupply;
+                $('#token-status .number-total-supply').text(`${(totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+                let userXbotBalance = result.balanceUser / 10 ** xbotDecimal;
                 if (userXbotBalance < 50) {
                     $('.referral-disable').show();
                     $('#referral-link').hide();
@@ -1019,16 +1006,20 @@
                 $('#token-balance .xbot-volume').text((userXbotBalance * xbotPrice).toFixed(6));
                 $('#token-buy-form .user-to-bal').text(userXbotBalance.toFixed(6));
                 $('#token-sell-form .user-from-bal').text(userXbotBalance.toFixed(6));
-            });
-            xbotContract.methods.myDividends('true' , userWallet).call().then(result => {
-                let savingETHBalance = result;
+
+                $('#token-buy-form .user-from-bal').text(result.ethBalanceUser / 1e18);
+                $('#token-sell-form .user-to-bal').text(result.ethBalanceUser / 1e18);
+
+                $('#token-status .number-total-supply').text(`${(result.totalSupply / 10 ** xbotDecimal).toFixed(6)} XBOT`);
+
+                let savingETHBalance = result.myDividends;
                 $('#saving-block .amount-eth').text((savingETHBalance/1e18).toFixed(6));
                 $('#saving-block .eth-volume').text(((savingETHBalance/1e18) * ethPrice).toFixed(6));
                 xbotContract.methods.getAmountOut(BigInt(savingETHBalance) , nullAdd).call().then(result => {
                     let tokenOutput = result / (10 ** xbotDecimal);             
                     $('#saving-block .reinvest-token').text(tokenOutput.toFixed(6));
                 });
-            });
+            })
         }, 5000);
         setInterval(async function() {
             let amountBuyIn = $('#token-buy-form input[name=amountPay]').val();
@@ -1073,7 +1064,6 @@
             $('#token-sell-form input[name=amountPay]').val(userBalance);
             doneTypingAmountSell();
         });
-        await getBalanceETH();
         var typingTimerAmountBuyWithETH;
         var typingTimerAmountBuyWithToken;
         var typingTimerAmountSell;
