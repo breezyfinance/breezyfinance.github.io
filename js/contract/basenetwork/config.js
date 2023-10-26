@@ -269,7 +269,7 @@ $.CONFIG.prototype = (function() {
             'xbot': 1,
         },
         8453: {
-            'eth' : 1800,
+            'eth' : 1750,
             'weth': 1622.21,
             'usdbc': 1,
             'cbeth': 1702.35,
