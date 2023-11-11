@@ -260,7 +260,7 @@ $.CONFIG.prototype = (function() {
     };
     var PRICES = {
         11155111: {
-            'eth' : 1607,
+            'eth' : 1900,
             'weth': 1807,
             'usdbc': 1,
             'cbeth': 1,
